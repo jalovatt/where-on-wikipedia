@@ -2,6 +2,12 @@ const request = require("request");
 
 const apiURL = "https://en.wikipedia.org/w/api.php?action=query";
 
+
+// 11263477
+// Desert Rat Scrap Book
+
+
+
 module.exports = {
 
   getRandomArticle() {
@@ -11,41 +17,42 @@ module.exports = {
       rnlimit: 1
     };
 
-    return wikiQuery(params);
+    return wikiQuery(params).then((data) => data.query.random[0]);
   },
 
-  getLinksHere(articleId) {
+  getArticleById(articleId) {
     const params = {
-      prop: "linkshere",
+      action: "query",
+      format: "json",
+      prop: "links|linkshere|categories|info",
       pageids: articleId,
-      lhnamespace: 0,
-      lhlimit: 30
+      plnamespace: "0",
+      pllimit: "100",
+      pldir: "ascending",
+      lhprop: "pageid|title",
+      lhnamespace: "0",
+      lhshow: "!redirect",
+      lhlimit: "100",
+      clshow: "!hidden",
+      cllimit: "50",
+      inprop: "url"
     };
 
-    return wikiQuery(params);
+    return wikiQuery(params)
+      .then((data) => {
+
+        return data.query.pages[articleId];
+
+      });
+
   },
 
-  getCategories(articleId) {
-
-    const params = {
-      prop: "categories",
-      pageids: articleId
-    };
-
-    return wikiQuery(params);
+  getRandomLinkFrom(article) {
+    return article.links[randomInt(article.links.length)];
   },
 
-  getLinksTo(articleId) {
-
-    const params = {
-      prop: "links",
-      plnamespace: 0,
-      pllimit: 10,
-      pageids: articleId
-    };
-
-    return wikiQuery(params);
-
+  getRandomLinkTo(article) {
+    return article.linkshere[randomInt(article.linkshere.length)];
   },
 
   getWikiText(articleId) {
@@ -53,10 +60,10 @@ module.exports = {
     const params = {
       action: "parse",
       pageid: articleId,
-      prop: "categories|links|images|sections|displaytitle|iwlinks|properties|wikitext"
+      prop: "images|sections|displaytitle|wikitext"
     };
 
-    return wikiQuery(params);
+    return wikiQuery(params).then((data) => data.parse);
   }
 
 };
@@ -66,6 +73,9 @@ module.exports = {
 function wikiQuery(queryParams) {
 
   const params = [apiURL, "&format=json"];
+
+  if (!queryParams.action) params.push("&action=query");
+
   Object.keys(queryParams).forEach((param) => {
     params.push(`&${param}=${queryParams[param]}`);
   });
@@ -79,4 +89,8 @@ function wikiQuery(queryParams) {
       })
     );
   });
+}
+
+function randomInt(n) {
+  return Math.floor(Math.random() * n);
 }
