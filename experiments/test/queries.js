@@ -96,7 +96,18 @@ describe("Article processing", () => {
     // which will be randomly given in place of article clues
   });
 
-  xdescribe("Generating clues", () => {
+  describe("Generating clues", () => {
+
+    let clues;
+    before((done) => {
+      clues = queries.generateClues(article);
+      print("Clues:", clues);
+      done();
+    });
+
+    it("should have three clues", () => {
+      assert.equal(clues.length, 5);
+    });
 
     // Call a master "generate step" function that picks a random article from
     // a given articleId's links

@@ -80,6 +80,52 @@ module.exports = {
     return article.categories[randomInt(article.categories.length)];
   },
 
+
+  generateArticleClue(article, suspect) {
+
+    const clueTypes = [
+
+      // - Article that links here
+      function(article, suspect) {
+        const str = "The suspect asked for directions to an article mentioned in '%ARTICLE%'";
+
+        const rand = randomInt(article.linkshere.length);
+
+        return str.replace("%ARTICLE%", article.linkshere[rand].title);
+      },
+
+      // - Category that this belongs to
+      function(article, suspect) {
+        const str = "The suspect expressed an interest in '%CATEGORY%'";
+        const rand = randomInt(article.categories.length);
+        return str.replace("%CATEGORY%", article.categories[rand].title);
+      },
+    ];
+
+    return clueTypes[randomInt(clueTypes.length)](article, suspect);
+
+
+
+  },
+
+  generateSuspectClue(suspect) {
+    return "a suspect clue";
+  },
+
+  generateClues(article, suspect) {
+
+    const clues = [];
+    clues.push(
+      this.generateArticleClue(article, suspect),
+      this.generateArticleClue(article, suspect),
+      this.generateArticleClue(article, suspect),
+      this.generateArticleClue(article, suspect),
+      ((randomInt(2) === 1) ? this.generateArticleClue(article, suspect) : this.generateSuspectClue(suspect))
+    );
+
+    return clues;
+
+  }
 };
 
 // Adapted from
