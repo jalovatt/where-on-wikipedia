@@ -3,13 +3,17 @@ const {assert} = require("chai");
 
 const queries = require("../queries");
 
+// Using this for our test queries:
+// https://en.wikipedia.org/wiki/Desert_Rat_Scrap_Book
+const articleId = 11263477;
+
 describe("Basic Queries", () => {
 
   it("should return a random Wikipedia article in JSON form", (done) => {
 
-    queries.getRandomArticle()
+    queries.getRandomArticleId()
       .then((data) => {
-        assert.exists(data.query.random[0]);
+        print("random wikipedia article", data);
         done();
       });
 
@@ -17,84 +21,110 @@ describe("Basic Queries", () => {
 
 });
 
-describe("Article metadata", () => {
+describe("Article processing", () => {
 
-  let articleId;
+  let article;
   before((done) => {
-    queries.getRandomArticle()
-      .then((data) => {
-        articleId = data.query.random[0].id;
+    queries.getArticle(articleId)
+      .then((result) => {
+
+        // print("Article data:", result);
+        article = result;
+
         done();
       });
   });
 
-  it("should return a URL to the article", (done) => {
-    queries.getArticleUrl(articleId)
-      .then((data) => {
-        // assert.exists
-        console.log(data);
-        done();
-      });
+  describe("Metadata", () => {
+    it("should have a URL to the article", () => {
+      assert.exists(article.fullurl);
+    });
+
+    it("should have a list of links that direct to that article", () => {
+      assert.exists(article.linkshere);
+    });
+
+    it("should have a list of categories that the article belongs to", () => {
+      assert.exists(article.categories);
+    });
+
+    it("should have a list of pages that the article links to", () => {
+      assert.exists(article.links);
+    });
+
   });
 
-  it("should return the list of links that direct to that article", (done) => {
-    queries.getLinksHere(articleId)
-      .then((data) => {
-        assert.exists(data.query.pages[articleId].linkshere);
-        done();
-      });
+  describe("Random functions", () => {
+
+    it("should return a random article link found on a given page", () => {
+      const rand = queries.getRandomLinkFrom(article);
+      assert.exists(article.links.some((link) => link === rand));
+    });
+
+    it("should return a random article that links to a given page", () => {
+      const rand = queries.getRandomLinkTo(article);
+      assert.exists(article.linkshere.some((link) => link === rand));
+    });
+
+    it("should return a random category that the page belongs to", () => {
+      const rand = queries.getRandomCategory(article);
+      assert.exists(article.categories.some((cat) => cat === rand));
+    });
   });
 
-  it("should return the list of categories that the article belongs to", (done) => {
-    queries.getCategories(articleId)
-      .then((data) => {
-        assert.exists(data.query.pages[articleId].categories);
-        done();
-      });
+  describe("Parsing WikiText", () => {
+
+    it("should have the parsed WikiText for an articleId", (done) => {
+      assert.exists(article.wikitext);
+      assert.match(article.wikitext, /^\{\{/);
+      done();
+    });
+
+    xit("should count how many times each linked article is mentioned in the WikiText", () => {
+      assert.isTrue(false);
+    });
+
   });
 
-  it("should return a list of pages that the article links to", (done) => {
-    queries.getLinksTo(articleId)
-      .then((data) => {
-        assert.exists(data.query.pages[articleId].links);
-        done();
-      });
+  xdescribe("Pick a villain", () => {
+
+    it("Should return a random villain", (done) => {
+
+    });
+
+    // Generating a villain should return a list of clues pertaining to them,
+    // which will be randomly given in place of article clues
+  });
+
+  describe("Generating clues", () => {
+
+    let clues;
+    before((done) => {
+      clues = queries.generateClues(article);
+      print("Clues:", clues);
+      done();
+    });
+
+    it("should have three clues", () => {
+      assert.equal(clues.length, 5);
+    });
+
+    // Call a master "generate step" function that picks a random article from
+    // a given articleId's links
+
+    // The returned data should include the article (title/id, url?) and up to
+    // three clues pertaining to it
+
+    // A full game
+
   });
 
 });
 
-describe("Processing WikiText", () => {
-  it("should get the parsed WikiText for an articleId", (done) => {
-    queries.getWikiText(18702834)
-      .then((data) => {
-        assert.exists(data.parse.wikitext["*"]);
-        assert.match(data.parse.wikitext["*"], /^\{\{/);
-        done();
-      });
-  });
 
-  xit("should count how many times each linked article is mentioned in the WikiText", () => {
 
-  });
 
-});
 
-xdescribe("Pick a villain (The Culprit)", () => {
-
-  it("Should return a random villain", (done) => {
-
-  });
-
-  it("Should return a list of pages that link to the villain", (done) => {
-
-  });
-
-  it("Should return a list of pages that the villain links to", (done) => {
-
-  });
-
-});
-
-xdescribe("At each subsequent step...", () => {
-
-});
+function print(heading, query) {
+  console.log("\n" + heading + "\n" + JSON.stringify(query, null, 2));
+}
