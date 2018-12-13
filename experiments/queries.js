@@ -17,7 +17,7 @@ module.exports = {
       rnlimit: 1
     };
 
-    return wikiQuery(params).then((data) => data.query.random[0]);
+    return wikiQuery(params).then((data) => data.query.random[0].id);
   },
 
   getArticleData(articleId) {
@@ -74,6 +74,10 @@ module.exports = {
 
   getRandomLinkTo(article) {
     return article.linkshere[randomInt(article.linkshere.length)];
+  },
+
+  getRandomCategory(article) {
+    return article.categories[randomInt(article.categories.length)];
   },
 
 };

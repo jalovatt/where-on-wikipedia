@@ -13,7 +13,7 @@ describe("Basic Queries", () => {
 
     queries.getRandomArticleId()
       .then((data) => {
-        // print("random wikipedia article", data);
+        print("random wikipedia article", data);
         done();
       });
 
@@ -65,6 +65,11 @@ describe("Article processing", () => {
       const rand = queries.getRandomLinkTo(article);
       assert.exists(article.linkshere.some((link) => link === rand));
     });
+
+    it("should return a random category that the page belongs to", () => {
+      const rand = queries.getRandomCategory(article);
+      assert.exists(article.categories.some((cat) => cat === rand));
+    });
   });
 
   describe("Parsing WikiText", () => {
@@ -81,31 +86,31 @@ describe("Article processing", () => {
 
   });
 
-});
+  xdescribe("Pick a villain", () => {
 
+    it("Should return a random villain", (done) => {
 
+    });
 
-xdescribe("Pick a villain (The Culprit)", () => {
+    // Generating a villain should return a list of clues pertaining to them,
+    // which will be randomly given in place of article clues
+  });
 
-  it("Should return a random villain", (done) => {
+  xdescribe("Generating clues", () => {
+
+    // Call a master "generate step" function that picks a random article from
+    // a given articleId's links
+
+    // The returned data should include the article (title/id, url?) and up to
+    // three clues pertaining to it
+
+    // A full game
 
   });
 
-  // Generating a villain should return a list of clues pertaining to them,
-  // which will be randomly given in place of article clues
 });
 
-xdescribe("At each subsequent step...", () => {
 
-  // Call a master "generate step" function that picks a random article from
-  // a given articleId's links
-
-  // The returned data should include the article (title/id, url?) and up to
-  // three clues pertaining to it
-
-  // A full game
-
-});
 
 
 
