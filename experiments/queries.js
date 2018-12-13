@@ -10,7 +10,7 @@ const apiURL = "https://en.wikipedia.org/w/api.php?action=query";
 
 module.exports = {
 
-  getRandomArticle() {
+  getRandomArticleId() {
     const params = {
       list: "random",
       rnnamespace: 0,
@@ -20,7 +20,7 @@ module.exports = {
     return wikiQuery(params).then((data) => data.query.random[0]);
   },
 
-  getArticleById(articleId) {
+  getArticleData(articleId) {
     const params = {
       action: "query",
       format: "json",
@@ -39,11 +39,32 @@ module.exports = {
     };
 
     return wikiQuery(params)
-      .then((data) => {
+      .then((data) => data.query.pages[articleId]);
 
-        return data.query.pages[articleId];
+  },
 
-      });
+  getArticleWikiText(articleId) {
+    ///w/api.php?action=parse&format=json&pageid=18702834&prop=categories%7Clinks%7Cimages%7Csections%7Cdisplaytitle%7Ciwlinks%7Cproperties%7Cwikitext
+    const params = {
+      action: "parse",
+      pageid: articleId,
+      prop: "images|sections|displaytitle|wikitext"
+    };
+
+    return wikiQuery(params)
+      .then((data) => data.parse);
+  },
+
+  getArticle(articleId) {
+
+    return Promise.all([
+      this.getArticleData(articleId),
+      this.getArticleWikiText(articleId)
+    ]).then((results) => {
+      const out ={...results[0], ...results[1]};
+      out.wikitext = out.wikitext["*"];
+      return out;
+    });
 
   },
 
@@ -54,17 +75,6 @@ module.exports = {
   getRandomLinkTo(article) {
     return article.linkshere[randomInt(article.linkshere.length)];
   },
-
-  getWikiText(articleId) {
-    ///w/api.php?action=parse&format=json&pageid=18702834&prop=categories%7Clinks%7Cimages%7Csections%7Cdisplaytitle%7Ciwlinks%7Cproperties%7Cwikitext
-    const params = {
-      action: "parse",
-      pageid: articleId,
-      prop: "images|sections|displaytitle|wikitext"
-    };
-
-    return wikiQuery(params).then((data) => data.parse);
-  }
 
 };
 

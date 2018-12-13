@@ -11,7 +11,7 @@ describe("Basic Queries", () => {
 
   it("should return a random Wikipedia article in JSON form", (done) => {
 
-    queries.getRandomArticle()
+    queries.getRandomArticleId()
       .then((data) => {
         // print("random wikipedia article", data);
         done();
@@ -25,7 +25,7 @@ describe("Article processing", () => {
 
   let article;
   before((done) => {
-    queries.getArticleById(articleId)
+    queries.getArticle(articleId)
       .then((result) => {
 
         // print("Article data:", result);
@@ -40,17 +40,21 @@ describe("Article processing", () => {
       assert.exists(article.fullurl);
     });
 
-    it("should return the list of links that direct to that article", () => {
+    it("should have a list of links that direct to that article", () => {
       assert.exists(article.linkshere);
     });
 
-    it("should return the list of categories that the article belongs to", () => {
+    it("should have a list of categories that the article belongs to", () => {
       assert.exists(article.categories);
     });
 
-    it("should return a list of pages that the article links to", () => {
+    it("should have a list of pages that the article links to", () => {
       assert.exists(article.links);
     });
+
+  });
+
+  describe("Random functions", () => {
 
     it("should return a random article link found on a given page", () => {
       const rand = queries.getRandomLinkFrom(article);
@@ -65,19 +69,7 @@ describe("Article processing", () => {
 
   describe("Parsing WikiText", () => {
 
-    let wikitext;
-    before((done) => {
-      queries.getWikiText(articleId)
-        .then((data) => {
-          // print("Wikitext:", data);
-          article.images = data.images;
-          article.sections = data.sections;
-          article.wikitext = data.wikitext["*"];
-          done();
-        });
-    });
-
-    it("should get the parsed WikiText for an articleId", (done) => {
+    it("should have the parsed WikiText for an articleId", (done) => {
       assert.exists(article.wikitext);
       assert.match(article.wikitext, /^\{\{/);
       done();
@@ -99,18 +91,6 @@ xdescribe("Pick a villain (The Culprit)", () => {
 
   });
 
-  it("Should return the categories that the villain belongs to", (done) => {
-
-  });
-
-  it("Should return a list of pages that link to the villain", (done) => {
-
-  });
-
-  it("Should return a list of pages that the villain links to", (done) => {
-
-  });
-
   // Generating a villain should return a list of clues pertaining to them,
   // which will be randomly given in place of article clues
 });
@@ -126,6 +106,8 @@ xdescribe("At each subsequent step...", () => {
   // A full game
 
 });
+
+
 
 function print(heading, query) {
   console.log("\n" + heading + "\n" + JSON.stringify(query, null, 2));
