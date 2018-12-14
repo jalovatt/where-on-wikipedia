@@ -4,8 +4,11 @@
   "description": "A Carmen Sandiego-style game powered by Wikipedia",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "clean": "shx rm -rf dist",
+  "copy": "shx mkdir dist && shx cp -r public views dist/",
+  "compile": "npm run clean && npm run copy && babel \"./{,!(dist|node_modules)/**/}*.js\" bin/www -d dist",
+  "start": "npm run compile && node ./dist/bin/www"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jalovatt/wiki-sandiego.git"
@@ -15,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/jalovatt/wiki-sandiego/issues"
   },
-  "homepage": "https://github.com/jalovatt/wiki-sandiego#readme"
+  "homepage": "https://github.com/jalovatt/wiki-sandiego#readme",
+  "dependencies": {
+    "express-generator": "^4.16.0"
+  }
 }
