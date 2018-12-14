@@ -72,7 +72,54 @@ describe("Article processing", () => {
     });
   });
 
-  describe("Parsing WikiText", () => {
+  describe("Useability", () => {
+
+    async function testUseability(id, expectingArticle) {
+
+      const article = await queries.getArticleById(id);
+      const useable = await queries.isUseableArticle(article);
+
+      if (expectingArticle) {
+        assert.isOk(useable);
+      } else {
+        assert.isNotOk(useable);
+      }
+
+    }
+
+    it("should return false for an article with no links", async () => {
+
+      // https://en.wikipedia.org/wiki/Special:DeadendPages
+      // Rhythmus 21 (no links as of Dec. 2018)
+      testUseability(59190088, false);
+
+    });
+
+    it("should return false for an article with no links to it", async () => {
+
+      // https://en.wikipedia.org/wiki/Category:Orphaned_articles
+      // Ronan Carroll (no links to it as of Dec. 2018)
+      testUseability(31940707, false);
+
+    });
+
+    it("should return false for an article with no categories", async () => {
+
+      // University of Mendoza
+      testUseability(27342618, false);
+
+    });
+
+    it("should return the article for an article with links, links to it, and categories", async () => {
+
+      // Jenner Township, Somerset County, Pennsylvania
+      testUseability(133795, true);
+
+    });
+
+  });
+
+  xdescribe("Parsing WikiText", () => {
 
     it("should have the parsed WikiText for an articleId", (done) => {
       assert.exists(article.wikitext);
@@ -96,7 +143,7 @@ describe("Article processing", () => {
     // which will be randomly given in place of article clues
   });
 
-  describe("Generating clues", () => {
+  xdescribe("Generating clues", () => {
 
     let clues;
     before((done) => {
@@ -121,7 +168,7 @@ describe("Article processing", () => {
 
 });
 
-describe("Generating a mystery", () => {
+xdescribe("Generating a mystery", () => {
 
   // Get a mystery
   let mystery = {};

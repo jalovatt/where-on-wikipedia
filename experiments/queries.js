@@ -26,7 +26,7 @@ module.exports = {
     };
 
     return wikiQuery(params)
-      .then((data) => Object.values(data.query.pages)[0]);
+      .then((data) => Object.values(data.query.pages)[0].pageid);
 
   },
 
@@ -67,6 +67,8 @@ module.exports = {
 
   getArticleById: async function getArticleById(articleId) {
 
+    console.log("getArticleById: " + articleId);
+
     const data = await this.getArticleData(articleId);
     const text = await this.getArticleWikiText(articleId);
     text.wikitext = text.wikitext["*"];
@@ -78,7 +80,7 @@ module.exports = {
   getArticleByTitle: async function getArticleByTitle(articleTitle) {
 
     const articleId = await this.getArticleIdFromTitle(articleTitle);
-    return this.getArticleById(articleId.pageid);
+    return this.getArticleById(articleId);
 
   },
 
@@ -94,6 +96,42 @@ module.exports = {
     return article.categories[randomInt(article.categories.length)];
   },
 
+  isUseableArticle(article) {
+    // console.log("=================");
+    // console.log("IS USEABLE ARTICLE GOT:");
+    // console.log(JSON.stringify(article, null, 2));
+    // console.log("=================");
+    return (
+      article.links &&
+      article.links.length &&
+      article.linkshere &&
+      article.linkshere.length &&
+      article.categories &&
+      article.categories.length
+    ) && article;
+  },
+
+  findUseableLinkFrom: async function findUseableLinkFrom(article) {
+
+    let useable = false;
+
+    do {
+      const curLink = this.getRandomLinkFrom(article).title;
+
+      const curId = await this.getArticleIdFromTitle(curLink);
+      console.log(JSON.stringify(curId));
+
+      if (!curId || curId === "0") continue;
+
+      const curArticle = await this.getArticleById(curId);
+
+      useable = this.isUseableArticle(curArticle);
+
+    } while (!useable);
+
+    return useable;
+
+  },
 
   generateArticleClue(article, suspect) {
 
@@ -136,7 +174,27 @@ module.exports = {
 
   },
 
+  generateNextStep: async function generateNextStep(prevArticle, final) {
+
+    const nextLink = await this.findUseableLinkFrom(prevArticle);
+
+    console.log("\tnext article: " + nextLink.title);
+
+    const step = {};
+    step.article = await this.getArticleByTitle(nextLink.title);
+
+    step.clues = (final)
+      ? ["You caught up to the thief!!"]
+      : this.generateClues(step.article);
+
+    return step;
+
+  },
+
   generateMystery: async function generateMystery(numSteps = 5) {
+
+    console.log("====================");
+    console.log("generating a mystery");
 
     const lootId = await this.getRandomArticleId();
     const loot = await this.getArticleById(lootId);
@@ -149,28 +207,16 @@ module.exports = {
 
       console.log("\tgenerating " + i);
 
-      const nextLink = this.getRandomLinkFrom(prevArticle).title;
-
-      console.log("\tnext article: " + nextLink);
-      const nextArticle = this.getArticleByTitle(nextLink);
-
-      const step = {};
-      step.article = await this.getArticleByTitle(nextLink);
-
-      if (i < numSteps) {
-        step.clues = this.generateClues(step.article);
-      } else {
-        step.clues = ["You caught up to the thief!!"];
-      }
-
+      const step = await this.generateNextStep(prevArticle, (i === numSteps));
       steps[step.article.pageid] = {...step};
 
       prevArticle = step.article;
+
     }
 
-    console.log("========================\nMystery:");
-    console.log(JSON.stringify(steps, null, 2));
-    console.log("========================");
+    console.log("finished the mystery");
+    console.log("====================");
+
     return steps;
 
   }
