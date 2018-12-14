@@ -133,13 +133,13 @@ describe("Article processing", () => {
 
   });
 
-  xdescribe("Pick a villain", () => {
+  xdescribe("Pick a suspect", () => {
 
-    it("Should return a random villain", (done) => {
+    it("Should return a random suspect", (done) => {
 
     });
 
-    // Generating a villain should return a list of clues pertaining to them,
+    // Generating a suspect should return a list of clues pertaining to them,
     // which will be randomly given in place of article clues
   });
 
@@ -168,7 +168,7 @@ describe("Article processing", () => {
 
 });
 
-xdescribe("Generating a mystery", () => {
+describe("Generating a mystery", () => {
 
   // Get a mystery
   let mystery = {};

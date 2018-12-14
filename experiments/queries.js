@@ -6,6 +6,24 @@ const apiURL = "https://en.wikipedia.org/w/api.php?action=query";
 // 11263477
 // Desert Rat Scrap Book
 
+const suspects = [
+  99217,    // Ernst Blofeld
+  951124,   // Auric Goldfinger
+  10656254, // Carmen Sandiego
+  300331,   // Irene Adler
+  84764,    // Professor Moriarty
+  341087,   // Bender
+  9533027,  // Lupin III
+  1234711,  // Boris Badenov
+  1788896,  // Natasha Fatale
+  2124741,  // The Grinch
+  165684,   // Hannibal Lecter
+  882532,   // Alex DeLarge
+  441588,   // Maleficent
+  98301,    // The Joker
+  1547531,  // Cruella de Vil
+];
+
 
 
 module.exports = {
@@ -67,8 +85,6 @@ module.exports = {
 
   getArticleById: async function getArticleById(articleId) {
 
-    console.log("getArticleById: " + articleId);
-
     const data = await this.getArticleData(articleId);
     const text = await this.getArticleWikiText(articleId);
     text.wikitext = text.wikitext["*"];
@@ -119,7 +135,6 @@ module.exports = {
       const curLink = this.getRandomLinkFrom(article).title;
 
       const curId = await this.getArticleIdFromTitle(curLink);
-      console.log(JSON.stringify(curId));
 
       if (!curId || curId === "0") continue;
 
@@ -167,6 +182,8 @@ module.exports = {
     clues.push(
       this.generateArticleClue(article, suspect),
       this.generateArticleClue(article, suspect),
+      this.generateArticleClue(article, suspect),
+      ((randomInt(2) === 1) ? this.generateArticleClue(article, suspect) : this.generateSuspectClue(suspect)),
       ((randomInt(2) === 1) ? this.generateArticleClue(article, suspect) : this.generateSuspectClue(suspect))
     );
 
@@ -174,30 +191,50 @@ module.exports = {
 
   },
 
-  generateNextStep: async function generateNextStep(prevArticle, final) {
+  generateNextStep: async function generateNextStep(prevArticle, suspect) {
 
     const nextLink = await this.findUseableLinkFrom(prevArticle);
-
-    console.log("\tnext article: " + nextLink.title);
 
     const step = {};
     step.article = await this.getArticleByTitle(nextLink.title);
 
-    step.clues = (final)
-      ? ["You caught up to the thief!!"]
-      : this.generateClues(step.article);
+    step.clues = this.generateClues(step.article, suspect);
 
     return step;
 
   },
 
-  generateMystery: async function generateMystery(numSteps = 5) {
+  getUseableRandomArticle: async function getUseableRandomArticle() {
+
+    let useable = false;
+
+    do {
+      const id = await this.getRandomArticleId();
+      const article = await this.getArticleById(id);
+      useable = this.isUseableArticle(article);
+    } while (!useable);
+
+    return useable;
+
+  },
+
+  generateSuspect: async function generateSuspect() {
+
+    const id = suspects[randomInt(suspects.length)];
+    return this.getArticleById(id);
+
+  },
+
+  generateMystery: async function generateMystery(numSteps = 3) {
 
     console.log("====================");
     console.log("generating a mystery");
 
-    const lootId = await this.getRandomArticleId();
-    const loot = await this.getArticleById(lootId);
+    const suspect = await this.generateSuspect();
+
+    const loot = await this.getUseableRandomArticle();
+
+    console.log("starting point: " + loot.title);
 
     let prevArticle = loot;
     let nextId;
@@ -205,12 +242,19 @@ module.exports = {
     const steps = {};
     for (let i = 1; i <= numSteps; i++) {
 
-      console.log("\tgenerating " + i);
+      console.log("\nstep: " + i);
 
-      const step = await this.generateNextStep(prevArticle, (i === numSteps));
+      const step = await this.generateNextStep(prevArticle, suspect);
+
+      if (i === numSteps) step.final = true;
+
       steps[step.article.pageid] = {...step};
 
       prevArticle = step.article;
+
+      console.log("title: " + step.article.title);
+      console.log("clues:");
+      console.log(JSON.stringify(step.clues, null, 2));
 
     }
 
