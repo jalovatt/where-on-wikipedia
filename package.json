@@ -4,11 +4,11 @@
   "description": "A Carmen Sandiego-style game powered by Wikipedia",
   "main": "index.js",
   "scripts": {
-  "clean": "shx rm -rf dist",
-  "copy": "shx mkdir dist && shx cp -r public views dist/",
-  "compile": "npm run clean && npm run copy && babel \"./{,!(dist|node_modules)/**/}*.js\" bin/www -d dist",
-  "start": "npm run compile && node ./dist/bin/www"
-},
+    "clean": "shx rm -rf dist",
+    "copy": "shx mkdir dist && shx cp -r public views dist/",
+    "compile": "npm run clean && npm run copy && babel \"./{,!(dist|node_modules)/**/}*.js\" bin/www -d dist",
+    "start": "npm run compile && node ./dist/bin/www"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jalovatt/wiki-sandiego.git"

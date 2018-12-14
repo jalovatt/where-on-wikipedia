@@ -8,6 +8,7 @@ import mongoose from 'mongoose';
 import passportManager from './config/passport';
 import config from './config/db';
 import router from './routes';
+const cookieSession = require('cookie-session');
 
 const app = express();
 
@@ -28,6 +29,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(cookieSession({
+   name: "session",
+   keys: ["secretsecret"],
+   maxAge: 60 * 60 * 1000 // session cookie time length
+ }));
 // routes setup
 app.use('/',router);
 

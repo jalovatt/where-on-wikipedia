@@ -42,6 +42,8 @@ var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var cookieSession = require('cookie-session');
+
 var app = (0, _express2.default)();
 
 //mongoose setup
@@ -61,6 +63,11 @@ app.use(_express2.default.urlencoded({ extended: false }));
 app.use((0, _cookieParser2.default)());
 app.use(_express2.default.static(_path2.default.join(__dirname, 'public')));
 
+app.use(cookieSession({
+  name: "session",
+  keys: ["secretsecret"],
+  maxAge: 60 * 60 * 1000 // session cookie time length
+}));
 // routes setup
 app.use('/', _routes2.default);
 
