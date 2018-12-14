@@ -7,7 +7,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.get("/login", (req, res) => {
-  res.render("login");
+  let templateVar = {
+  user: [req.cookies]};
+  console.log(templateVar)
+  res.render("login", templateVar);
 });
 
 

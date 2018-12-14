@@ -9,7 +9,10 @@ router.get('/', function (req, res, next) {
 });
 
 router.get("/login", function (req, res) {
-  res.render("login");
+  var templateVar = {
+    user: [req.cookies] };
+  console.log(templateVar);
+  res.render("login", templateVar);
 });
 
 router.get("/register", function (req, res) {
