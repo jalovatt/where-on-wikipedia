@@ -20,6 +20,16 @@ module.exports = {
     return wikiQuery(params).then((data) => data.query.random[0].id);
   },
 
+  getArticleIdFromTitle(title) {
+    const params = {
+      titles: title
+    };
+
+    return wikiQuery(params)
+      .then((data) => Object.values(data.query.pages)[0]);
+
+  },
+
   getArticleData(articleId) {
     const params = {
       action: "query",
@@ -55,16 +65,20 @@ module.exports = {
       .then((data) => data.parse);
   },
 
-  getArticle(articleId) {
+  getArticleById: async function getArticleById(articleId) {
 
-    return Promise.all([
-      this.getArticleData(articleId),
-      this.getArticleWikiText(articleId)
-    ]).then((results) => {
-      const out ={...results[0], ...results[1]};
-      out.wikitext = out.wikitext["*"];
-      return out;
-    });
+    const data = await this.getArticleData(articleId);
+    const text = await this.getArticleWikiText(articleId);
+    text.wikitext = text.wikitext["*"];
+
+    return {...data, ...text};
+
+  },
+
+  getArticleByTitle: async function getArticleByTitle(articleTitle) {
+
+    const articleId = await this.getArticleIdFromTitle(articleTitle);
+    return this.getArticleById(articleId.pageid);
 
   },
 
@@ -88,7 +102,6 @@ module.exports = {
       // - Article that links here
       function(article, suspect) {
         const str = "The suspect asked for directions to an article mentioned in '%ARTICLE%'";
-
         const rand = randomInt(article.linkshere.length);
 
         return str.replace("%ARTICLE%", article.linkshere[rand].title);
@@ -104,8 +117,6 @@ module.exports = {
 
     return clueTypes[randomInt(clueTypes.length)](article, suspect);
 
-
-
   },
 
   generateSuspectClue(suspect) {
@@ -118,12 +129,49 @@ module.exports = {
     clues.push(
       this.generateArticleClue(article, suspect),
       this.generateArticleClue(article, suspect),
-      this.generateArticleClue(article, suspect),
-      this.generateArticleClue(article, suspect),
       ((randomInt(2) === 1) ? this.generateArticleClue(article, suspect) : this.generateSuspectClue(suspect))
     );
 
     return clues;
+
+  },
+
+  generateMystery: async function generateMystery(numSteps = 5) {
+
+    const lootId = await this.getRandomArticleId();
+    const loot = await this.getArticleById(lootId);
+
+    let prevArticle = loot;
+    let nextId;
+
+    const steps = {};
+    for (let i = 1; i <= numSteps; i++) {
+
+      console.log("\tgenerating " + i);
+
+      const nextLink = this.getRandomLinkFrom(prevArticle).title;
+
+      console.log("\tnext article: " + nextLink);
+      const nextArticle = this.getArticleByTitle(nextLink);
+
+      const step = {};
+      step.article = await this.getArticleByTitle(nextLink);
+
+      if (i < numSteps) {
+        step.clues = this.generateClues(step.article);
+      } else {
+        step.clues = ["You caught up to the thief!!"];
+      }
+
+      steps[step.article.pageid] = {...step};
+
+      prevArticle = step.article;
+    }
+
+    console.log("========================\nMystery:");
+    console.log(JSON.stringify(steps, null, 2));
+    console.log("========================");
+    return steps;
 
   }
 };

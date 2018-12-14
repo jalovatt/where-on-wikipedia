@@ -25,7 +25,7 @@ describe("Article processing", () => {
 
   let article;
   before((done) => {
-    queries.getArticle(articleId)
+    queries.getArticleById(articleId)
       .then((result) => {
 
         // print("Article data:", result);
@@ -106,7 +106,7 @@ describe("Article processing", () => {
     });
 
     it("should have three clues", () => {
-      assert.equal(clues.length, 5);
+      assert.equal(clues.length, 3);
     });
 
     // Call a master "generate step" function that picks a random article from
@@ -118,6 +118,42 @@ describe("Article processing", () => {
     // A full game
 
   });
+
+});
+
+describe("Generating a mystery", () => {
+
+  // Get a mystery
+  let mystery = {};
+  before((done) => {
+    queries.generateMystery()
+      .then((result) => {
+        mystery = result;
+        // print("Mystery:", mystery);
+        done();
+      });
+  });
+
+  xit("should contain the specified number of steps", (done) => {
+
+
+    done();
+  });
+
+  xit("each page should be in the links of the previous page", (done) => {
+
+    assert.isTrue(() => {
+      let allGood = true;
+
+      mystery.steps.map((step, idx) => {
+
+      });
+
+      return allGood;
+    });
+
+  });
+
 
 });
 
