@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/jalovatt/wiki-sandiego#readme",
   "dependencies": {
+    "express": "^4.16.4",
     "express-generator": "^4.16.0"
   }
 }
