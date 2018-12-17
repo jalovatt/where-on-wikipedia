@@ -2,6 +2,7 @@ var express = require('express');
 var bcrypt = require('bcrypt');
 var router = express.Router();
 
+
 const users = {
 }
 
@@ -48,13 +49,20 @@ function findUser(email, password) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+   let templateVar = {
+   user: users[req.cookies["user_id"]]};
+   console.log()
+  res.render('index', { title: 'Express', templateVar });
 });
 
+router.get("/users.json", (req, res) => {
+   res.json(users);
+ });
+
+
 router.get("/login", (req, res) => {
-  let templateVar = {
-  user: [req.cookies]};
-  console.log(templateVar.user)
+   let templateVar = {
+   user: users[req.cookies["user_id"]]};
   let userId = templateVar.user
   if(!userId || !users[userId]) {
     res.render("login", {});
@@ -64,10 +72,10 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/register", (req, res) => {
-  let templateVar = {
-  user: [req.cookies]};
-  console.log(templateVar)
-  let userId = templateVar.user
+   let templateVar = {
+   user: users[req.cookies["user_id"]]};
+   console.log(templateVar)
+   let userId = templateVar.user
   if(!userId || !users[userId]) {
     res.render("register", { errMsg: "" });
   } else {
@@ -108,12 +116,17 @@ router.post("/register", (req, res) => {
     if (canRegistered(email)) {
       let userId = addUser(email, password);
       templateVar.user = userId;
+      res.cookie("user_id", templateVar.user);
       res.redirect("/");
     } else {
       res.render("register", { errMsg: `${email} had already been registered.` });
     }
   }
+
+
+
   console.log(users)
+  console.log(req.body.email)
 });
 
 
