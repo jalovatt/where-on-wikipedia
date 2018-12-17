@@ -52,7 +52,7 @@ router.get('/', function(req, res, next) {
    let templateVar = {
    user: users[req.cookies["user_id"]]};
    console.log()
-  res.render('index', { title: 'Express', templateVar });
+  res.render('index', { title: 'Where in Wikipedia', templateVar });
 });
 
 router.get("/users.json", (req, res) => {
@@ -94,6 +94,9 @@ router.post("/login", (req, res) => {
       res.sendStatus(403);  // Forbidden
     } else {
       templateVar.user = userId;
+      res.cookie("user_id", templateVar.user);
+      console.log("blah")
+      console.log(templateVar.user)
       res.redirect("/");
     }
   }
