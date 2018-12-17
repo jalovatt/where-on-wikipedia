@@ -1,22 +1,50 @@
+var express = require('express');
+var bcrypt = require('bcrypt');
+var router = express.Router();
+
+const users = {
+}
+
+// functions
+
 function generateRandomString() {
  return  Math.random().toString(36).replace('0.', '') .slice(5);
  };
 
-var express = require('express');
-var router = express.Router();
+ function canRegistered(email) {
+   let signal = true;
+   for (let user in users) {
+     if (users[user].email === email) {
+       return false;
+     }
+   }
+   return true;
+ }
 
-const users = {
-  "userRandomID": {
-    id: "userRandomID",
-    email: "user@example.com",
-    password: "purple-monkey-dinosaur"
-  },
- "user2RandomID": {
-    id: "user2RandomID",
-    email: "user2@example.com",
-    password: "dishwasher-funk"
-  }
-}
+
+ function addUser(email, password) {
+   let newUserId = "";
+
+   do {
+     newUserId = generateRandomString();
+   } while(users[newUserId])
+   users[newUserId] = {
+     id: newUserId,
+     email: email,
+     password: bcrypt.hashSync(password, 10)
+   };
+   return newUserId;
+ }
+
+function findUser(email, password) {
+   for (let user in users) {
+     if (users[user].email === email
+       && bcrypt.compareSync(password, users[user].password)) {
+       return user;
+     }
+   }
+   return "";
+ }
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -26,78 +54,67 @@ router.get('/', function(req, res, next) {
 router.get("/login", (req, res) => {
   let templateVar = {
   user: [req.cookies]};
-  console.log(templateVar)
-  res.render('login', templateVar);
+  console.log(templateVar.user)
+  let userId = templateVar.user
+  if(!userId || !users[userId]) {
+    res.render("login", {});
+  } else {
+    res.redirect("/");
+  }
 });
-
 
 router.get("/register", (req, res) => {
   let templateVar = {
   user: [req.cookies]};
   console.log(templateVar)
-  res.render('register', templateVar);
-})
+  let userId = templateVar.user
+  if(!userId || !users[userId]) {
+    res.render("register", { errMsg: "" });
+  } else {
+    res.redirect("/");
+  }
+});
 
 router.post("/login", (req, res) => {
-  let userEmail = "";
-  let userPass = "";
-   for (let x in users) {
-    if (users[x]['email'] == req.body.email && users[x]['password'] == req.body.password) {
-      userEmail = req.body.email;
-      userPass = req.body.password;
-      res.cookie("user_id", users[x]["id"]);
+  let templateVar = {
+    user: [req.cookies]};
+   if (!req.body.email || !req.body.password) {
+        res.sendStatus(400);  // Bad Request
+  } else {
+    let userId = findUser(req.body.email, req.body.password);
+    if (!userId) {
+      res.sendStatus(403);  // Forbidden
+    } else {
+      templateVar.user = userId;
+      res.redirect("/");
     }
   }
-   if (userEmail.length > 0 && userPass.length > 0) {
-    res.redirect('/');
-  }
-  else {
-    res.sendStatus(403);
-  }
- });
+});
 
 router.post("/logout", (req, res)=>{
     res.clearCookie("user_id");
     res.redirect('/')
 })
 
-// router.post("/login", (req, res) => {
-//     console.log('req body', req.body.email)
-//   res.cookie("email", req.body.email);
-//    res.redirect("/")
-// });
-
-// router.post("/register", (req, res) => {
-//     console.log('req body', req.body.email)
-//   res.cookie("email", req.body.email);
-//    res.redirect("/")
-// });
 
 router.post("/register", (req, res) => {
+  let templateVar = {
+    user: [req.cookies]};
   let email = req.body.email;
-    if (!req.body.email || !req.body.password) {
-        res.status(400).send("Email and/or password field incomplete");
-    }
-  let matchedEmail;
-    for (let i in users) {
-    if (email === users[i].email) {
-        matchedEmail = true
-      }
-    }
-    if (matchedEmail) return res.status(400).send("User email already registered")
   let password = req.body.password;
-  let newUserID = generateRandomString();
-
-    users[newUserID] = {
-    email: email,
-    password: password,
-    id: newUserID
+  if (!email || !password) {
+    res.sendStatus(400);
+  } else {
+    if (canRegistered(email)) {
+      let userId = addUser(email, password);
+      templateVar.user = userId;
+      res.redirect("/");
+    } else {
+      res.render("register", { errMsg: `${email} had already been registered.` });
+    }
   }
-
-  res.cookie("user_id", newUserID);
-    console.log(users)
-    res.redirect('/')
-})
+  console.log(users)
+});
 
 
 module.exports = router;

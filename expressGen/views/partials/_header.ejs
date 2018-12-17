@@ -1,0 +1,11 @@
+<% if(user) { %>
+   <form action="/logout" method="POST" style="float: right;">
+     <%= user %>
+    <button style="margin-left: :60px;">Logout </button>
+  </form>
+<% } else { %>
+<nav>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+  </nav>
+<% } %>
