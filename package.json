@@ -1,5 +1,5 @@
 {
-  "name": "wiki-sandiego",
+  "name": "where-on-wikipedia",
   "version": "1.0.0",
   "description": "A Carmen Sandiego-style game powered by Wikipedia",
   "main": "index.js",
