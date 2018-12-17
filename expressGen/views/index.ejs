@@ -7,7 +7,6 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
 
     <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +31,7 @@
 
     position: absolute;
     left: 10%;
-    top: 25%;
+    top: 20%;
 
     width: 50vw;
     height: 80vh;
@@ -43,7 +42,7 @@
 
     position: absolute;
     left: 10%;
-    top: 25%;
+    top: 20%;
 
     width: 50vw;
     height: 80vh;
@@ -55,7 +54,7 @@
 
     position: absolute;
     left: calc(10% + 12px);
-    top: calc(25% + 12px);
+    top: calc(20% + 12px);
 
     width: calc(50vw - 24px);
     height: calc(80vh - 24px);
@@ -101,6 +100,7 @@
 
     position: absolute;
     bottom: 0px;
+    top: 102%
 
   }
 
@@ -166,6 +166,7 @@
     top: 0;
     left: 0;
     position: absolute;
+
     width: inherit;
     height: inherit;
     border-radius: inherit;
@@ -201,6 +202,17 @@
   <h1 id="turn-count">0</h1>
 
   <div class="wiki-bg metal linear" position="margin-top: 1000000px">&nbsp;</div>
+  <div class="wiki-overlay glass no-click">&nbsp;</div>
+  <iframe class="wiki-content" id="wiki-content" src="https://en.m.wikipedia.org/wiki/Special:Random"></iframe>
+
+  <div class="button-container">
+    <button class="metal radial"><i class="fab fa-wikipedia-w"></i></button>
+    <button class="metal radial"><i class="fas fa-search"></i></button>
+    <button class="metal radial"><i class="fas fa-running"></i></button>
+    <button class="metal radial"><i class="fas fa-bars"></i></button>
+  </div>
+
+    <div class="wiki-bg metal linear" position="margin-top: 1000000px">&nbsp;</div>
   <div class="wiki-overlay glass no-click">&nbsp;</div>
   <iframe class="wiki-content" id="wiki-content" src="https://en.m.wikipedia.org/wiki/Special:Random"></iframe>
 
