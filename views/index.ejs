@@ -34,6 +34,26 @@
     padding: 1px;
   }
 
+  .main-content {
+      display: flex;
+      width: 100%;
+      height: 80vh;
+  }
+
+  .game-container,
+
+  .wiki-container {
+      flex: 1;
+      height: 100%;
+      margin: 20px;
+      box-sizing: border-box;
+      padding: 2px;
+  }
+
+  .wiki-container {
+      padding: 0px;
+  }
+
   .wiki-overlay {
     left: 10%;
     top: 20%;
@@ -41,7 +61,7 @@
     height: 80vh;
   }
 
-    .wiki-content {
+  .wiki-content {
     left: calc(10% + 12px);
     top: calc(20% + 12px);
     width: calc(50vw - 24px);
@@ -76,13 +96,11 @@
     pointer-events: none;
   }
 
-  .button-container {
+/*  .button-container {
 
-    position: absolute;
+    position: relative;
     bottom: 0px;
-    top: 102%
-
-  }
+  }*/
 
   .metal {
     /* position: relative; */
@@ -145,7 +163,7 @@
     content: "";
     top: 0;
     left: 0;
-    position: absolute;
+
 
     width: inherit;
     height: inherit;
@@ -181,43 +199,20 @@
 
   <h1 id="turn-count">0</h1>
 
-  <style>
-    .main-content {
-      display: flex;
-      width: 100%;
-      height: 80vh;
-    }
-
-    .game-container,
-    .wiki-container {
-      flex: 1;
-      height: 100%;
-      margin: 20px;
-      box-sizing: border-box;
-      padding: 2px;
-    }
-
-    .wiki-container {
-      padding: 0px;
-    }
-  </style>
   <main class="main-content">
       <article class="wiki-container metal linear glass ">
           <iframe class="wiki-content" id="wiki-content" src="https://en.m.wikipedia.org/wiki/Special:Random" onload="updateUrl(event)"></iframe>
       </article>
-    <article class="game-container metal linear glass no-click">
+    <article class="game-container metal linear glass no-click button-container">
+      <h4>Welcome player</h4>
+        <!-- <div class="button-container"> -->
+          <button class="metal radial"><i class="fab fa-wikipedia-w"></i></button>
+          <button class="metal radial"><i class="fas fa-search"></i></button>
+          <button class="metal radial"><i class="fas fa-running"></i></button>
+          <button class="metal radial"><i class="fas fa-bars"></i></button>
+        <!-- </div> -->
     </article>
   </main>
-
-
-  <div class="button-container">
-    <button class="metal radial"><i class="fab fa-wikipedia-w"></i></button>
-    <button class="metal radial"><i class="fas fa-search"></i></button>
-    <button class="metal radial"><i class="fas fa-running"></i></button>
-    <button class="metal radial"><i class="fas fa-bars"></i></button>
-  </div>
-
-
 
 
   <script>
@@ -229,8 +224,6 @@
     iframe.addEventListener("load", (e) => {
       turnCount.innerText = ++count;
     });
-
-
 
   </script>
 
