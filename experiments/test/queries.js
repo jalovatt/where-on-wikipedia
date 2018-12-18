@@ -72,7 +72,7 @@ describe("Article processing", () => {
     });
   });
 
-  describe("Useability", () => {
+  describe("Useability\n(If any of these fail, double-check that the test article still fits the criteria)", () => {
 
     async function testUseability(id, expectingArticle) {
 
@@ -90,8 +90,8 @@ describe("Article processing", () => {
     it("should return false for an article with no links", async () => {
 
       // https://en.wikipedia.org/wiki/Special:DeadendPages
-      // Rhythmus 21 (no links as of Dec. 2018)
-      testUseability(59190088, false);
+      // Robert Dotson (no links as of Dec. 2018)
+      testUseability(50059391, false);
 
     });
 
@@ -119,19 +119,19 @@ describe("Article processing", () => {
 
   });
 
-  xdescribe("Parsing WikiText", () => {
+  // xdescribe("Parsing WikiText", () => {
 
-    it("should have the parsed WikiText for an articleId", (done) => {
-      assert.exists(article.wikitext);
-      assert.match(article.wikitext, /^\{\{/);
-      done();
-    });
+  //   it("should have the parsed WikiText for an articleId", (done) => {
+  //     assert.exists(article.wikitext);
+  //     assert.match(article.wikitext, /^\{\{/);
+  //     done();
+  //   });
 
-    xit("should count how many times each linked article is mentioned in the WikiText", () => {
-      assert.isTrue(false);
-    });
+  //   xit("should count how many times each linked article is mentioned in the WikiText", () => {
+  //     assert.isTrue(false);
+  //   });
 
-  });
+  // });
 
   xdescribe("Pick a suspect", () => {
 
@@ -143,28 +143,20 @@ describe("Article processing", () => {
     // which will be randomly given in place of article clues
   });
 
-  xdescribe("Generating clues", () => {
+  // xdescribe("Generating clues", () => {
 
-    let clues;
-    before((done) => {
-      clues = queries.generateClues(article);
-      print("Clues:", clues);
-      done();
-    });
+  //   let clues;
+  //   before((done) => {
+  //     clues = queries.addClues(article);
+  //     print("Clues:", clues);
+  //     done();
+  //   });
 
-    it("should have three clues", () => {
-      assert.equal(clues.length, 3);
-    });
+  //   it("should have three clues", () => {
+  //     assert.equal(clues.length, 3);
+  //   });
 
-    // Call a master "generate step" function that picks a random article from
-    // a given articleId's links
-
-    // The returned data should include the article (title/id, url?) and up to
-    // three clues pertaining to it
-
-    // A full game
-
-  });
+  // });
 
 });
 
@@ -181,32 +173,33 @@ describe("Generating a mystery", () => {
       });
   });
 
-  xit("should contain the specified number of steps", (done) => {
-
-
-    done();
+  it("should exist", () => {
+    assert.isOk(mystery);
   });
 
-  xit("each page should be in the links of the previous page", (done) => {
+  it("should have a suspect", () => {
+    assert.isOk(mystery.suspect);
+  });
 
-    assert.isTrue(() => {
-      let allGood = true;
+  it("should contain destinations for each step but the last", () => {
+    const destSteps = mystery.steps.slice(0, -1);
 
-      mystery.steps.map((step, idx) => {
-
-      });
-
-      return allGood;
-    });
+    assert.isTrue(
+      destSteps.every((step) => step.destinations && step.destinations.length)
+    );
 
   });
 
+  it("should contain clues for each step but the last", () => {
+    const clueSteps = mystery.steps.slice(0, -1);
+
+    assert.isTrue(
+      clueSteps.every((step) => step.clues && step.clues.length)
+    );
+
+  });
 
 });
-
-
-
-
 
 function print(heading, query) {
   console.log("\n" + heading + "\n" + JSON.stringify(query, null, 2));

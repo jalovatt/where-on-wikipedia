@@ -186,15 +186,25 @@
 
 <body>
 
+  <script>
+    let currentUrl;
+    let urlDisplay;
+
+    function updateUrl(e) {
+      console.dir(e.target);
+    }
+  </script>
+
   <h1 id="turn-count">0</h1>
 
   <div class="wiki-bg metal linear">&nbsp;</div>
   <div class="wiki-overlay glass no-click">&nbsp;</div>
-  <iframe class="wiki-content" id="wiki-content" src="https://en.m.wikipedia.org/wiki/Special:Random"></iframe>
+  <iframe class="wiki-content" id="wiki-content" src="https://en.m.wikipedia.org/wiki/Special:Random" onload="updateUrl(event)"></iframe>
 
   <div class="button-container">
     <button class="metal radial"><i class="fab fa-wikipedia-w"></i></button>
     <button class="metal radial"><i class="fas fa-search"></i></button>
+    <button class="metal radial"><i class="fas fa-plane"></i></button>
     <button class="metal radial"><i class="fas fa-running"></i></button>
     <button class="metal radial"><i class="fas fa-bars"></i></button>
   </div>
@@ -202,13 +212,13 @@
 
   <script>
 
-    let count = 0;
+    // let count = 0;
 
-    const turnCount = document.getElementById("turn-count");
-    const iframe = document.getElementById("wiki-content");
-    iframe.addEventListener("load", (e) => {
-      turnCount.innerText = ++count;
-    });
+    // const turnCount = document.getElementById("turn-count");
+    // const iframe = document.getElementById("wiki-content");
+    // iframe.addEventListener("load", (e) => {
+    //   turnCount.innerText = ++count;
+    // });
 
 
 

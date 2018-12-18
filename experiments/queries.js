@@ -86,10 +86,15 @@ module.exports = {
   getArticleById: async function getArticleById(articleId) {
 
     const data = await this.getArticleData(articleId);
-    const text = await this.getArticleWikiText(articleId);
-    text.wikitext = text.wikitext["*"];
+    // const text = await this.getArticleWikiText(articleId);
 
-    return {...data, ...text};
+    if (!articleId) return 1 / 0;
+
+    // text.wikitext = text.wikitext["*"];
+
+    // return {...data, ...text};
+
+    return data;
 
   },
 
@@ -129,9 +134,12 @@ module.exports = {
 
   findUseableLinkFrom: async function findUseableLinkFrom(article) {
 
+    // console.log("finding useable link from article: " + article.title);
+
     let useable = false;
 
     do {
+
       const curLink = this.getRandomLinkFrom(article).title;
 
       const curId = await this.getArticleIdFromTitle(curLink);
@@ -148,12 +156,12 @@ module.exports = {
 
   },
 
-  generateArticleClue(article, suspect) {
+  generateArticleClue(article) {
 
     const clueTypes = [
 
       // - Article that links here
-      function(article, suspect) {
+      function(article) {
         const str = "The suspect asked for directions to an article mentioned in '%ARTICLE%'";
         const rand = randomInt(article.linkshere.length);
 
@@ -161,33 +169,57 @@ module.exports = {
       },
 
       // - Category that this belongs to
-      function(article, suspect) {
+      function(article) {
         const str = "The suspect expressed an interest in '%CATEGORY%'";
         const rand = randomInt(article.categories.length);
         return str.replace("%CATEGORY%", article.categories[rand].title);
       },
     ];
 
-    return clueTypes[randomInt(clueTypes.length)](article, suspect);
+    return clueTypes[randomInt(clueTypes.length)](article);
 
   },
 
   generateSuspectClue(suspect) {
-    return "a suspect clue";
+    return this.generateArticleClue(suspect);
   },
 
-  generateClues(article, suspect) {
+  addClues(article, suspect) {
 
     const clues = [];
     clues.push(
-      this.generateArticleClue(article, suspect),
-      this.generateArticleClue(article, suspect),
-      this.generateArticleClue(article, suspect),
-      ((randomInt(2) === 1) ? this.generateArticleClue(article, suspect) : this.generateSuspectClue(suspect)),
-      ((randomInt(2) === 1) ? this.generateArticleClue(article, suspect) : this.generateSuspectClue(suspect))
+      this.generateArticleClue(article),
+      this.generateArticleClue(article),
+      this.generateArticleClue(article),
+      ((randomInt(2) === 1) ? this.generateArticleClue(article) : this.generateSuspectClue(suspect)),
+      ((randomInt(2) === 1) ? this.generateArticleClue(article) : this.generateSuspectClue(suspect))
     );
 
     return clues;
+
+  },
+
+  getRandomLinksFrom(article, n) {
+
+    const out = [];
+    const l = article.links.length;
+
+    for (let i = 0; i < n; i++) {
+      out.push(article.links[randomInt(l)].title);
+    }
+
+    return out;
+  },
+
+  getDestinations(article, include) {
+
+    const out = this.getRandomLinksFrom(article, 4);
+    out.push(include);
+
+    console.log("returning destinations:");
+    console.log(out);
+
+    return out;
 
   },
 
@@ -198,7 +230,8 @@ module.exports = {
     const step = {};
     step.article = await this.getArticleByTitle(nextLink.title);
 
-    step.clues = this.generateClues(step.article, suspect);
+    step.clues = this.addClues(step.article, suspect);
+    step.destinations = this.getRandomLinksFrom(step.article, 4);
 
     return step;
 
@@ -225,43 +258,70 @@ module.exports = {
 
   },
 
-  generateMystery: async function generateMystery(numSteps = 3) {
+  generateGameSteps: async function generateGameSteps(numSteps) {
 
-    console.log("====================");
-    console.log("generating a mystery");
-
-    const suspect = await this.generateSuspect();
-
+    const steps = [];
     const loot = await this.getUseableRandomArticle();
+    console.log("pushing " + loot.title);
+    steps.push(loot);
 
-    console.log("starting point: " + loot.title);
+    for (let i = 1; i < numSteps; i++) {
+      console.log("==== step " + i + " ====");
+      // console.log("there are " + steps.length + " steps in the array");
 
-    let prevArticle = loot;
-    let nextId;
+      const link = await this.findUseableLinkFrom(steps[i-1]);
 
-    const steps = {};
-    for (let i = 1; i <= numSteps; i++) {
+      // console.log("found " + link.title);
+      const article = await this.getArticleByTitle(link.title);
 
-      console.log("\nstep: " + i);
+      console.log("pushing " + article.title);
+      steps.push(article);
 
-      const step = await this.generateNextStep(prevArticle, suspect);
+      console.log("==== end of step " + i + " ====");
+      // console.log("there are " + steps.length + " steps in the array");
+    }
 
-      if (i === numSteps) step.final = true;
+    return steps;
 
-      steps[step.article.pageid] = {...step};
+  },
 
-      prevArticle = step.article;
+  addMetadata(steps, suspect) {
 
-      console.log("title: " + step.article.title);
-      console.log("clues:");
-      console.log(JSON.stringify(step.clues, null, 2));
+    for (let i = 0, l = steps.length - 1; i < l; i++) {
+
+      const destinations = this.getRandomLinksFrom(steps[i], 4);
+      destinations.push(steps[i + 1].title);
+      steps[i].destinations = destinations;
+
+      const clues = this.addClues(steps[i + 1], suspect);
+      steps[i].clues = clues;
 
     }
 
-    console.log("finished the mystery");
+    return steps;
+
+  },
+
+  generateMystery: async function generateMystery(numSteps = 5) {
+
+    console.log("====================");
+    console.log("generating a game");
+
+    let game = {};
+
+    game.suspect = await this.generateSuspect();
+
+    const steps = await this.generateGameSteps(5);
+    game.steps =  this.addMetadata(steps, game.suspect);
+
+    // const meta = this.addMetadata(game);
+    // game.clues = meta.clues;
+    // game.destinations = meta.destinations;
+
+    console.log("finished the game");
     console.log("====================");
 
-    return steps;
+    return game;
 
   }
 };
