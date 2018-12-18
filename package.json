@@ -2,12 +2,9 @@
   "name": "where-on-wikipedia",
   "version": "1.0.0",
   "description": "A Carmen Sandiego-style game powered by Wikipedia",
-  "main": "index.js",
+  "main": "server/app.js",
   "scripts": {
-    "clean": "shx rm -rf dist",
-    "copy": "shx mkdir dist && shx cp -r public views dist/",
-    "compile": "npm run clean && npm run copy && babel \"./{,!(dist|node_modules)/**/}*.js\" bin/www -d dist",
-    "start": "npm run compile && node ./dist/bin/www"
+    "start": "node server/app.js"
   },
   "repository": {
     "type": "git",
@@ -26,10 +23,12 @@
     "cookie-session": "^2.0.0-beta.3",
     "debug": "~2.6.9",
     "dotenv": "^6.2.0",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "http-errors": "~1.6.2",
     "mongo": "^0.1.0",
     "mongodb": "^3.1.10",
     "morgan": "~1.9.0"
-  }
+  },
+  "devDependencies": {}
 }

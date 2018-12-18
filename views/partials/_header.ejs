@@ -1,0 +1,15 @@
+
+<% if (templateVar.user) { %>
+
+   <form action="/logout" method="POST" style="float: right;">
+<%= templateVar.user.email %>
+
+    <button style="margin-left: :60px;">Logout <img src="https://image.flaticon.com/icons/svg/154/154347.svg" width="20" height="20"></button>
+  </form>
+<% } else { %>
+<nav>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+  </nav>
+
+<% } %>
