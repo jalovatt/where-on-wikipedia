@@ -1,14 +1,17 @@
-var express = require('express');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 const bodyParser = require("body-parser");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const db = "nothing yet";
 
-var app = express();
+const helpers = require("./helpers/helpers")(db, bcrypt);
+const controllers = require("./controllers/controllers")(helpers);
+const router = require("./routes/router")(express, controllers);
+
+const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -25,10 +28,7 @@ app.use(cookieSession({
   maxAge: 60 * 60 * 1000 // session cookie time length
 }));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-
+app.use(router);
 
 // // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
