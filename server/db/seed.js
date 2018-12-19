@@ -4982,6 +4982,7 @@ async function seedDb() {
 
   exampleGame["_id"] = "example";
 
+  await db.collection("games").insertOne({});
   await db.collection("games").drop();
   await db.collection("games").insertOne(exampleGame);
 
