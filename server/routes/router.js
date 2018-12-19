@@ -11,8 +11,10 @@ module.exports = function(express, controllers) {
   router.post("/register",    controllers.user.postRegister);
 
   router.get("/game/new",     controllers.game.getNew);
-  router.get("/game/:gameId/search/:articleId",
-                              controllers.game.getSearch);
+  router.get("/game/:gameId/travel/:articleId",
+                              controllers.game.getTravel);
+  // router.get("/game/:gameId/search/:articleId",
+  //                             controllers.game.getSearch);
   router.get("/game/:gameId/capture/:articleId/:suspectId",
                               controllers.game.getCapture);
 

@@ -28,6 +28,8 @@ const suspects = [
 
 module.exports = {
 
+  logMystery: false,    // Flag for console.logging the mystery's progress
+
   getRandomArticleId() {
     const params = {
       list: "random",
@@ -83,7 +85,7 @@ module.exports = {
       .then((data) => data.parse);
   },
 
-  getArticleById: async function getArticleById(articleId) {
+  async getArticleById(articleId) {
 
     const data = await this.getArticleData(articleId);
     // const text = await this.getArticleWikiText(articleId);
@@ -98,7 +100,7 @@ module.exports = {
 
   },
 
-  getArticleByTitle: async function getArticleByTitle(articleTitle) {
+  async getArticleByTitle(articleTitle) {
 
     const articleId = await this.getArticleIdFromTitle(articleTitle);
     return this.getArticleById(articleId);
@@ -132,7 +134,7 @@ module.exports = {
     ) && article;
   },
 
-  findUseableLinkFrom: async function findUseableLinkFrom(article) {
+  async findUseableLinkFrom(article) {
 
     // console.log("finding useable link from article: " + article.title);
 
@@ -149,6 +151,8 @@ module.exports = {
       const curArticle = await this.getArticleById(curId);
 
       useable = this.isUseableArticle(curArticle);
+
+      !useable && this.logMystery && console.log("\t.");
 
     } while (!useable);
 
@@ -220,7 +224,7 @@ module.exports = {
 
   },
 
-  generateNextStep: async function generateNextStep(prevArticle, suspect) {
+  async generateNextStep(prevArticle, suspect) {
 
     const nextLink = await this.findUseableLinkFrom(prevArticle);
 
@@ -234,7 +238,7 @@ module.exports = {
 
   },
 
-  getUseableRandomArticle: async function getUseableRandomArticle() {
+  async getUseableRandomArticle() {
 
     let useable = false;
 
@@ -248,18 +252,21 @@ module.exports = {
 
   },
 
-  generateSuspect: async function generateSuspect() {
+  async generateSuspect() {
 
     const id = suspects[randomInt(suspects.length)];
     return this.getArticleById(id);
 
   },
 
-  generateGameSteps: async function generateGameSteps(numSteps) {
+  async generateGameSteps(numSteps) {
 
+    this.logMystery && console.log("\tGenerating steps...");
     const steps = [];
     const loot = await this.getUseableRandomArticle();
-    // console.log("pushing " + loot.title);
+
+    this.logMystery && console.log(`\t${loot.title}`);
+
     steps.push(loot);
 
     for (let i = 1; i < numSteps; i++) {
@@ -273,6 +280,8 @@ module.exports = {
 
       // console.log("pushing " + article.title);
       steps.push(article);
+
+      this.logMystery && console.log(`\t${article.title}`);
 
       // console.log("==== end of step " + i + " ====");
       // console.log("there are " + steps.length + " steps in the array");
@@ -299,7 +308,7 @@ module.exports = {
 
   },
 
-  generateMystery: async function generateMystery(numSteps = 5) {
+  async generateMystery(numSteps = 5) {
 
     // console.log("====================");
     // console.log("generating a game");

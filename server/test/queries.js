@@ -165,7 +165,8 @@ describe("Generating a mystery", () => {
   // Get a mystery
   let mystery = {};
   before((done) => {
-    queries.generateMystery()
+    queries.logMystery = true;
+    queries.generateMystery(null) // Spit out progress
       .then((result) => {
         mystery = result;
         // print("Mystery:", mystery);

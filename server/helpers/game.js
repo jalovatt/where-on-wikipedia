@@ -5,19 +5,35 @@ module.exports = function(db) {
 
   return {
 
-    newGame: async function newGame() {
+    async newGame() {
 
       const id = exampleGameId;
       const step = await db.loadStep(id, 0);
 
       return {
-        id,
+        gameid: gameId,
+        pageid: step.pageid,
         title: step.title,
         url: step.canonicalurl,
         destinations: step.destinations,
-        clues: step.clues
+        // clues: step.clues
       };
 
+    },
+
+    async travelTo(gameId, articleId) {
+
+      gameId = exampleGameId;
+
+      const step = await db.findStepByArticle(gameId, articleId);
+
+      return (!step) ? null : {
+        gameid: gameId,
+        pageid: step.pageid,
+        title: step.title,
+        url: step.canonicalurl,
+        destinations: step.destinations,
+      };
     }
 
   };

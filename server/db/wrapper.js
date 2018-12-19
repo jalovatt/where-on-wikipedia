@@ -5,21 +5,34 @@ module.exports = function(mongo, db) {
 
   return {
 
-    loadGame: async function(gameId) {
+    async loadGame(gameId) {
       return await games.findOne(mongo.ObjectId(gameId));
     },
 
-    storeGame: async function(game) {
+    async storeGame(game) {
       return await games.insertOne(game);
     },
 
-    loadStep: async function(gameId, step) {
+    async loadStep(gameId, step) {
 
       const result = await games
         .findOne(mongo.ObjectId(gameId), {projection: {steps: 1}});
 
-      return result.steps[step];
+
+      return (result && result.steps) ? result.steps[step] : null;
     },
+
+    async findStepByArticle(gameId, articleId) {
+
+      const game = await this.loadGame(gameId);
+      const step = game.steps.find((step) => Number(step.pageid) === Number(articleId));
+
+      console.log("===================\n");
+      console.log(step);
+      console.log("\n===================");
+
+      return (step) ? step : null;
+    }
 
   };
 };
