@@ -69,7 +69,7 @@ module.exports = function(wiki) {
 
         useable = this.isUseableArticle(curArticle);
 
-        !useable && this.logMystery && console.log("\t.");
+        !useable && this.logMystery && console.log("\t\t.");
 
       } while (!useable);
 
@@ -206,7 +206,7 @@ module.exports = function(wiki) {
       const steps = [];
       const loot = await this.getUseableRandomArticle();
 
-      this.logMystery && console.log(`\t${loot.title}`);
+      this.logMystery && console.log(`\t- ${loot.title}`);
 
       steps.push(loot);
 
@@ -222,7 +222,7 @@ module.exports = function(wiki) {
         // console.log("pushing " + article.title);
         steps.push(article);
 
-        this.logMystery && console.log(`\t${article.title}`);
+        this.logMystery && console.log(`\t- ${article.title}`);
 
         // console.log("==== end of step " + i + " ====");
         // console.log("there are " + steps.length + " steps in the array");

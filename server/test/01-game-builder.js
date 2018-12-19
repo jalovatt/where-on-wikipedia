@@ -60,7 +60,7 @@ describe("Article processing", () => {
     });
   });
 
-  describe("Useability\n(If any of these fail, double-check that the test article still fits the criteria)", () => {
+  describe("Useability\n\t(If these fail, check that each test's article still fits the criteria)", () => {
 
     async function testUseability(id, expectingArticle) {
 

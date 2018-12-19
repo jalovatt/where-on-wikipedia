@@ -19,7 +19,19 @@ module.exports = function(request) {
     return new Promise((resolve, reject) => {
       request(query,
         ((err, res, body) => {
-          (err) ? reject(err) : resolve(JSON.parse(body));
+
+          if (err) {
+            console.log("WikiQuery failed")
+            console.log("query:");
+            console.log(query);
+            console.log("error:");
+            console.log(err);
+
+            reject(err);
+
+          } else {
+            resolve(JSON.parse(body));
+          }
         })
       );
     });

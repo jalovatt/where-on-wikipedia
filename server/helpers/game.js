@@ -1,6 +1,6 @@
 module.exports = function(db, gameBuilder) {
 
-  const exampleGameId = "5c197a4b956aa4a4c5851a39";
+  const exampleGameId = "example";
   // const exampleGame = db.loadGame(exampleGameId);
 
   return {

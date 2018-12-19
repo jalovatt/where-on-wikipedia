@@ -6,7 +6,7 @@ module.exports = function(mongo, db) {
   return {
 
     async loadGame(gameId) {
-      return await games.findOne(mongo.ObjectId(gameId));
+      return await games.findOne({["_id"]: gameId});
     },
 
     async storeGame(game) {
