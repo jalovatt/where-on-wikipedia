@@ -4,11 +4,11 @@
     <title><%= title %></title>
 <% include ./partials/_header %>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+
   </head>
   <body>
     <h1><%= title %></h1>
 
-    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/solid.css" integrity="sha384-aj0h5DVQ8jfwc8DA7JiM+Dysv7z+qYrFYZR+Qd/TwnmpDI6UaB3GJRRTdY8jYGS4" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/brands.css" integrity="sha384-whKHCkwP9f4MyD1vda26+XRyEg2zkyZezur14Kxc784RxUU1E7HvWVYj9EoJnUV7" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/fontawesome.css" integrity="sha384-WK8BzK0mpgOdhCxq86nInFqSWLzR5UAsNg0MGX9aDaIIrFWQ38dGdhwnNCAoXFxL" crossorigin="anonymous">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
   <title>Document</title>
 </head>
 <style>
@@ -203,14 +206,32 @@
       <article class="wiki-container metal linear glass ">
           <iframe class="wiki-content" id="wiki-content" src="https://en.m.wikipedia.org/wiki/Special:Random" onload="updateUrl(event)"></iframe>
       </article>
-    <article class="game-container metal linear glass no-click button-container">
+    <article class="game-container metal linear glass button-container">
       <h4>Welcome player</h4>
         <!-- <div class="button-container"> -->
-          <button class="metal radial"><i class="fab fa-wikipedia-w"></i></button>
+         <!--  <button class="metal radial"><i class="fab fa-wikipedia-w"></i></button>
           <button class="metal radial"><i class="fas fa-search"></i></button>
           <button class="metal radial"><i class="fas fa-running"></i></button>
-          <button class="metal radial"><i class="fas fa-bars"></i></button>
+          <button class="metal radial"><i class="fas fa-bars"></i></button> -->
         <!-- </div> -->
+
+  <button>example game</button>
+<div id="resultJson"></div>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+  $("button").click(function(){
+    $.getJSON("http://localhost:3000/game/0/travel/153095", function(result){
+      $.each(result, function(i, field){
+        $("div").append(field + " ");
+      });
+    });
+  });
+});
+
+</script>
     </article>
   </main>
 
@@ -234,5 +255,3 @@
 </html>
 
 
-  </body>
-</html>
