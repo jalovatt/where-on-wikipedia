@@ -10,7 +10,7 @@ async function startApp() {
   const request = require("request");
 
   const mongo = require("mongodb");
-  const db = await require("./db/db")(mongo, process.env.MONGODB_URI);
+  const db = await require("./db/db")(mongo);
   console.log("Connected to database at: " + process.env.MONGODB_URI);
 
   const wiki = require("./wiki-api/wiki")(request);

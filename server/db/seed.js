@@ -3,7 +3,10 @@ async function seedDb() {
   require("dotenv").config();
   const mongo = require("mongodb");
 
-  const client = new mongo.MongoClient(process.env.MONGODB_URI, {useNewUrlParser: true});
+  const client = new mongo.MongoClient(
+    process.env.MONGODB_URI,
+    {useNewUrlParser: true}
+  );
 
   const db = await client.connect()
     .then((client) => {

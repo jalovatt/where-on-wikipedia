@@ -1,14 +1,17 @@
-module.exports = async function(mongo, MONGODB_URI) {
+module.exports = async function(mongo) {
 
   const dbWrapper = require("./wrapper");
 
-  const db = await mongo.connect(
-    MONGODB_URI,
+  const client = new mongo.MongoClient(
+    process.env.MONGODB_URI,
     {useNewUrlParser: true}
-  ).then((client) => {
-    return client.db(process.env.DB_NAME);
-  });
+  );
 
-  return dbWrapper(mongo, db);
+  const db = await client.connect()
+    .then((client) => {
+      return client.db(process.env.DB_NAME);
+    });
+
+  return dbWrapper(db);
 
 };

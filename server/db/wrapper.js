@@ -1,4 +1,4 @@
-module.exports = function(mongo, db) {
+module.exports = function(db) {
 
   const users = db.collection("users");
   const games = db.collection("games");
@@ -16,7 +16,7 @@ module.exports = function(mongo, db) {
     async loadStep(gameId, step) {
 
       const result = await games
-        .findOne(mongo.ObjectId(gameId), {projection: {steps: 1}});
+        .findOne({["_id"]: gameId}, {projection: {steps: 1}});
 
 
       return (result && result.steps) ? result.steps[step] : null;
