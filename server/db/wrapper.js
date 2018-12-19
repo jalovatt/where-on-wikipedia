@@ -15,12 +15,10 @@ module.exports = function(mongo, db) {
 
     loadStep: async function(gameId, step) {
 
-      console.log(`Attempting to load game ${gameId}, step ${step}`);
+      const result = await games
+        .findOne(mongo.ObjectId(gameId), {projection: {steps: 1}});
 
-      const steps = await games
-        .findOne(mongo.ObjectId(gameId), {steps: 1});
-
-      return steps[step];
+      return result.steps[step];
     },
 
   };

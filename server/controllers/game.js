@@ -4,9 +4,6 @@ module.exports = function(helper) {
 
     getNew: async function getNew(req, res, next) {
       const newGameData = await helper.newGame();
-
-      console.log(newGameData);
-
       res.json(newGameData);
     },
 

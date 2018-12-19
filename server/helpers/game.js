@@ -1,7 +1,7 @@
 module.exports = function(db) {
 
   const exampleGameId = "5c197a4b956aa4a4c5851a39";
-  const exampleGame = db.loadGame(exampleGameId);
+  // const exampleGame = db.loadGame(exampleGameId);
 
   return {
 
@@ -13,6 +13,7 @@ module.exports = function(db) {
       return {
         id,
         title: step.title,
+        url: step.canonicalurl,
         destinations: step.destinations,
         clues: step.clues
       };
