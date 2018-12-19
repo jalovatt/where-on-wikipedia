@@ -6,43 +6,44 @@ module.exports = function(db, bcrypt) {
 // functions
 
   return {
-    generateRandomString() {
-      return Math.random().toString(36).replace('0.', '') .slice(5);
-    },
 
-    canRegistered(email) {
-      let signal = true;
-      for (let user in users) {
-        if (users[user].email === email) {
-          return false;
-        }
-      }
-      return true;
-    },
+    async newUser(email, name, password) {
 
-    addUser(email, password) {
-      let newUserId = "";
+      const emailAvailable = await db.isEmailAvailable(email);
+      if (!emailAvailable) return ["Email address already exists"];
 
-      do {
-        newUserId = generateRandomString();
-      } while(users[newUserId])
-      users[newUserId] = {
-        id: newUserId,
-        email: email,
-        password: bcrypt.hashSync(password, 10)
+      const nameAvailable = await db.isNameAvailable(name);
+      if (!nameAvailable) return ["Name already exists"];
+
+      const user = {
+        ["_id"]: email,
+        name,
+        password: bcrypt.hashSync(password, 10),
+        gamesPlayed: 0,
+        gamesWon: 0,
       };
-      return newUserId;
+
+      await db.registerUser(user);
+
+      return [null, email];
     },
 
-    findUser(email, password) {
-      for (let user in users) {
-        if (users[user].email === email
-          && bcrypt.compareSync(password, users[user].password)) {
-          return user;
-        }
+    async validateLogin(email, password) {
+
+      const user = await db.findUserByEmail(email);
+      if (!user) return ["User doesn't exist"];
+      if (!bcrypt.compareSync(password, user.password)) {
+        return ["Incorrect password"];
       }
-      return "";
-    },
+
+      return [null, {
+        name: user.name,
+        email: user["_id"],
+        played: user.gamesPlayed,
+        won: user.gamesWon
+      }];
+    }
+
   };
 
 };

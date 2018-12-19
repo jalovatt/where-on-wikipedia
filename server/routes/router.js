@@ -3,8 +3,8 @@ module.exports = function(router, controllers) {
 
   router.get("/",             controllers.index.getIndex);
 
-  router.get("/login",        controllers.user.getLogin);
-  router.get("/register",     controllers.user.getRegister);
+  // router.get("/login",        controllers.user.getLogin);
+  // router.get("/register",     controllers.user.getRegister);
 
   router.post("/login",       controllers.user.postLogin);
   router.post("/logout",      controllers.user.postLogout);

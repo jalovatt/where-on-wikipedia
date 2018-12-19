@@ -1,76 +1,57 @@
-module.exports = function(db, bcrypt) {
+module.exports = function(helper) {
 
-  const userHelper = require("../helpers/user")(db, bcrypt);
+  // const userHelper = require("../helpers/user")(db, bcrypt);
 
   const userController = {
-    getLogin(req, res) {
-      console.log("GET /login");
-      let templateVar = {
-        user: users[req.cookies["user_id"]]};
-      let userId = templateVar.user;
-      if(!userId || !users[userId]) {
-        res.render("login", {});
+    // getLogin(req, res) {
+    //   let templateVar = {
+    //     user: users[req.cookies["user_id"]]};
+    //   let userId = templateVar.user;
+    //   if(!userId || !users[userId]) {
+    //     res.render("login", {});
+    //   } else {
+    //     res.redirect("/");
+    //   }
+    // },
+
+    async postLogin(req, res) {
+      const [err, user] = await helper.validateLogin(req.body.email, req.body.password);
+      if (err) {
+        res.status(400)
+          .json({
+            error: err
+          });
       } else {
-        res.redirect("/");
+        res.cookie("user-email", user.email).json(user);
       }
     },
 
-    postLogin(req, res) {
-      console.log("POST /login");
-      let templateVar = {
-        user: [req.cookies]};
-      if (!req.body.email || !req.body.password) {
-        res.sendStatus(400);  // Bad Request
-      } else {
-        let userId = userHelper.findUser(req.body.email, req.body.password);
-        if (!userId) {
-          res.sendStatus(403);  // Forbidden
-        } else {
-          templateVar.user = userId;
-          res.cookie("user_id", templateVar.user);
-          console.log("blah")
-          console.log(templateVar.user)
-          res.redirect("/");
-        }
-      }
-    },
+    // getRegister(req, res) {
+    //   let templateVar = {
+    //     user: users[req.cookies["user_id"]]};
+    //   console.log(templateVar)
+    //   let userId = templateVar.user;
+    //   if(!userId || !users[userId]) {
+    //     res.render("register", { errMsg: "" });
+    //   } else {
+    //     res.redirect("/");
+    //   }
+    // },
 
-    getRegister(req, res) {
-      console.log("GET /register");
-      let templateVar = {
-        user: users[req.cookies["user_id"]]};
-      console.log(templateVar)
-      let userId = templateVar.user;
-      if(!userId || !users[userId]) {
-        res.render("register", { errMsg: "" });
-      } else {
-        res.redirect("/");
-      }
-    },
+    async postRegister(req, res) {
 
-    postRegister(req, res) {
-      console.log("POST /register");
-      let templateVar = {
-        user: [req.cookies]};
-      let email = req.body.email;
-      let password = req.body.password;
-      if (!email || !password) {
-        res.sendStatus(400);
+      const [err, email] = await helper.newUser(req.body.email, req.body.name, req.body.password);
+
+      if (err) {
+        res.status(400)
+          .json({error: err});
       } else {
-        if (userHelper.canRegistered(email)) {
-          let userId = userHelper.addUser(email, password);
-          templateVar.user = userId;
-          res.cookie("user_id", templateVar.user);
-          res.redirect("/");
-        } else {
-          res.render("register", { errMsg: `${email} had already been registered.` });
-        }
+        res.cookie("user-email", email);
       }
     },
 
     postLogout(req, res) {
-      res.clearCookie("user_id");
-      res.redirect('/')
+      res.clearCookie("user-email");
     }
 
   };

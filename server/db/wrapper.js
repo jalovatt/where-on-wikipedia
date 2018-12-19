@@ -27,11 +27,35 @@ module.exports = function(db) {
       const game = await this.loadGame(gameId);
       const step = game.steps.find((step) => Number(step.pageid) === Number(articleId));
 
-      console.log("===================\n");
-      console.log(step);
-      console.log("\n===================");
+      // console.log("===================\n");
+      // console.log(step);
+      // console.log("\n===================");
 
       return (step) ? step : null;
+    },
+
+    async findUserByEmail(email) {
+      console.log("finding user by email: " + email);
+      const searchEmail = email.trim().toLowerCase();
+      return await users.findOne({["_id"]: email});
+    },
+
+    async isEmailAvailable(email) {
+      const searchEmail = email.trim().toLowerCase();
+      const result = await users.findOne({["_id"]: searchEmail});
+
+      return !result;
+
+    },
+
+    async isNameAvailable(name) {
+      const result = await users.findOne({name});
+
+      return !result;
+    },
+
+    async registerUser(user) {
+      await users.insertOne(user);
     }
 
   };
