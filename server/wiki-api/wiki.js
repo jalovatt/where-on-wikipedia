@@ -216,9 +216,6 @@ module.exports = {
     const out = this.getRandomLinksFrom(article, 4);
     out.push(include);
 
-    console.log("returning destinations:");
-    console.log(out);
-
     return out;
 
   },
@@ -262,11 +259,11 @@ module.exports = {
 
     const steps = [];
     const loot = await this.getUseableRandomArticle();
-    console.log("pushing " + loot.title);
+    // console.log("pushing " + loot.title);
     steps.push(loot);
 
     for (let i = 1; i < numSteps; i++) {
-      console.log("==== step " + i + " ====");
+      // console.log("==== step " + i + " ====");
       // console.log("there are " + steps.length + " steps in the array");
 
       const link = await this.findUseableLinkFrom(steps[i-1]);
@@ -274,10 +271,10 @@ module.exports = {
       // console.log("found " + link.title);
       const article = await this.getArticleByTitle(link.title);
 
-      console.log("pushing " + article.title);
+      // console.log("pushing " + article.title);
       steps.push(article);
 
-      console.log("==== end of step " + i + " ====");
+      // console.log("==== end of step " + i + " ====");
       // console.log("there are " + steps.length + " steps in the array");
     }
 
@@ -304,8 +301,8 @@ module.exports = {
 
   generateMystery: async function generateMystery(numSteps = 5) {
 
-    console.log("====================");
-    console.log("generating a game");
+    // console.log("====================");
+    // console.log("generating a game");
 
     let game = {};
 
@@ -318,8 +315,8 @@ module.exports = {
     // game.clues = meta.clues;
     // game.destinations = meta.destinations;
 
-    console.log("finished the game");
-    console.log("====================");
+    // console.log("finished the game");
+    // console.log("====================");
 
     return game;
 

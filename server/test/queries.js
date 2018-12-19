@@ -1,7 +1,7 @@
 const Mocha = require("mocha");
 const {assert} = require("chai");
 
-const queries = require("../queries");
+const queries = require("../wiki-api/wiki");
 
 // Using this for our test queries:
 // https://en.wikipedia.org/wiki/Desert_Rat_Scrap_Book
@@ -13,7 +13,7 @@ describe("Basic Queries", () => {
 
     queries.getRandomArticleId()
       .then((data) => {
-        print("random wikipedia article", data);
+        // print("random wikipedia article", data);
         done();
       });
 
@@ -200,6 +200,7 @@ describe("Generating a mystery", () => {
   });
 
 });
+
 
 function print(heading, query) {
   console.log("\n" + heading + "\n" + JSON.stringify(query, null, 2));

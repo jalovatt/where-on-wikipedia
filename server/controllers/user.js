@@ -4,6 +4,7 @@ module.exports = function(db, bcrypt) {
 
   const userController = {
     getLogin(req, res) {
+      console.log("GET /login");
       let templateVar = {
         user: users[req.cookies["user_id"]]};
       let userId = templateVar.user;
@@ -15,6 +16,7 @@ module.exports = function(db, bcrypt) {
     },
 
     postLogin(req, res) {
+      console.log("POST /login");
       let templateVar = {
         user: [req.cookies]};
       if (!req.body.email || !req.body.password) {
@@ -34,6 +36,7 @@ module.exports = function(db, bcrypt) {
     },
 
     getRegister(req, res) {
+      console.log("GET /register");
       let templateVar = {
         user: users[req.cookies["user_id"]]};
       console.log(templateVar)
@@ -46,6 +49,7 @@ module.exports = function(db, bcrypt) {
     },
 
     postRegister(req, res) {
+      console.log("POST /register");
       let templateVar = {
         user: [req.cookies]};
       let email = req.body.email;

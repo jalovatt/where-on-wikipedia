@@ -5,7 +5,7 @@ const users = {
 module.exports = function(db, bcrypt) {
 // functions
 
-  const userHelper = {
+  return {
     generateRandomString() {
       return Math.random().toString(36).replace('0.', '') .slice(5);
     },
@@ -45,5 +45,4 @@ module.exports = function(db, bcrypt) {
     },
   };
 
-  return userHelper;
 };
