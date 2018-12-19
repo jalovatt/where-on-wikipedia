@@ -41,6 +41,8 @@ async function startApp() {
     console.log(`[${time}] Listening on port ${process.env.PORT}`);
   });
 
+  return app;
+
 }
 
-startApp();
+module.exports = startApp();
