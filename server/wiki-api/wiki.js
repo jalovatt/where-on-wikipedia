@@ -26,6 +26,22 @@ module.exports = function(request) {
   }
 
   return {
+
+    async getArticleById(articleId) {
+
+      const data = await this.getArticleData(articleId);
+      // const text = await wiki.getArticleWikiText(articleId);
+
+      if (!articleId) return 1 / 0;
+
+      // text.wikitext = text.wikitext["*"];
+
+      // return {...data, ...text};
+
+      return data;
+
+    },
+
     getRandomArticleId() {
       const params = {
         list: "random",

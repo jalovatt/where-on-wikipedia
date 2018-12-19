@@ -1,32 +1,19 @@
 const Mocha = require("mocha");
 const {assert} = require("chai");
 
-const wiki = require("../wiki-api/wiki");
-const gameBuilder = require("../helpers/game-builder");
+const request = require("request");
+const wiki = require("../wiki-api/wiki")(request);
+const gameBuilder = require("../helpers/game-builder")(wiki);
 
 // Using this for our test queries:
 // https://en.wikipedia.org/wiki/Desert_Rat_Scrap_Book
 const articleId = 11263477;
 
-describe("Basic Queries", () => {
-
-  it("should return a random Wikipedia article in JSON form", (done) => {
-
-    gameBuilder.getRandomArticleId()
-      .then((data) => {
-        // print("random wikipedia article", data);
-        done();
-      });
-
-  });
-
-});
-
 describe("Article processing", () => {
 
   let article;
   before((done) => {
-    gameBuilder.getArticleById(articleId)
+    wiki.getArticleById(articleId)
       .then((result) => {
 
         // print("Article data:", result);
@@ -77,7 +64,7 @@ describe("Article processing", () => {
 
     async function testUseability(id, expectingArticle) {
 
-      const article = await gameBuilder.getArticleById(id);
+      const article = await wiki.getArticleById(id);
       const useable = await gameBuilder.isUseableArticle(article);
 
       if (expectingArticle) {
@@ -165,9 +152,10 @@ describe("Generating a mystery", () => {
 
   // Get a mystery
   let mystery = {};
-  before((done) => {
-    gameBuilder.logMystery = true;
-    gameBuilder.generateMystery(null) // Spit out progress
+  before(function (done) {
+    this.timeout(20000);
+    gameBuilder.logMystery = true; // Spit out progress
+    gameBuilder.generateGame()
       .then((result) => {
         mystery = result;
         // print("Mystery:", mystery);

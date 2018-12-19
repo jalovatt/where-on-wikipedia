@@ -23,20 +23,6 @@ function randomInt(n) {
 module.exports = function(wiki) {
 
   return {
-    async getArticleById(articleId) {
-
-      const data = await wiki.getArticleData(articleId);
-      // const text = await wiki.getArticleWikiText(articleId);
-
-      if (!articleId) return 1 / 0;
-
-      // text.wikitext = text.wikitext["*"];
-
-      // return {...data, ...text};
-
-      return data;
-
-    },
 
     getRandomLinkFrom(article) {
       return article.links[randomInt(article.links.length)];
@@ -79,7 +65,7 @@ module.exports = function(wiki) {
 
         if (!curId || curId === "0") continue;
 
-        const curArticle = await this.getArticleById(curId);
+        const curArticle = await wiki.getArticleById(curId);
 
         useable = this.isUseableArticle(curArticle);
 
@@ -111,7 +97,7 @@ module.exports = function(wiki) {
 
       do {
         const id = await wiki.getRandomArticleId();
-        const article = await this.getArticleById(id);
+        const article = await wiki.getArticleById(id);
         useable = this.isUseableArticle(article);
       } while (!useable);
 
@@ -122,14 +108,14 @@ module.exports = function(wiki) {
     async generateSuspect() {
 
       const id = suspects[randomInt(suspects.length)];
-      return this.getArticleById(id);
+      return wiki.getArticleById(id);
 
     },
 
     async getArticleByTitle(articleTitle) {
 
       const articleId = await wiki.getArticleIdFromTitle(articleTitle);
-      return this.getArticleById(articleId);
+      return wiki.getArticleById(articleId);
 
     },
 
