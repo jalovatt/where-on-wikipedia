@@ -1,6 +1,8 @@
 module.exports = function(db, bcrypt, wiki) {
   const user = require("./user")(db, bcrypt);
-  const game = require("./game")(db, wiki);
+
+  const gameBuilder = require("./game-builder")(wiki);
+  const game = require("./game")(db, gameBuilder);
 
   return {user, game};
 };

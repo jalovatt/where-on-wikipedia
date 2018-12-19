@@ -1,7 +1,8 @@
 const Mocha = require("mocha");
 const {assert} = require("chai");
 
-const queries = require("../wiki-api/wiki");
+const wiki = require("../wiki-api/wiki");
+const gameBuilder = require("../helpers/game-builder");
 
 // Using this for our test queries:
 // https://en.wikipedia.org/wiki/Desert_Rat_Scrap_Book
@@ -11,7 +12,7 @@ describe("Basic Queries", () => {
 
   it("should return a random Wikipedia article in JSON form", (done) => {
 
-    queries.getRandomArticleId()
+    gameBuilder.getRandomArticleId()
       .then((data) => {
         // print("random wikipedia article", data);
         done();
@@ -25,7 +26,7 @@ describe("Article processing", () => {
 
   let article;
   before((done) => {
-    queries.getArticleById(articleId)
+    gameBuilder.getArticleById(articleId)
       .then((result) => {
 
         // print("Article data:", result);
@@ -57,17 +58,17 @@ describe("Article processing", () => {
   describe("Random functions", () => {
 
     it("should return a random article link found on a given page", () => {
-      const rand = queries.getRandomLinkFrom(article);
+      const rand = gameBuilder.getRandomLinkFrom(article);
       assert.exists(article.links.some((link) => link === rand));
     });
 
     it("should return a random article that links to a given page", () => {
-      const rand = queries.getRandomLinkTo(article);
+      const rand = gameBuilder.getRandomLinkTo(article);
       assert.exists(article.linkshere.some((link) => link === rand));
     });
 
     it("should return a random category that the page belongs to", () => {
-      const rand = queries.getRandomCategory(article);
+      const rand = gameBuilder.getRandomCategory(article);
       assert.exists(article.categories.some((cat) => cat === rand));
     });
   });
@@ -76,8 +77,8 @@ describe("Article processing", () => {
 
     async function testUseability(id, expectingArticle) {
 
-      const article = await queries.getArticleById(id);
-      const useable = await queries.isUseableArticle(article);
+      const article = await gameBuilder.getArticleById(id);
+      const useable = await gameBuilder.isUseableArticle(article);
 
       if (expectingArticle) {
         assert.isOk(useable);
@@ -165,8 +166,8 @@ describe("Generating a mystery", () => {
   // Get a mystery
   let mystery = {};
   before((done) => {
-    queries.logMystery = true;
-    queries.generateMystery(null) // Spit out progress
+    gameBuilder.logMystery = true;
+    gameBuilder.generateMystery(null) // Spit out progress
       .then((result) => {
         mystery = result;
         // print("Mystery:", mystery);

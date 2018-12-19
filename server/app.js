@@ -7,12 +7,13 @@ async function startApp() {
   const cookieSession = require('cookie-session');
   const bcrypt = require('bcrypt');
   const bodyParser = require("body-parser");
+  const request = require("request");
 
   const mongo = require("mongodb");
   const db = await require("./db/db")(mongo, process.env.MONGODB_URI);
   console.log("Connected to database at: " + process.env.MONGODB_URI);
 
-  const wiki = require("./wiki-api/wiki");
+  const wiki = require("./wiki-api/wiki")(request);
   const helpers = require("./helpers/helpers")(db, bcrypt, wiki);
   const controllers = require("./controllers/controllers")(helpers);
   const router = express.Router();

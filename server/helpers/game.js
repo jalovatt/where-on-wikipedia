@@ -1,4 +1,4 @@
-module.exports = function(db) {
+module.exports = function(db, gameBuilder) {
 
   const exampleGameId = "5c197a4b956aa4a4c5851a39";
   // const exampleGame = db.loadGame(exampleGameId);
@@ -11,7 +11,7 @@ module.exports = function(db) {
       const step = await db.loadStep(id, 0);
 
       return {
-        gameid: gameId,
+        gameid: id,
         pageid: step.pageid,
         title: step.title,
         url: step.canonicalurl,
