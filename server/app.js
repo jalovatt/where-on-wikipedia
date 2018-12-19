@@ -15,7 +15,8 @@ async function startApp() {
   const wiki = require("./wiki-api/wiki");
   const helpers = require("./helpers/helpers")(db, bcrypt, wiki);
   const controllers = require("./controllers/controllers")(helpers);
-  const router = require("./routes/router")(express, controllers);
+  const router = express.Router();
+  require("./routes/router")(router, controllers);
 
   const app = express();
 

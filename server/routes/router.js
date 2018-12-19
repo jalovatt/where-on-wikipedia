@@ -1,5 +1,5 @@
-module.exports = function(express, controllers) {
-  const router = express.Router();
+module.exports = function(router, controllers) {
+  // const router = express.Router();
 
   router.get("/",             controllers.index.getIndex);
 
@@ -18,5 +18,5 @@ module.exports = function(express, controllers) {
   router.get("/game/:gameId/capture/:articleId/:suspectId",
                               controllers.game.getCapture);
 
-  return router;
+  // return router;
 };
