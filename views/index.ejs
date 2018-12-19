@@ -218,6 +218,9 @@
   <button>example game</button>
 <div id="resultJson"></div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<button id="btnSun">Say hello!</button>
+
 
 <script type="text/javascript">
 
@@ -226,10 +229,20 @@ $(document).ready(function(){
     $.getJSON("http://localhost:3000/game/0/travel/153095", function(result){
       $.each(result, function(i, field){
         $("div").append(field + " ");
+        console.log(JSON.gameid)
       });
     });
   });
 });
+
+$(document).ready(function() {
+  $('#btnSun').click(myFunction);
+});
+
+function myFunction() {
+  alert('hi');
+}
+
 
 </script>
     </article>
