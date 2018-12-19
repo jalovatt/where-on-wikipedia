@@ -5,7 +5,7 @@
   "main": "server/app.js",
   "scripts": {
     "start": "node server/app.js",
-    "test": "node_modules/.bin/mocha server/test",
+    "test": "NODE_ENV=test node_modules/.bin/mocha server/test",
     "seed": "node server/db/seed.js"
   },
   "repository": {

@@ -1,4 +1,9 @@
 const Mocha = require("mocha");
-const {assert} = require("chai");
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+
+const assert = chai.assert;
+
+chai.use(chaiHttp);
 
 const app = require("../app.js");
