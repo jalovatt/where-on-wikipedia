@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- External stylesheets -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/solid.css" integrity="sha384-aj0h5DVQ8jfwc8DA7JiM+Dysv7z+qYrFYZR+Qd/TwnmpDI6UaB3GJRRTdY8jYGS4" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/brands.css" integrity="sha384-whKHCkwP9f4MyD1vda26+XRyEg2zkyZezur14Kxc784RxUU1E7HvWVYj9EoJnUV7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/fontawesome.css" integrity="sha384-WK8BzK0mpgOdhCxq86nInFqSWLzR5UAsNg0MGX9aDaIIrFWQ38dGdhwnNCAoXFxL" crossorigin="anonymous">
+
+  <!-- App stylesheets -->
+  <link rel="stylesheet" href="/styles/styles.css" type="text/css" />
+
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- App JS -->
+  <script type="text/javascript" src="/scripts/app.js"></script>
+
+
+  <title>Document</title>
+</head>
+
+<body>
+
+  <main class="main-content">
+    <article class="wiki-container metal linear glass ">
+        <iframe class="wiki-content" id="wiki-content" src="https://en.m.wikipedia.org/wiki/Special:Random" onload="updateUrl(event)"></iframe>
+    </article>
+
+    <article class="game-container metal linear glass button-container">
+      <h4>Welcome player</h4>
+        <!-- <div class="button-container"> -->
+          <!--  <button class="metal radial"><i class="fab fa-wikipedia-w"></i></button>
+          <button class="metal radial"><i class="fas fa-search"></i></button>
+          <button class="metal radial"><i class="fas fa-running"></i></button>
+          <button class="metal radial"><i class="fas fa-bars"></i></button> -->
+        <!-- </div> -->
+
+      <button>example game</button>
+      <div id="resultJson"></div>
+
+      <button id="btnSun">Say hello!</button>
+    </article>
+  </main>
+
+</body>
+</html>
