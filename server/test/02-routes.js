@@ -6,11 +6,15 @@ const assert = chai.assert;
 
 chai.use(chaiHttp);
 
-const app = require("../app.js");
-
 describe("Routes", () => {
 
-  describe("GET /",
+  let app;
+  before(async () => {
+    app = await require("../app.js");
+  });
 
+  it("blah blah", () => {
+    assert.isTrue(true);
+  });
 
 });
