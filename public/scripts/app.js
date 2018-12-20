@@ -7,11 +7,20 @@ $(document).ready(function(){
 
       var obj = result;
       Object.keys(obj).forEach(function(key, index) {
-      // console.log(key, obj[key], index);
-      // console.log(key, index)
-      if (index == 3) {
-            $("div").append("The starting URL is: " + obj.url)
-      }
+      console.log(key, obj[key], index);
+
+
+
+        if (index == 3) {
+
+              $("#resultJson").text("The starting URL is: " + obj.url)
+
+        }
+
+
+      // if ("div".append === "The starting URL is: " + obj.url) {
+      //   console.log("apple")
+      // }
       //  if (index == 1) {
       //   console.log(obj.pageid)
       // }
@@ -23,6 +32,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
+    var integerCount = 0;
 
 
   $("#btnSun").click(function(){
@@ -31,48 +41,23 @@ $(document).ready(function(){
 
       var obj = result;
       Object.keys(obj).forEach(function(key, index) {
-      // console.log(key, obj[key], index);
-      // console.log(key, index)
-      if (index == 5) {
-            $("div").append("Clue: " + obj.clues[0])
-      }
+
+
+    $("#clueResult").text("Clue: " + obj.clues[integerCount])
+    integerCount ++;
+    console.log(integerCount)
+
+    if (integerCount > 4){
+      integerCount = 0;
+    }
+
 
 });
   });
 });
 });
 
-// $(document).ready(function() {
-//   $('#btnSun').click(myFunction);
-// });
-
-// function myFunction() {
-//   alert('hi');
-// }
 
 
 
-      // $.each(result, function(i, field){
 
-//       //   $("div").append(field + " ");
-//       //   console.log(JSON.gameid)
-//       // });
-// // var res = ''
-//       if (result.url == "https://en.wikipedia.org/wiki/Radio_navigation") {
-//       for (let results in result){
-//         let value = result[results];
-//       // console.log(result.gameid)
-// // res += result[results].split(":", 1)[0];
-
-//       // console.log(result.destinations[0])
-// // console.log(res)
-// // console.log(result)
-//       // console.log("the result is: ", result.clues[0]);
-//       // return result.gameid
-//       console.log(result.gameid)
-//         $("div").append("The initial start page is:" + result.url);
-//     }}
-//       else {
-//         console.log('nope')
-//       }
-//     });
