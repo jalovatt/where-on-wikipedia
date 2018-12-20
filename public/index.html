@@ -27,9 +27,10 @@
 
 <body>
 
+
   <main class="main-content">
     <article class="wiki-container metal linear glass ">
-        <iframe class="wiki-content" id="wiki-content" src="https://en.m.wikipedia.org/?curid=" + {pageid}></iframe>
+        <iframe class="wiki-content" id="wiki-content" name="name" ></iframe>
     </article>
 
     <article class="game-container metal linear glass button-container">
@@ -40,15 +41,19 @@
           <button class="metal radial"><i class="fas fa-running"></i></button>
           <button class="metal radial"><i class="fas fa-bars"></i></button> -->
         <!-- </div> -->
+  <!--       <script type="text/javascript" src="/scripts/app.js">
+
+          document.getElementById("wiki-content").setAttribute("src","https://en.m.wikipedia.org/wiki/?curid="+pageId)
+        </script> -->
+
 <script type="text/javascript"></script>
-      <button id="game">example game</button>
+      <button id="game">start game</button>
       <div id="resultJson"></div>
 
       <button id="btnSun"">get a clue</button>
       <div id="clueResult"></div>
-
       <button id="btnSun2"">get destination</button>
-      <div id="destResult"></div>
+      <a id="destResult" href="" target="name"> </a> </div>
     </article>
   </main>
 
