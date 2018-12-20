@@ -48,9 +48,10 @@ $(document).ready(function(){
 
       Object.keys(obj).forEach(function(key, index) {
     $("#destResult").text(obj.destinations[integerCount])
+    $('#wiki-content').attr('src', "https://en.m.wikipedia.org/wiki/" + obj.destinations[integerCount]);
     integerCount ++;
     console.log(integerCount)
-    // $('#wiki-content').attr('src', "https://en.m.wikipedia.org/wiki/?curid=" + obj.url);
+    // $('#wiki-content').attr('src', "https://en.m.wikipedia.org/wiki/" + destinations[integerCount]);
 
    if (integerCount > 4){
       integerCount = 0;
@@ -59,6 +60,8 @@ $(document).ready(function(){
   });
 });
 });
+
+
 
 
 
