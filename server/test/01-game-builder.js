@@ -134,31 +134,35 @@ describe("Article processing", () => {
 
 });
 
-describe("Generating a mystery", () => {
+describe("Generating a game", () => {
 
   // Get a mystery
-  let mystery = {};
+  let game = {};
   before(function (done) {
     this.timeout(20000);
     gameBuilder.logMystery = true; // Spit out progress
     gameBuilder.generateGame()
       .then((result) => {
-        mystery = result;
+        game = result;
         // print("Mystery:", mystery);
         done();
       });
   });
 
   it("should exist", () => {
-    assert.isOk(mystery);
+    assert.isOk(game);
+  });
+
+  it("should have an ID", () => {
+    assert.exists(game["_id"]);
   });
 
   it("should have a suspect", () => {
-    assert.isOk(mystery.suspect);
+    assert.isOk(game.suspect);
   });
 
   it("should contain destinations for each step but the last", () => {
-    const destSteps = mystery.steps.slice(0, -1);
+    const destSteps = game.steps.slice(0, -1);
 
     assert.isTrue(
       destSteps.every((step) => step.destinations && step.destinations.length)
@@ -167,7 +171,7 @@ describe("Generating a mystery", () => {
   });
 
   it("should contain clues for each step but the last", () => {
-    const clueSteps = mystery.steps.slice(0, -1);
+    const clueSteps = game.steps.slice(0, -1);
 
     assert.isTrue(
       clueSteps.every((step) => step.clues && step.clues.length)

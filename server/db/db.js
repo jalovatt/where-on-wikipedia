@@ -18,7 +18,8 @@ module.exports = async function(mongo) {
     },
 
     async storeGame(game) {
-      return await games.insertOne(game);
+      const ret = await games.insertOne(game);
+      return !ret;
     },
 
     async loadStep(gameId, step) {
@@ -31,9 +32,10 @@ module.exports = async function(mongo) {
 
     async findStepByArticle(gameId, articleId) {
       const game = await this.loadGame(gameId);
-      const step = game.steps.find((step) => Number(step.pageid) === Number(articleId));
+      if (!game) return ["Couldn't find game with that ID"];
 
-      return (step) ? step : null;
+      const step = game.steps.find((step) => Number(step.pageid) === Number(articleId));
+      return (!step) && [null, {}] || [null, step];
     },
 
     async findUserByEmail(email) {
