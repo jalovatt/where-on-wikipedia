@@ -52,21 +52,15 @@ module.exports = function(wiki) {
     },
 
     async findUseableLinkFrom(article) {
-
-      // console.log("finding useable link from article: " + article.title);
-
       let useable = false;
 
       do {
-
         const curLink = this.getRandomLinkFrom(article).title;
-
         const curId = await wiki.getArticleIdFromTitle(curLink);
 
         if (!curId || curId === "0") continue;
 
         const curArticle = await wiki.getArticleById(curId);
-
         useable = this.isUseableArticle(curArticle);
 
         !useable && this.logMystery && console.log("\t\t.");
@@ -74,11 +68,9 @@ module.exports = function(wiki) {
       } while (!useable);
 
       return useable;
-
     },
 
     async generateNextStep(prevArticle, suspect) {
-
       const nextLink = await this.findUseableLinkFrom(prevArticle);
 
       const step = {};
@@ -88,11 +80,9 @@ module.exports = function(wiki) {
       step.destinations = this.getRandomLinksFrom(step.article, 4);
 
       return step;
-
     },
 
     async getUseableRandomArticle() {
-
       let useable = false;
 
       do {
@@ -102,25 +92,21 @@ module.exports = function(wiki) {
       } while (!useable);
 
       return useable;
-
     },
 
     async generateSuspect() {
-
       const id = suspects[randomInt(suspects.length)];
-      return wiki.getArticleById(id);
 
+      return wiki.getArticleById(id);
     },
 
     async getArticleByTitle(articleTitle) {
-
       const articleId = await wiki.getArticleIdFromTitle(articleTitle);
-      return wiki.getArticleById(articleId);
 
+      return wiki.getArticleById(articleId);
     },
 
     generateArticleClue(article) {
-
       const clueTypes = [
 
         // - Article that links here
@@ -140,7 +126,6 @@ module.exports = function(wiki) {
       ];
 
       return clueTypes[randomInt(clueTypes.length)](article);
-
     },
 
     generateSuspectClue(suspect) {
@@ -148,7 +133,6 @@ module.exports = function(wiki) {
     },
 
     addClues(article, suspect) {
-
       const clues = [];
       clues.push(
         this.generateArticleClue(article),
@@ -159,11 +143,9 @@ module.exports = function(wiki) {
       );
 
       return clues;
-
     },
 
     getRandomLinksFrom(article, n) {
-
       const out = [];
       const l = article.links.length;
 
@@ -175,16 +157,13 @@ module.exports = function(wiki) {
     },
 
     getDestinations(article, include) {
-
       const out = this.getRandomLinksFrom(article, 4);
       out.push(include);
 
       return out;
-
     },
 
     addMetadata(steps, suspect) {
-
       for (let i = 0, l = steps.length - 1; i < l; i++) {
 
         const destinations = this.getRandomLinksFrom(steps[i], 4);
@@ -197,62 +176,37 @@ module.exports = function(wiki) {
       }
 
       return steps;
-
     },
 
     async generateGameSteps(numSteps) {
-
       this.logMystery && console.log("\tGenerating steps...");
+
       const steps = [];
       const loot = await this.getUseableRandomArticle();
+      steps.push(loot);
 
       this.logMystery && console.log(`\t- ${loot.title}`);
 
-      steps.push(loot);
-
       for (let i = 1; i < numSteps; i++) {
-        // console.log("==== step " + i + " ====");
-        // console.log("there are " + steps.length + " steps in the array");
-
         const link = await this.findUseableLinkFrom(steps[i-1]);
-
-        // console.log("found " + link.title);
         const article = await this.getArticleByTitle(link.title);
-
-        // console.log("pushing " + article.title);
         steps.push(article);
 
         this.logMystery && console.log(`\t- ${article.title}`);
-
-        // console.log("==== end of step " + i + " ====");
-        // console.log("there are " + steps.length + " steps in the array");
       }
 
       return steps;
-
     },
 
     async generateGame(numSteps = 5) {
-
-      // console.log("====================");
-      // console.log("generating a game");
-
       let game = {};
 
       game.suspect = await this.generateSuspect();
-
       const steps = await this.generateGameSteps(5);
+
       game.steps =  this.addMetadata(steps, game.suspect);
 
-      // const meta = this.addMetadata(game);
-      // game.clues = meta.clues;
-      // game.destinations = meta.destinations;
-
-      // console.log("finished the game");
-      // console.log("====================");
-
       return game;
-
     },
 
     searchArticle() {

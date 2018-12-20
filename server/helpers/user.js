@@ -1,9 +1,4 @@
-
-const users = {
-}
-
 module.exports = function(db, bcrypt) {
-// functions
 
   return {
 
@@ -45,5 +40,4 @@ module.exports = function(db, bcrypt) {
     }
 
   };
-
 };
