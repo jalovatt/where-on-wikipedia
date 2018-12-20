@@ -22,13 +22,14 @@
 
 
   <title>Document</title>
+  <script type="text/javascript"></script>
 </head>
 
 <body>
 
   <main class="main-content">
     <article class="wiki-container metal linear glass ">
-        <iframe class="wiki-content" id="wiki-content" src="https://en.m.wikipedia.org/wiki/Special:Random" onload="updateUrl(event)"></iframe>
+        <iframe class="wiki-content" id="wiki-content" src="https://en.m.wikipedia.org/?curid=" + {pageid}></iframe>
     </article>
 
     <article class="game-container metal linear glass button-container">
@@ -45,6 +46,9 @@
 
       <button id="btnSun"">get a clue</button>
       <div id="clueResult"></div>
+
+      <button id="btnSun2"">get destination</button>
+      <div id="destResult"></div>
     </article>
   </main>
 
