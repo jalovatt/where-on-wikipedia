@@ -11,7 +11,7 @@ async function startApp() {
 
   const mongo = require("mongodb");
   const db = await require("./db/db")(mongo);
-  console.log("Connected to database at: " + process.env.MONGODB_URI);
+  (process.env.NODE_ENV !== "test") && console.log("Connected to database at: " + process.env.MONGODB_URI);
 
   const wiki = require("./wiki-api/wiki")(request);
   const helpers = require("./helpers/helpers")(db, bcrypt, wiki);
@@ -37,12 +37,12 @@ async function startApp() {
 
   app.use(router);
 
-  app.listen(process.env.PORT, () => {
+  return app.listen(process.env.PORT, () => {
     const time = new Date().toLocaleTimeString();
-    console.log(`[${time}] Listening on port ${process.env.PORT}`);
+    (process.env.NODE_ENV !== "test") && console.log(`[${time}] Listening on port ${process.env.PORT}`);
   });
 
-  return app;
+  // return app;
 
 }
 
