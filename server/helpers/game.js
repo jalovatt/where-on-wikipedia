@@ -22,7 +22,7 @@ module.exports = function(db, gameBuilder) {
         gameid: game["_id"],
         pageid: step.pageid,
         title: step.title,
-        url: step.canonicalurl,
+        url: step.canonicalurl.replace("en.", "en.m."),
         destinations: step.destinations,
         clues: step.clues
       }];
@@ -40,7 +40,7 @@ module.exports = function(db, gameBuilder) {
         gameid: gameId,
         pageid: articleId,
         title: step.title,
-        url: step.canonicalurl,
+        url: step.canonicalurl.replace("en.", "en.m."),
         destinations: step.destinations,
         clues: step.clues
       }];
