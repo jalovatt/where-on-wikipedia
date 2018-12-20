@@ -1,6 +1,7 @@
 html {
 
   font:62.5%/1 "Droid Sans", "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+  background-color: black;
 
 }
 
@@ -61,7 +62,7 @@ iframe {
   width: calc(100% - 24px);
   height: calc(100% - 24px);
 
-  z-index: 998;
+  z-index: 997;
 }
 
 .screen-bg {
@@ -70,8 +71,19 @@ iframe {
   width: 100%;
   height: 100%;
 
-  z-index: 0;
+  z-index: 1;
 
+}
+
+.screen-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-shadow:
+    0px 0px 16px -4px hsla(160,15%,50%,80%),
+    0px 0px 96px -16px hsla(60,15%,80%,90%);
+  z-index: 0;
+  border-radius: 10px;
 }
 
 .glass {
@@ -95,7 +107,7 @@ iframe {
     inset 0 10px rgba(255,255,255,0.2),
     inset 0 10px 20px rgba(255,255,255,0.25),
     inset 0 -15px 30px rgba(0,0,0,0.3);
-  background:rgba(0,0,0,0.08);
+  background:rgba(0,0,0,0.18);
 }
 
 .no-click {
@@ -199,9 +211,14 @@ box-shadow:
     hsl(0,0%,70%)100%);
 }
 
+/* https://stackoverflow.com/a/34556311/9667199 */
 .carbon {
+
+  border-radius: 18px;
+  border: 2px solid hsl(0,0%,10%);
   background-color: rgb(32, 32, 32);
   background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(to bottom, rgb(8, 8, 8), rgb(32, 32, 32));
-  background-size: 10px 10px, 10px 10px, 10px 5px;
-  background-position: 0px 0px, 5px 5px, 0px 0px;
+  background-size: 12px 12px, 12px 12px, 12px 6px;
+  background-position: 0px 0px, 6px 6px, 0px 0px;
+
 }
