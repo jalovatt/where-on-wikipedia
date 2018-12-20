@@ -1,0 +1,7 @@
+{
+  "_id": "bob@bob.bob",
+  "name": "Bob",
+  "password": "$2b$10$v2wtJhAxY4hAWqd.tG8dE.WSgqb0aoaPEy1sMGX5OjvGzWDtvgkFK",
+  "gamesPlayed": 0,
+  "gamesWon": 0
+}
