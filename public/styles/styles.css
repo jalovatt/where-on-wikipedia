@@ -11,31 +11,24 @@ iframe {
 }
 
 .main-content {
-    /* display: flex; */
     position: absolute;
-    width: 1360px;
-    height: calc(100vh - 10%);
-
     left: calc((100vw - 1360px) / 2);
     top: 5%;
 
-    margin: auto;
+    width: 1360px;
+    height: calc(100vh - 10%);
 
-    /* border: 1px solid red; */
+    margin: auto;
 }
 
 .screen {
-    /* flex: 1; */
     position: absolute;
+    top: 5%;
+
     width: 41%;
     height: 90%;
 
-    top: 5%;
-
     box-sizing: border-box;
-    /* padding: 2px; */
-
-    /* border: 1px solid magenta; */
 }
 
 .wiki {
@@ -52,6 +45,8 @@ iframe {
   width: 100%;
   height: 100%;
 
+  pointer-events: none;
+
   z-index: 999;
 }
 
@@ -66,26 +61,27 @@ iframe {
 }
 
 .screen-bg {
-
   position: absolute;
   width: 100%;
   height: 100%;
 
   z-index: 1;
-
 }
 
 .screen-glow {
   position: absolute;
   width: 100%;
   height: 100%;
+
+  border-radius: 10px;
+
   box-shadow:
     0px 0px 16px -4px hsla(160,15%,50%,80%),
     0px 0px 96px -16px hsla(60,15%,80%,90%);
   z-index: 0;
-  border-radius: 10px;
 }
 
+/* https://dev.opera.com/articles/beautiful-ui-styling-with-css3/#glassbox */
 .glass {
   border:1px solid rgba(0,0,0,0.5);
   border-radius: 10px;
@@ -110,15 +106,14 @@ iframe {
   background:rgba(0,0,0,0.18);
 }
 
-.no-click {
-  pointer-events: none;
-}
-
 /*  .button-container {
 
   position: relative;
   bottom: 0px;
 }*/
+
+/* Metal effects */
+/* https://codepen.io/simurai/pen/DwJdq */
 
 .metal {
   /* position: relative; */
@@ -142,7 +137,7 @@ iframe {
   transition: color .2s;
 }
 
-
+/* Button glow */
 .metal-button:active {
 color: hsl(210, 100%, 40%);
 text-shadow: hsla(210,100%,20%,.3) 0 -1px 0, hsl(210,100%,85%) 0 2px 1px, hsla(200,100%,80%,1) 0 0 5px, hsla(210,100%,50%,.6) 0 0 20px;
@@ -157,8 +152,7 @@ box-shadow:
 
 }
 
-/* Radial ------------------------- */
-
+/* Buttons */
 .radial.metal {
   width: 80px;
   height: 80px;
@@ -176,12 +170,10 @@ box-shadow:
     -webkit-radial-gradient( 50% 50%, 200% 50%, hsla(0,0%,90%,1) 5%, hsla(0,0%,85%,1) 30%, hsla(0,0%,60%,1) 100%);
 }
 
-
 .metal.radial:before, .metal.radial:after {
   content: "";
   top: 0;
   left: 0;
-
 
   width: inherit;
   height: inherit;
@@ -196,8 +188,6 @@ box-shadow:
 .metal.radial:before { transform: rotate( 65deg); }
 .metal.radial:after { transform: rotate(-65deg); }
 
-/* Linear ------------------------- */
-
 .metal.linear {
   /* font-size: 4em; */
   border-radius: 10px;
@@ -211,6 +201,8 @@ box-shadow:
     hsl(0,0%,70%)100%);
 }
 
+
+/* Background */
 /* https://stackoverflow.com/a/34556311/9667199 */
 .carbon {
 
