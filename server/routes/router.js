@@ -1,10 +1,5 @@
 module.exports = function(router, controllers) {
-  // const router = express.Router();
-
   router.get("/",             controllers.index.getIndex);
-
-  // router.get("/login",        controllers.user.getLogin);
-  // router.get("/register",     controllers.user.getRegister);
 
   router.post("/login",       controllers.user.postLogin);
   router.post("/logout",      controllers.user.postLogout);
@@ -13,10 +8,6 @@ module.exports = function(router, controllers) {
   router.get("/game/new",     controllers.game.getNew);
   router.get("/game/:gameId/travel/:articleId",
                               controllers.game.getTravel);
-  // router.get("/game/:gameId/search/:articleId",
-  //                             controllers.game.getSearch);
   router.get("/game/:gameId/capture/:articleId/:suspectId",
                               controllers.game.getCapture);
-
-  // return router;
 };

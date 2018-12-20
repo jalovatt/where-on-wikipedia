@@ -1,12 +1,9 @@
 module.exports = function(db, gameBuilder) {
-
   const exampleGameId = "example";
-  // const exampleGame = db.loadGame(exampleGameId);
 
   return {
 
     async newGame() {
-
       const id = exampleGameId;
       const step = await db.loadStep(id, 0);
 
@@ -16,13 +13,13 @@ module.exports = function(db, gameBuilder) {
         title: step.title,
         url: step.canonicalurl,
         destinations: step.destinations,
-        // clues: step.clues
+        clues: step.clues
       };
-
     },
 
     async travelTo(gameId, articleId) {
 
+      // *** For testing, remove at some point ***
       gameId = exampleGameId;
 
       const step = await db.findStepByArticle(gameId, articleId);

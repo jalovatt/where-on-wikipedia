@@ -107,20 +107,6 @@ describe("Article processing", () => {
 
   });
 
-  // xdescribe("Parsing WikiText", () => {
-
-  //   it("should have the parsed WikiText for an articleId", (done) => {
-  //     assert.exists(article.wikitext);
-  //     assert.match(article.wikitext, /^\{\{/);
-  //     done();
-  //   });
-
-  //   xit("should count how many times each linked article is mentioned in the WikiText", () => {
-  //     assert.isTrue(false);
-  //   });
-
-  // });
-
   xdescribe("Pick a suspect", () => {
 
     it("Should return a random suspect", (done) => {

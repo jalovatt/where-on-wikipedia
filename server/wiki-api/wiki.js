@@ -2,8 +2,12 @@ const apiURL = "https://en.wikipedia.org/w/api.php?action=query";
 
 module.exports = function(request) {
 
-  // Adapted from
-  // https://github.com/jtessler/studio-wiki-race/blob/master/src/WikiApi.js
+  /*
+    Build and send a request to Wikipedia's query api
+
+    Adapted from:
+    https://github.com/jtessler/studio-wiki-race/blob/master/src/WikiApi.js
+  */
   function wikiQuery(queryParams) {
 
     const params = [apiURL, "&format=json"];
@@ -40,18 +44,10 @@ module.exports = function(request) {
   return {
 
     async getArticleById(articleId) {
-
       const data = await this.getArticleData(articleId);
-      // const text = await wiki.getArticleWikiText(articleId);
-
       if (!articleId) return 1 / 0;
 
-      // text.wikitext = text.wikitext["*"];
-
-      // return {...data, ...text};
-
       return data;
-
     },
 
     getRandomArticleId() {
@@ -65,8 +61,7 @@ module.exports = function(request) {
         .then((data) => data.query.random[0].id);
     },
 
-    getArticleWikiText(articleId) {
-      ///w/api.php?action=parse&format=json&pageid=18702834&prop=categories%7Clinks%7Cimages%7Csections%7Cdisplaytitle%7Ciwlinks%7Cproperties%7Cwikitext
+    getArticleParseData(articleId) {
       const params = {
         action: "parse",
         pageid: articleId,
@@ -97,7 +92,6 @@ module.exports = function(request) {
 
       return wikiQuery(params)
         .then((data) => data.query.pages[articleId]);
-
     },
 
     getArticleIdFromTitle(title) {
@@ -107,7 +101,6 @@ module.exports = function(request) {
 
       return wikiQuery(params)
         .then((data) => Object.values(data.query.pages)[0].pageid);
-
     }
   };
 
