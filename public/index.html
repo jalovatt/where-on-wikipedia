@@ -29,32 +29,32 @@
 
 
   <main class="main-content">
-    <article class="wiki-container metal linear glass ">
-        <iframe class="wiki-content" id="wiki-content" name="name"></iframe>
+
+    <article class="wiki screen">
+      <div class="glass"></div>
+      <iframe class="wiki-content" id="wiki-content" src="https://en.m.wikipedia.org/wiki/Special:Random" onload="updateUrl(event)"></iframe>
+      <div class="metal"></div>
     </article>
 
-    <article class="game-container metal linear glass button-container">
-      <h6>The suspect is hiding on 1 of 5 articles listed below. Use the clues to track them down</h1>
+    <article class="game screen button-container">
+
+      <div class="glass"></div>
+
+      <h4>Welcome player</h4>
         <!-- <div class="button-container"> -->
-          <!--  <button class="metal radial"><i class="fab fa-wikipedia-w"></i></button>
-          <button class="metal radial"><i class="fas fa-search"></i></button>
-          <button class="metal radial"><i class="fas fa-running"></i></button>
-          <button class="metal radial"><i class="fas fa-bars"></i></button> -->
+          <!--  <button class="metal-button radial"><i class="fab fa-wikipedia-w"></i></button>
+          <button class="metal-button radial"><i class="fas fa-search"></i></button>
+          <button class="metal-button radial"><i class="fas fa-running"></i></button>
+          <button class="metal-button radial"><i class="fas fa-bars"></i></button> -->
         <!-- </div> -->
-  <!--       <script type="text/javascript" src="/scripts/app.js">
 
-          document.getElementById("wiki-content").setAttribute("src","https://en.m.wikipedia.org/wiki/?curid="+pageId)
-        </script> -->
-
-      <button id="game">start game</button>
-      <div><h6 id="resultJson"></h5></div>
+      <button id="game">example game</button>
+      <div id="resultJson"></div>
 
       <button id="btnSun"">get a clue</button>
-      <h6 id="clueResult"></h6>
+      <div id="clueResult"></div>
 
-      <button id="btnSun2"">articles</button>
-      <a href=""id="destResult" target="name"></a>
-      <!-- <div id="destResult" target='name'></div> -->
+      <div class="metal"></div>
     </article>
   </main>
 
