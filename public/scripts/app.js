@@ -9,9 +9,10 @@ $(document).ready(function(){
       // console.log(key, obj[key], index);
 
         if (index == 3) {
-           $("#resultJson").text("This is the starting point:")
+           // $("#resultJson").text("This is the starting point:")
+           $('#wiki-content').attr('src', obj.url);
         }
-        $('#wiki-content').attr('src', obj.url);
+
 });
   });
 });
@@ -46,7 +47,7 @@ $(document).ready(function(){
       var obj = result;
 
       Object.keys(obj).forEach(function(key, index) {
-    $("#destResult").text("Destinations: " + obj.destinations[integerCount])
+    $("#destResult").text(obj.destinations[integerCount])
     integerCount ++;
     console.log(integerCount)
     // $('#wiki-content').attr('src', "https://en.m.wikipedia.org/wiki/?curid=" + obj.url);

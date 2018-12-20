@@ -30,11 +30,11 @@
 
   <main class="main-content">
     <article class="wiki-container metal linear glass ">
-        <iframe class="wiki-content" id="wiki-content" name="name" ></iframe>
+        <iframe class="wiki-content" id="wiki-content" ></iframe>
     </article>
 
     <article class="game-container metal linear glass button-container">
-      <h4>Welcome player</h4>
+      <h6>The suspect is hiding on 1 of 5 articles listed below. Use the clues to track them down</h1>
         <!-- <div class="button-container"> -->
           <!--  <button class="metal radial"><i class="fab fa-wikipedia-w"></i></button>
           <button class="metal radial"><i class="fas fa-search"></i></button>
@@ -46,14 +46,14 @@
           document.getElementById("wiki-content").setAttribute("src","https://en.m.wikipedia.org/wiki/?curid="+pageId)
         </script> -->
 
-<script type="text/javascript"></script>
       <button id="game">start game</button>
-      <div id="resultJson"></div>
+      <div><h6 id="resultJson"></h5></div>
 
       <button id="btnSun"">get a clue</button>
-      <div id="clueResult"></div>
-      <button id="btnSun2"">get destination</button>
-      <a id="destResult" href="" target="name"> </a> </div>
+      <h6 id="clueResult"></h6>
+
+      <button id="btnSun2"">articles</button>
+      <div id="destResult"></div>
     </article>
   </main>
 
