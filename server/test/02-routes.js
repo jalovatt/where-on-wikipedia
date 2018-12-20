@@ -6,7 +6,7 @@ const assert = chai.assert;
 
 chai.use(chaiHttp);
 
-xdescribe("Routes", () => {
+describe("Routes", () => {
 
   let app;
   before(async () => {

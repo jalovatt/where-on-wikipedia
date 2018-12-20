@@ -33,6 +33,7 @@ module.exports = function(db, gameBuilder) {
         title: step.title,
         url: step.canonicalurl,
         destinations: step.destinations,
+        clues: step.clues
       };
     }
 
