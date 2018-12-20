@@ -3,17 +3,27 @@ module.exports = function(helper) {
   return {
 
     async getNew(req, res, next) {
-      const newGameData = await helper.newGame();
+      const [err, step] = await helper.newGame();
 
-      res.json(newGameData);
+      if (err) {
+        res.status(500)
+          .json({error: err});
+      } else {
+        res.json(step);
+      }
     },
 
     async getTravel(req, res, next) {
       const gameId = req.params.gameId;
       const articleId = req.params.articleId;
-      const stepData = await helper.travelTo(gameId, articleId);
+      const [err, step] = await helper.travelTo(gameId, articleId);
 
-      res.json(stepData);
+      if (err) {
+        res.status(500)
+          .json({error: err});
+      } else {
+        res.json(step);
+      }
     },
 
     async getCapture(req, res, next) {

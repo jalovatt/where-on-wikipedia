@@ -20,6 +20,11 @@ function randomInt(n) {
   return Math.floor(Math.random() * n);
 }
 
+// https://stackoverflow.com/a/10986669/9667199
+function generateGameId() {
+  return new Date().getTime().toString(36).toUpperCase();
+}
+
 module.exports = function(wiki) {
 
   return {
@@ -205,6 +210,8 @@ module.exports = function(wiki) {
       const steps = await this.generateGameSteps(5);
 
       game.steps =  this.addMetadata(steps, game.suspect);
+
+      game["_id"] = generateGameId();
 
       return game;
     },
