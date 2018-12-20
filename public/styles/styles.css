@@ -5,57 +5,74 @@ html {
 }
 
 iframe {
-  height: 100%;
-  width: 100%;
-  border-radius: 10px;
-  padding: 1px;
+  border: none;
+  padding: 0px;
 }
 
 .main-content {
     /* display: flex; */
-    position: relative;
+    position: absolute;
     width: 1360px;
-    height: 768px;
+    height: calc(100vh - 10%);
+
+    left: calc((100vw - 1360px) / 2);
+    top: 5%;
 
     margin: auto;
 
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .screen {
     /* flex: 1; */
     position: absolute;
-    width: 35%;
-    height: 100%;
-    top: 10%;
-    margin: 20px;
-    box-sizing: border-box;
-    padding: 2px;
+    width: 41%;
+    height: 90%;
 
-    border: 1px solid magenta;
+    top: 5%;
+
+    box-sizing: border-box;
+    /* padding: 2px; */
+
+    /* border: 1px solid magenta; */
 }
 
 .wiki {
-  left: 10%;
+  left: 5%;
 }
 
 .game {
-  right: 10%;
+  right: 5%;
 }
 
-/* .wiki-overlay {
-  left: 10%;
-  top: 20%;
-  width: 50vw;
-  height: 80vh;
-} */
+.screen-overlay {
+  position: absolute;
 
-/* .wiki-content {
-  left: calc(10% + 12px);
-  top: calc(20% + 12px);
-  width: calc(50vw - 24px);
-  height: calc(80vh - 24px);
-} */
+  width: 100%;
+  height: 100%;
+
+  z-index: 999;
+}
+
+.screen-content {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+
+  z-index: 998;
+}
+
+.screen-bg {
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  z-index: 0;
+
+}
 
 .glass {
   border:1px solid rgba(0,0,0,0.5);
@@ -78,7 +95,7 @@ iframe {
     inset 0 10px rgba(255,255,255,0.2),
     inset 0 10px 20px rgba(255,255,255,0.25),
     inset 0 -15px 30px rgba(0,0,0,0.3);
-  background:rgba(0,0,0,0.05);
+  background:rgba(0,0,0,0.08);
 }
 
 .no-click {
@@ -180,4 +197,11 @@ box-shadow:
     hsl(0,0%,90%) 47%,
     hsl(0,0%,78%) 53%,
     hsl(0,0%,70%)100%);
+}
+
+.carbon {
+  background-color: rgb(32, 32, 32);
+  background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(to bottom, rgb(8, 8, 8), rgb(32, 32, 32));
+  background-size: 10px 10px, 10px 10px, 10px 5px;
+  background-position: 0px 0px, 5px 5px, 0px 0px;
 }
