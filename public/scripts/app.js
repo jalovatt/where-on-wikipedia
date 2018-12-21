@@ -23,8 +23,7 @@ $(document).ready(function(){
         if (index) {
            $('#wiki-content').attr('src', obj.url); //button for starting game
            $("#resultJson").attr('href', obj.url);
-           $("#resultJson").text("Starring Article: " + obj.title) //button for rendering clues
-           console.log(obj.suspect)
+           $("#resultJson").text("Starting Article: " + obj.title) //button for rendering clues
         }
   });
 
@@ -33,7 +32,7 @@ $(document).ready(function(){
       $("#btnSun").click(function(){
         Object.keys(obj).forEach(function(key, index) {
 
-      $("#clueResult").text("Clue: " + obj.clues[integerCount]) //button for rendering clues
+      $("#clueResult").text("Clue number " + (integerCount + 1) + ": " + obj.clues[integerCount]) //button for rendering clues
       integerCount ++;
 
       if (integerCount > 4){
@@ -47,7 +46,7 @@ $(document).ready(function(){
         Object.keys(obj).forEach(function(key, index) {
 
       $("#destResult").attr('href', "https://en.m.wikipedia.org/wiki/" + obj.destinations[integerCount2]);
-      $("#destResult").text(obj.destinations[integerCount2])
+      $("#destResult").text("Article number " + (integerCount2 + 1) + ": " + obj.destinations[integerCount2])
       integerCount2 ++;
 
 
@@ -61,27 +60,3 @@ $(document).ready(function(){
 
 });
 
-
-
-// $(document).ready(function(){
-//     var integerCount = 0;
-
-//   $("#btnSun2").click(function(){
-//     $.getJSON("http://localhost:3000/game/example/travel/153095", function(result){
-//       var obj = result;
-
-//       Object.keys(obj).forEach(function(key, index) {
-//     $("#destResult").text(obj.destinations[integerCount])
-//     $('#wiki-content').attr('src', "https://en.m.wikipedia.org/wiki/" + obj.destinations[integerCount]);
-//     integerCount ++;
-//     console.log(integerCount)
-//     // console.log(/game/new)
-//     // $('#wiki-content').attr('src', "https://en.m.wikipedia.org/wiki/" + destinations[integerCount]);
-
-//    if (integerCount > 4){
-//       integerCount = 0;
-//     }
-// });
-//   });
-// });
-// });
