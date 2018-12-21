@@ -22,7 +22,9 @@ $(document).ready(function(){
 
         if (index) {
            $('#wiki-content').attr('src', obj.url); //button for starting game
+           $("#resultJson").attr('href', obj.url);
            $("#resultJson").text("Starring Article: " + obj.title) //button for rendering clues
+           console.log(obj.suspect)
         }
   });
 
@@ -44,13 +46,13 @@ $(document).ready(function(){
       $("#btnSun2").click(function(){
         Object.keys(obj).forEach(function(key, index) {
 
-      $("#destResult").text(obj.destinations[integerCount])
-      $('#wiki-content').attr('src', "https://en.m.wikipedia.org/wiki/" + obj.destinations[integerCount]);
-      integerCount ++;
+      $("#destResult").attr('href', "https://en.m.wikipedia.org/wiki/" + obj.destinations[integerCount2]);
+      $("#destResult").text(obj.destinations[integerCount2])
+      integerCount2 ++;
 
 
-      if (integerCount > 4){
-        integerCount = 0;
+      if (integerCount2 > 4){
+        integerCount2 = 0;
     }
 });
   });
