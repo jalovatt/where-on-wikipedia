@@ -21,20 +21,36 @@ $(document).ready(function(){
       // console.log(key, obj[key], index);
 
         if (index) {
-           // $("#resultJson").text("This is the starting point:")
-           $('#wiki-content').attr('src', obj.url);
+           $('#wiki-content').attr('src', obj.url); //button for starting game
+           $("#resultJson").text("Starring Article: " + obj.title) //button for rendering clues
         }
   });
 
-    var integerCount = 0;
-    $("#btnSun").click(function(){
-      Object.keys(obj).forEach(function(key, index) {
+      var integerCount = 0;
 
-    $("#clueResult").text("Clue: " + obj.clues[integerCount])
+      $("#btnSun").click(function(){
+        Object.keys(obj).forEach(function(key, index) {
+
+      $("#clueResult").text("Clue: " + obj.clues[integerCount]) //button for rendering clues
       integerCount ++;
-      console.log(integerCount)
-    if (integerCount > 4){
-       integerCount = 0;
+
+      if (integerCount > 4){
+        integerCount = 0;
+    }
+});
+  });
+      var integerCount2 = 0
+
+      $("#btnSun2").click(function(){
+        Object.keys(obj).forEach(function(key, index) {
+
+      $("#destResult").text(obj.destinations[integerCount])
+      $('#wiki-content').attr('src', "https://en.m.wikipedia.org/wiki/" + obj.destinations[integerCount]);
+      integerCount ++;
+
+
+      if (integerCount > 4){
+        integerCount = 0;
     }
 });
   });
