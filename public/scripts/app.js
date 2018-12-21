@@ -24,6 +24,8 @@ $(document).ready(function(){
            $('#wiki-content').attr('src', obj.url); //button for starting game
            $("#resultJson").attr('href', obj.url);
            $("#resultJson").text("Starting Article: " + obj.title) //button for rendering clues
+           $("#clueResult").empty();
+           $("#destResult").empty();
         }
   });
 
