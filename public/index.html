@@ -31,7 +31,7 @@
 
     <article class="wiki screen">
       <div class="glass screen-overlay"></div>
-      <iframe class="screen-content" id="wiki-content" src="https://en.m.wikipedia.org/wiki/Special:Random" onload="updateUrl(event)"></iframe>
+      <iframe class="screen-content" id="wiki-content" name="name"></iframe>
       <div class="screen-bg metal linear"></div>
       <div class="screen-glow"></div>
     </article>
@@ -41,19 +41,25 @@
       <div class="glass screen-overlay"></div>
 
       <section class="screen-content id="game-content">
-        <h4>Welcome player</h4>
-          <!-- <div class="button-container"> -->
-            <!--  <button class="metal-button radial"><i class="fab fa-wikipedia-w"></i></button>
-            <button class="metal-button radial"><i class="fas fa-search"></i></button>
-            <button class="metal-button radial"><i class="fas fa-running"></i></button>
-            <button class="metal-button radial"><i class="fas fa-bars"></i></button> -->
-          <!-- </div> -->
+          <h6>The suspect is hiding on 1 of 5 articles listed below. Use the clues to track them down</h1>
+            <!-- <div class="button-container"> -->
+              <!--  <button class="metal radial"><i class="fab fa-wikipedia-w"></i></button>
+              <button class="metal radial"><i class="fas fa-search"></i></button>
+              <button class="metal radial"><i class="fas fa-running"></i></button>
+              <button class="metal radial"><i class="fas fa-bars"></i></button> -->
+            <!-- </div> -->
+      <!--       <script type="text/javascript" src="/scripts/app.js">
+              document.getElementById("wiki-content").setAttribute("src","https://en.m.wikipedia.org/wiki/?curid="+pageId)
+            </script> -->
 
-        <button id="game">example game</button>
-        <div id="resultJson"></div>
+          <button id="game">start game</button>
+          <div><h6 id="resultJson"></h5></div>
 
-        <button id="btnSun"">get a clue</button>
-        <div id="clueResult"></div>
+          <button id="btnSun"">get a clue</button>
+          <h6 id="clueResult"></h6>
+          <button id="btnSun2"">articles</button>
+          <a href=""id="destResult" target="name"></a>
+          <!-- <div id="destResult" target='name'></div> -->
       </section>
 
       <div class="screen-bg metal linear"></div>
