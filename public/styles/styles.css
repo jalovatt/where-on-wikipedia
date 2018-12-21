@@ -234,3 +234,7 @@ box-shadow:
   background-position: 0px 0px, 6px 6px, 0px 0px;
 
 }
+
+.hidden {
+  display: none;
+}

@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/solid.css" integrity="sha384-aj0h5DVQ8jfwc8DA7JiM+Dysv7z+qYrFYZR+Qd/TwnmpDI6UaB3GJRRTdY8jYGS4" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/brands.css" integrity="sha384-whKHCkwP9f4MyD1vda26+XRyEg2zkyZezur14Kxc784RxUU1E7HvWVYj9EoJnUV7" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/fontawesome.css" integrity="sha384-WK8BzK0mpgOdhCxq86nInFqSWLzR5UAsNg0MGX9aDaIIrFWQ38dGdhwnNCAoXFxL" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- App stylesheets -->
   <link rel="stylesheet" href="/styles/styles.css" type="text/css" />
@@ -19,7 +20,6 @@
 
   <!-- App JS -->
   <script type="text/javascript" src="/scripts/app.js"></script>
-
 
   <title>Document</title>
   <script type="text/javascript"></script>
@@ -31,8 +31,8 @@
 
     <article class="wiki screen">
       <div class="glass screen-overlay"></div>
-      <iframe class="screen-content" id="wiki-content" name="name"></iframe>
-      <div class="screen-bg metal linear"></div>
+        <iframe class="screen-content" id="wiki-content" name="name"></iframe>
+        <div class="screen-bg metal linear"></div>
       <div class="screen-glow"></div>
     </article>
 
@@ -52,14 +52,14 @@
               document.getElementById("wiki-content").setAttribute("src","https://en.m.wikipedia.org/wiki/?curid="+pageId)
             </script> -->
 
-          <button id="game">start game</button>
-          <div><h6 id="resultJson"></h5></div>
+          <button id="game" >start game </button>
+            <div><h6 id="resultJson"><div id="hide" class="hidden"><i class="fa fa-refresh fa-spin"></i>Loading</div></h5></div>
 
           <button id="btnSun"">get a clue</button>
-          <h6 id="clueResult"></h6>
+            <h6 id="clueResult"></h6>
+
           <button id="btnSun2"">articles</button>
-          <a href=""id="destResult" target="name"></a>
-          <!-- <div id="destResult" target='name'></div> -->
+            <a href=""id="destResult" target="name"></a>
       </section>
 
       <div class="screen-bg metal linear"></div>
