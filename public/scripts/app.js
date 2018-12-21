@@ -24,23 +24,15 @@ $(document).ready(function(){
            // $("#resultJson").text("This is the starting point:")
            $('#wiki-content').attr('src', obj.url);
         }
-});
   });
-});
-});
 
-$(document).ready(function(){
     var integerCount = 0;
+    $("#btnSun").click(function(){
+      Object.keys(obj).forEach(function(key, index) {
 
-  $("#btnSun").click(function(){
-    $.getJSON("/game/new/", function(result){
-      var obj = result;
-
-Object.keys(obj).forEach(function(key, index) {
-  $("#clueResult").text("Clue: " + obj.clues[integerCount])
-    integerCount ++;
-    console.log(integerCount)
-
+    $("#clueResult").text("Clue: " + obj.clues[integerCount])
+      integerCount ++;
+      console.log(integerCount)
     if (integerCount > 4){
        integerCount = 0;
     }
@@ -48,6 +40,9 @@ Object.keys(obj).forEach(function(key, index) {
   });
 });
 });
+
+});
+
 
 
 // $(document).ready(function(){
