@@ -1,5 +1,6 @@
 const Mocha = require("mocha");
-const {assert} = require("chai");
+const chai = require("chai");
+const {assert} = chai;
 
 const request = require("request");
 const wiki = require("../wiki-api/wiki")(request);
@@ -78,8 +79,8 @@ describe("Article processing", () => {
     it("should return false for an article with no links", async () => {
 
       // https://en.wikipedia.org/wiki/Special:DeadendPages
-      // Robert Dotson (no links as of Dec. 2018)
-      testUseability(50059391, false);
+      // https://en.wikipedia.org/wiki/Child_bereavement (no links as of Dec. 2018)
+      await testUseability(55307463, false);
 
     });
 
@@ -87,14 +88,14 @@ describe("Article processing", () => {
 
       // https://en.wikipedia.org/wiki/Category:Orphaned_articles
       // Ronan Carroll (no links to it as of Dec. 2018)
-      testUseability(31940707, false);
+      await testUseability(31940707, false);
 
     });
 
     it("should return false for an article with no categories", async () => {
 
       // University of Mendoza
-      testUseability(27342618, false);
+      await testUseability(27342618, false);
 
     });
 
