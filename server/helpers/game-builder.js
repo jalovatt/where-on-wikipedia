@@ -30,15 +30,15 @@ module.exports = function(wiki) {
   return {
 
     getRandomLinkFrom(article) {
-      return article.links[randomInt(article.links.length)];
+      return article.links[randomInt(article.links.length)].title;
     },
 
     getRandomLinkTo(article) {
-      return article.linkshere[randomInt(article.linkshere.length)];
+      return article.linkshere[randomInt(article.linkshere.length)].title;
     },
 
     getRandomCategory(article) {
-      return article.categories[randomInt(article.categories.length)];
+      return article.categories[randomInt(article.categories.length)].title;
     },
 
     isUseableArticle(article) {
@@ -60,7 +60,7 @@ module.exports = function(wiki) {
       let useable = false;
 
       do {
-        const curLink = this.getRandomLinkFrom(article).title;
+        const curLink = this.getRandomLinkFrom(article);
         const curId = await wiki.getArticleIdFromTitle(curLink);
 
         if (!curId || curId === "0") continue;
@@ -112,24 +112,21 @@ module.exports = function(wiki) {
     },
 
     generateArticleClue(article) {
-      const clueTypes = [
+      // - Article that links here
+      const linksHere = (article) => {
+        const str = "The suspect asked for directions to an article mentioned in '%ARTICLE%'";
+        const link = this.getRandomLinkTo(article);
+        return str.replace("%ARTICLE%", link);
+      };
 
-        // - Article that links here
-        function(article) {
-          const str = "The suspect asked for directions to an article mentioned in '%ARTICLE%'";
-          const rand = randomInt(article.linkshere.length);
+      // - Category that this belongs to
+      const category = (article) => {
+        const str = "The suspect expressed an interest in '%CATEGORY%'";
+        const cat = this.getRandomCategory(article);
+        return str.replace("%CATEGORY%", cat);
+      };
 
-          return str.replace("%ARTICLE%", article.linkshere[rand].title);
-        },
-
-        // - Category that this belongs to
-        function(article) {
-          const str = "The suspect expressed an interest in '%CATEGORY%'";
-          const rand = randomInt(article.categories.length);
-          return str.replace("%CATEGORY%", article.categories[rand].title);
-        },
-      ];
-
+      const clueTypes = [linksHere, category];
       return clueTypes[randomInt(clueTypes.length)](article);
     },
 
@@ -183,7 +180,7 @@ module.exports = function(wiki) {
       return this.shuffleArray(clues);
     },
 
-    getRandomLinkFrom(article, dests) {
+    generateNewDestination(article, dests) {
       let dest;
       do {
         dest = this.getRandomLinkFrom(article);
@@ -198,13 +195,13 @@ module.exports = function(wiki) {
         dests.push(this.generateNewDestination(article, dests));
       }
 
-      return this.shuffleArray(destinations);
+      return this.shuffleArray(dests);
     },
 
     addMetadata(steps, suspect) {
       for (let i = 0, l = steps.length - 1; i < l; i++) {
 
-        const destinations = this.addDestinations(article, steps[i + 1].title);
+        const destinations = this.addDestinations(steps[i], steps[i + 1].title);
         steps[i].destinations = destinations;
 
         const clues = this.addClues(steps[i + 1], suspect);
