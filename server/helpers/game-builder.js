@@ -245,10 +245,6 @@ module.exports = function(wiki) {
       return game;
     },
 
-    searchArticle() {
-
-    }
-
   };
 
 };
