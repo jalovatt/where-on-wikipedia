@@ -1,9 +1,12 @@
-const queries = require("./queries");
 const fs = require("fs");
 
-async function writeMystery() {
-  const mystery = await queries.generateMystery(3);
-  fs.writeFileSync("./example-mystery.txt", JSON.stringify(mystery, null, 2));
+const request = require("request");
+const wiki = require("../server/wiki-api/wiki")(request);
+const gameBuilder = require("../server/helpers/game-builder")(wiki);
+
+async function writeGame() {
+  const game = await gameBuilder.generateGame(5);
+  fs.writeFileSync("./experiments/example-game.txt", JSON.stringify(game, null, 2));
 }
 
-writeMystery();
+writeGame();
