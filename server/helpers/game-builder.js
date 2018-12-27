@@ -137,15 +137,15 @@ module.exports = function(wiki) {
       return this.generateArticleClue(suspect);
     },
 
-    isDuplicateClue(clue, clueArr) {
-      return clueArr.indexOf(clue) > -1;
+    existsInArray(val, arr) {
+      return arr.indexOf(val) > -1;
     },
 
     generateNewArticleClue(article, clueArr) {
       let clue;
       do {
         clue = this.generateArticleClue(article);
-      } while (this.isDuplicateClue(clue, clueArr));
+      } while (this.existsInArray(clue, clueArr));
 
       return clue;
     },
@@ -183,29 +183,28 @@ module.exports = function(wiki) {
       return this.shuffleArray(clues);
     },
 
-    getRandomLinksFrom(article, n) {
-      const out = [];
-      const l = article.links.length;
+    getRandomLinkFrom(article, dests) {
+      let dest;
+      do {
+        dest = this.getRandomLinkFrom(article);
+      } while (this.existsInArray(dest, dests));
 
-      for (let i = 0; i < n; i++) {
-        out.push(article.links[randomInt(l)].title);
-      }
-
-      return out;
+      return dest;
     },
 
-    getDestinations(article, include) {
-      const out = this.getRandomLinksFrom(article, 4);
-      out.push(include);
+    addDestinations(article, include) {
+      const dests = [include];
+      while (dests.length < 4) {
+        dests.push(this.generateNewDestination(article, dests));
+      }
 
-      return out;
+      return this.shuffleArray(destinations);
     },
 
     addMetadata(steps, suspect) {
       for (let i = 0, l = steps.length - 1; i < l; i++) {
 
-        const destinations = this.getRandomLinksFrom(steps[i], 4);
-        destinations.push(steps[i + 1].title);
+        const destinations = this.addDestinations(article, steps[i + 1].title);
         steps[i].destinations = destinations;
 
         const clues = this.addClues(steps[i + 1], suspect);
