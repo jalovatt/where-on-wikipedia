@@ -137,17 +137,50 @@ module.exports = function(wiki) {
       return this.generateArticleClue(suspect);
     },
 
+    isDuplicateClue(clue, clueArr) {
+      return clueArr.indexOf(clue) > -1;
+    },
+
+    generateNewArticleClue(article, clueArr) {
+      let clue;
+      do {
+        clue = this.generateArticleClue(article);
+      } while (this.isDuplicateClue(clue, clueArr));
+
+      return clue;
+    },
+
+    // Fisher-Yates shuffling algorithm:
+    // https://bost.ocks.org/mike/shuffle/
+    shuffleArray(arr) {
+      const out = [...arr];
+      let left = out.length, swap, take;
+
+      while (left) {
+
+        // Pick a remaining element…
+        take = Math.floor(Math.random() * left--);
+
+        // And swap it with the current element.
+        swap = out[left];
+        out[left] = out[take];
+        out[take] = swap;
+      }
+
+      return out;
+    },
+
     addClues(article, suspect) {
       const clues = [];
-      clues.push(
-        this.generateArticleClue(article),
-        this.generateArticleClue(article),
-        this.generateArticleClue(article),
-        ((randomInt(2) === 1) ? this.generateArticleClue(article) : this.generateSuspectClue(suspect)),
-        ((randomInt(2) === 1) ? this.generateArticleClue(article) : this.generateSuspectClue(suspect))
-      );
+      while (clues.length < 5) {
+        clues.push(this.generateNewArticleClue(article, clues));
+      }
 
-      return clues;
+      // Chance to replace two clues with suspect clues
+      (randomInt(2) === 1) && (clues[0] = this.generateSuspectClue(suspect));
+      (randomInt(2) === 1) && (clues[1] = this.generateSuspectClue(suspect));
+
+      return this.shuffleArray(clues);
     },
 
     getRandomLinksFrom(article, n) {
