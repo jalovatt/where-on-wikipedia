@@ -7,7 +7,6 @@ $(document).ready(function(){
       var obj = result;
       console.log(result)
       Object.keys(obj).forEach(function(key, index) {
-      // console.log(key, obj[key], index);
 
            $('#wiki-content').attr('src', obj.url); //button for starting game
            $("#resultJson").attr('href', obj.url);
