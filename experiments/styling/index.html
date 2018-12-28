@@ -13,13 +13,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- App stylesheets -->
-  <link rel="stylesheet" href="/styles/styles.css" type="text/css" />
+  <link rel="stylesheet" href="styles/styles.css" type="text/css" />
 
   <!-- External JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <!-- App JS -->
-  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="scripts/app.js"></script>
 
   <title>Document</title>
   <script type="text/javascript"></script>
@@ -36,35 +36,42 @@
       <div class="screen-glow"></div>
     </article>
 
-    <article class="game screen button-container">
+    <div class="title">
+      <span class="title-where-on">where on</span>
+      <span class="title-wikipedia">&#xE02F;ikipediA</span>
+    </div>
+
+    <article class="game screen">
 
       <div class="glass screen-overlay"></div>
 
       <section class="screen-content id="game-content">
-          <h6>The suspect is hiding in 1 of 5 articles listed below. Use the clues to track them down</h1>
-            <!-- <div class="button-container"> -->
-              <!--  <button class="metal radial"><i class="fab fa-wikipedia-w"></i></button>
-              <button class="metal radial"><i class="fas fa-search"></i></button>
-              <button class="metal radial"><i class="fas fa-running"></i></button>
-              <button class="metal radial"><i class="fas fa-bars"></i></button> -->
-            <!-- </div> -->
-      <!--       <script type="text/javascript" src="/scripts/app.js">
-              document.getElementById("wiki-content").setAttribute("src","https://en.m.wikipedia.org/wiki/?curid="+pageId)
-            </script> -->
+        <h6>The suspect is hiding in 1 of 5 articles listed below. Use the clues to track them down</h1>
 
-          <button id="game" >start game </button>
-            <div><h6 id="resultJson"><div id="hide" class="hidden"><i class="fa fa-refresh fa-spin"></i>Loading</div></h5></div>
+    <!--       <script type="text/javascript" src="/scripts/app.js">
+            document.getElementById("wiki-content").setAttribute("src","https://en.m.wikipedia.org/wiki/?curid="+pageId)
+          </script> -->
 
-          <button id="btnSun"">get a clue</button>
-            <h6 id="clueResult"></h6>
+        <button id="game" >start game </button>
+          <div><h6 id="resultJson"><div id="hide" class="hidden"><i class="fa fa-refresh fa-spin"></i>Loading</div></h5></div>
 
-          <button id="btnSun2"">articles</button>
-            <a href=""id="destResult" target="name"></a>
+        <button id="btnSun"">get a clue</button>
+          <h6 id="clueResult"></h6>
+
+        <button id="btnSun2"">articles</button>
+          <a href=""id="destResult" target="name"></a>
       </section>
 
       <div class="screen-bg metal linear"></div>
       <div class="screen-glow"></div>
     </article>
+
+    <div class="button-container">
+      <button class="metal button radial"><i class="fas fa-plane"></i></button>
+      <button class="metal button radial"><i class="fas fa-search"></i></button>
+      <button class="metal button radial"><i class="fas fa-running"></i></button>
+      <button class="metal button radial"><i class="fas fa-bars"></i></button>
+    </div>
   </main>
 
 </body>
