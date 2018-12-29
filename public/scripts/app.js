@@ -5,7 +5,6 @@ $(document).ready(function(){
     $.getJSON("/game/new/", function(result){
 
       var obj = result;
-      console.log(result)
       Object.keys(obj).forEach(function(key, index) {
 
            $('#wiki-content').attr('src', obj.url); //button for starting game
@@ -13,6 +12,10 @@ $(document).ready(function(){
            $("#resultJson").text("Starting Article: " + obj.title)
            $("#clueResult").empty();
            $("#destResult").empty();
+           $("#destResult1").empty();
+           $("#destResult2").empty();
+           $("#destResult3").empty();
+           $("#destResult4").empty();
   });
 
       var integerCount = 0;
@@ -28,7 +31,6 @@ $(document).ready(function(){
     }
 });
   });
-      var integerCount2 = 0
 
       $("#btnSun2").click(function(){
         Object.keys(obj).forEach(function(key, index) {
@@ -45,12 +47,6 @@ $(document).ready(function(){
       $("#destResult3").text("Article number 4: " + obj.destinations[3])
       $("#destResult4").text("Article number 5: " + obj.destinations[4])
 
-      integerCount2 ++;
-
-      if (integerCount2 > 4){
-        integerCount2 = 0;
-    }
-    console.log(obj.destinations[2])
 });
   });
 });
