@@ -10,7 +10,7 @@ $(document).ready(function(){
 
            $('#wiki-content').attr('src', obj.url); //button for starting game
            $("#resultJson").attr('href', obj.url);
-           $("#resultJson").text("Starting Article: " + obj.title) //button for rendering clues
+           $("#resultJson").text("Starting Article: " + obj.title)
            $("#clueResult").empty();
            $("#destResult").empty();
   });
@@ -33,14 +33,24 @@ $(document).ready(function(){
       $("#btnSun2").click(function(){
         Object.keys(obj).forEach(function(key, index) {
 
-      $("#destResult").attr('href', "https://en.m.wikipedia.org/wiki/" + obj.destinations[integerCount2]);
-      $("#destResult").text("Article number " + (integerCount2 + 1) + ": " + obj.destinations[integerCount2]) //button for rendering articles
-      integerCount2 ++;
+      $("#destResult").attr('href', "https://en.m.wikipedia.org/wiki/" + obj.destinations[0]); //button for rendering articles
+      $("#destResult1").attr('href', "https://en.m.wikipedia.org/wiki/" + obj.destinations[1]);
+      $("#destResult2").attr('href', "https://en.m.wikipedia.org/wiki/" + obj.destinations[2]);
+      $("#destResult3").attr('href', "https://en.m.wikipedia.org/wiki/" + obj.destinations[3]);
+      $("#destResult4").attr('href', "https://en.m.wikipedia.org/wiki/" + obj.destinations[4]);
 
+      $("#destResult").text("Article number 1: " + obj.destinations[0])
+      $("#destResult1").text("Article number 2: " + obj.destinations[1])
+      $("#destResult2").text("Article number 3: " + obj.destinations[2])
+      $("#destResult3").text("Article number 4: " + obj.destinations[3])
+      $("#destResult4").text("Article number 5: " + obj.destinations[4])
+
+      integerCount2 ++;
 
       if (integerCount2 > 4){
         integerCount2 = 0;
     }
+    console.log(obj.destinations[2])
 });
   });
 });
