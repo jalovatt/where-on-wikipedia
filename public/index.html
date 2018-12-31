@@ -13,13 +13,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- App stylesheets -->
-  <link rel="stylesheet" href="/styles/styles.css" type="text/css" />
+  <link rel="stylesheet" href="styles/styles.css" type="text/css" />
+
+  <!-- Preloading assets -->
+  <link rel="preload" href="../assets/Linux-Libertine.ttf.woff" as="font" type="font/woff" crossorigin>
 
   <!-- External JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <!-- App JS -->
-  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="scripts/app.js"></script>
 
   <title>Document</title>
   <script type="text/javascript"></script>
@@ -36,7 +39,12 @@
       <div class="screen-glow"></div>
     </article>
 
-    <article class="game screen button-container">
+    <div class="title">
+      <span class="title-where-on">where on</span>
+      <span class="title-wikipedia">&#xE02F;ikipediA</span>
+    </div>
+
+    <article class="game screen">
 
       <div class="glass screen-overlay"></div>
 
@@ -74,6 +82,13 @@
       <div class="screen-bg metal linear"></div>
       <div class="screen-glow"></div>
     </article>
+
+    <div class="button-container">
+      <button class="metal button radial"><i class="fas fa-plane"></i></button>
+      <button class="metal button radial"><i class="fas fa-search"></i></button>
+      <button class="metal button radial"><i class="fas fa-running"></i></button>
+      <button class="metal button radial"><i class="fas fa-bars"></i></button>
+    </div>
   </main>
 
 </body>
