@@ -191,7 +191,7 @@ module.exports = function(wiki) {
 
     addDestinations(article, include) {
       const dests = [include];
-      while (dests.length < 4) {
+      while (dests.length < 5) {
         dests.push(this.generateNewDestination(article, dests));
       }
 
