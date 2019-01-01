@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'Linux-Libertine';
-  src:url('../assets/Linux-Libertine.ttf.woff') format('woff'),
+  src:url('../assets/Linux-Libertine-Compact.woff') format('woff'),
+  /* src:url('../assets/Linux-Libertine.ttf.woff') format('woff'), */
       url('../assets/Linux-Libertine.ttf.svg#Linux-Libertine') format('svg'),
       url('../assets/Linux-Libertine.ttf.eot'),
       url('../assets/Linux-Libertine.ttf.eot?#iefix') format('embedded-opentype');
