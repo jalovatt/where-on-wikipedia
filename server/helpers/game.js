@@ -35,8 +35,17 @@ module.exports = function(db, gameBuilder) {
       //gameId = exampleGameId;
 
       const [err, step] = await db.findStepByArticle(gameId, articleId);
+      if (err) return [err];
 
-      return (err) ? [err] : [null, {
+      if (!step || !step.clues) return [null, {
+        gameid: gameId,
+        pageid: articleId,
+        clues: Array(5).fill("Nobody seems to know what you're talking about"),
+        destinations: Array(5).fill("Nobody knows where the suspect might have gone"),
+        deadend: true
+      }];
+
+      return [null, {
         gameid: gameId,
         pageid: articleId,
         title: step.title,

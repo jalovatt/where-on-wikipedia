@@ -180,28 +180,34 @@ module.exports = function(wiki) {
       return this.shuffleArray(clues);
     },
 
-    generateNewDestination(article, dests) {
-      let dest;
+    async generateNewDestination(article, dests) {
+      let title;
       do {
-        dest = this.getRandomLinkFrom(article);
-      } while (this.existsInArray(dest, dests));
+        title = this.getRandomLinkFrom(article);
+      } while (this.existsInArray(title, dests));
 
-      return dest;
+      const id = await wiki.getArticleIdFromTitle(title);
+
+      return {id, title};
     },
 
-    addDestinations(article, include) {
-      const dests = [include];
+    async addDestinations(article, include) {
+
+      const includeId = await wiki.getArticleIdFromTitle(include);
+      const dests = [{id: includeId, title: include}];
+
       while (dests.length < 5) {
-        dests.push(this.generateNewDestination(article, dests));
+        const dest = await this.generateNewDestination(article, dests);
+        dests.push(dest);
       }
 
       return this.shuffleArray(dests);
     },
 
-    addMetadata(steps, suspect) {
+    async addMetadata(steps, suspect) {
       for (let i = 0, l = steps.length - 1; i < l; i++) {
 
-        const destinations = this.addDestinations(steps[i], steps[i + 1].title);
+        const destinations = await this.addDestinations(steps[i], steps[i + 1].title);
         steps[i].destinations = destinations;
 
         const clues = this.addClues(steps[i + 1], suspect);
@@ -238,7 +244,7 @@ module.exports = function(wiki) {
       game.suspect = await this.generateSuspect();
       const steps = await this.generateGameSteps(5);
 
-      game.steps =  this.addMetadata(steps, game.suspect);
+      game.steps = await this.addMetadata(steps, game.suspect);
 
       game["_id"] = generateGameId();
 

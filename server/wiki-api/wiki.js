@@ -33,7 +33,7 @@ module.exports = function(request) {
           ((err, res, body) => {
 
             if (err) {
-              console.log("WikiQuery failed")
+              console.log("WikiQuery failed");
               console.log("query:");
               console.log(query);
               console.log("error:");
@@ -73,29 +73,33 @@ module.exports = function(request) {
       return data;
     },
 
-    getRandomArticleId() {
+    async getRandomArticleId() {
       const params = {
         list: "random",
         rnnamespace: 0,
         rnlimit: 1
       };
 
-      return this.wikiQuery(params)
+      const id = await this.wikiQuery(params)
         .then((data) => data.query.random[0].id);
+
+      return id;
     },
 
-    getArticleParseData(articleId) {
+    async getArticleParseData(articleId) {
       const params = {
         action: "parse",
         pageid: articleId,
         prop: "images|sections|displaytitle|wikitext"
       };
 
-      return this.wikiQuery(params)
+      const data = this.wikiQuery(params)
         .then((data) => data.parse);
+
+      return data;
     },
 
-    getArticleData(articleId) {
+    async getArticleData(articleId) {
       const params = {
         action: "query",
         format: "json",
@@ -113,11 +117,13 @@ module.exports = function(request) {
         inprop: "url"
       };
 
-      return this.wikiQuery(params)
+      const data = await this.wikiQuery(params)
         .then((data) => data.query.pages[articleId]);
+
+      return data;
     },
 
-    getArticleIdFromTitle(title) {
+    async getArticleIdFromTitle(title) {
       const params = {
         titles: title
       };

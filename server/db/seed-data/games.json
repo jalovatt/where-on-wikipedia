@@ -1140,11 +1140,11 @@
       "editurl": "https://en.wikipedia.org/w/index.php?title=Wiederau_transmitter&action=edit",
       "canonicalurl": "https://en.wikipedia.org/wiki/Wiederau_transmitter",
       "destinations": [
-        "Voice of Russia",
-        "Groundwave",
-        "Mühlacker Transmitter",
-        "Structurae",
-        "Radio navigation"
+        {"id": 530965, "title": "Voice of Russia"},
+        {"id": 41763, "title": "Groundwave"},
+        {"id": 1249263, "title": "Mühlacker Transmitter"},
+        {"id": 1774581, "title": "Structurae"},
+        {"id": 153095, "title": "Radio navigation"}
       ],
       "clues": [
         "The suspect asked for directions to an article mentioned in 'U.S. National Geodetic Survey'",
@@ -2103,11 +2103,11 @@
       "editurl": "https://en.wikipedia.org/w/index.php?title=Radio_navigation&action=edit",
       "canonicalurl": "https://en.wikipedia.org/wiki/Radio_navigation",
       "destinations": [
-        "Orfordness Beacon",
-        "List of World War II British naval radar",
-        "Gee (navigation)",
-        "Identification friend or foe",
-        "Indian Regional Navigation Satellite System"
+        {"id": 35686319, "title": "Orfordness Beacon"},
+        {"id": 6775568, "title": "List of World War II British naval radar"},
+        {"id": 590945, "title": "Gee (navigation)"},
+        {"id": 368327, "title": "Identification friend or foe"},
+        {"id": 9936493, "title": "Indian Regional Navigation Satellite System"}
       ],
       "clues": [
         "The suspect asked for directions to an article mentioned in 'Very low frequency'",
@@ -3062,11 +3062,11 @@
       "editurl": "https://en.wikipedia.org/w/index.php?title=Indian_Regional_Navigation_Satellite_System&action=edit",
       "canonicalurl": "https://en.wikipedia.org/wiki/Indian_Regional_Navigation_Satellite_System",
       "destinations": [
-        "Antrix Corporation",
-        "ATA (radio station)",
-        "BPC (time signal)",
-        "Frequency spectrum",
-        "Cartosat-2A"
+        {"id": 4566022, "title": "Antrix Corporation"},
+        {"id": 14580, "title": "Indian Ocean"},
+        {"id": 33249881, "title": "BPC (time signal)"},
+        {"id": 202672, "title": "Frequency spectrum"},
+        {"id": 16950400, "title": "Cartosat-2A"}
       ],
       "clues": [
         "The suspect expressed an interest in 'Category:Spacecraft launched by PSLV rockets'",
@@ -4009,11 +4009,11 @@
       "editurl": "https://en.wikipedia.org/w/index.php?title=Cartosat-2A&action=edit",
       "canonicalurl": "https://en.wikipedia.org/wiki/Cartosat-2A",
       "destinations": [
-        "GSAT-20",
-        "Arirang-2",
-        "ChinaSat 9",
-        "Cartosat",
-        "GSAT-1"
+        {"id": 54154996, "title": "GSAT-20"},
+        {"id": 6168385, "title": "Arirang-2"},
+        {"id": 17860602, "title": "ChinaSat 9"},
+        {"id": 38771512, "title": "Cartosat"},
+        {"id": 2446478, "title": "GSAT-1"}
       ],
       "clues": [
         "The suspect asked for directions to an article mentioned in 'GSAT-5P'",
