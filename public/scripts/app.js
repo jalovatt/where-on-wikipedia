@@ -4,8 +4,9 @@ $(document).ready(function(){
   $("#hide").removeClass("hidden")
     $.getJSON("/game/new/", function(result){
 
-      var obj = result;
-      // console.log(obj)
+      let obj = result;
+      console.log(obj)
+      console.log(obj.gameid)
       // console.log(obj.destinations)
       // console.log(obj.destinations[0])
       // console.log(obj.destinations[0].id)
@@ -52,54 +53,63 @@ $(document).ready(function(){
            $("#destResult3").text("Article number 4: " + obj.destinations[3].title)
            $("#destResult4").text("Article number 5: " + obj.destinations[4].title)
 
-      $("#destResult").click(function(){
-
-        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[0].title, function(res){
-           // let object = res;
-           // console.log(res.pageid)
-          console.log("hello")
-          });
-
-     });
-
-      $("#destResult1").click(function(){
-
-        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[0].title, function(res){
-          console.log("hello2")
-          });
-
-     });
-
-      $("#destResult2").click(function(){
-
-        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[0].title, function(res){
-          console.log("hello3")
-          });
-
-     });
-
-      $("#destResult3").click(function(){
-
-        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[0].title, function(res){
-          console.log("hello4")
-          });
-
-     });
-
-      $("#destResult4").click(function(){
-
-        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[0].title, function(res){
-           console.log("hello5")
-          });
-
-     });
-
 
 
 
 
 });
   });
+
+      $("#destResult").click(function(){
+
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[0].title, function(res){
+          let object = res;
+          console.log(object)
+          console.log(object.pageid)
+
+          });
+
+     });
+
+      $("#destResult1").click(function(){
+
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[1].title, function(res){
+          let object = res;
+          console.log(object)
+          console.log(object.pageid)
+          });
+
+     });
+
+      $("#destResult2").click(function(){
+
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[2].title, function(res){
+          let object = res;
+          console.log(object)
+          console.log(object.pageid)
+          });
+
+     });
+
+      $("#destResult3").click(function(){
+
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[3].title, function(res){
+          let object = res;
+          console.log(object)
+          console.log(object.pageid)
+          });
+
+     });
+
+      $("#destResult4").click(function(){
+
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[4].title, function(res){
+           let object = res;
+           console.log(object)
+           console.log(object.pageid)
+          });
+
+     });
 });
 });
 
