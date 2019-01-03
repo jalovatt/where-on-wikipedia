@@ -5,6 +5,8 @@ $(document).ready(function(){
     $.getJSON("/game/new/", function(result){
 
       var obj = result;
+      // console.log(obj)
+      // console.log(obj.gameid)
       Object.keys(obj).forEach(function(key, index) {
 
            $('#wiki-content').attr('src', obj.url); //button for starting game
@@ -47,13 +49,13 @@ $(document).ready(function(){
            $("#destResult3").text("Article number 4: " + obj.destinations[3])
            $("#destResult4").text("Article number 5: " + obj.destinations[4])
 
-      $("#destResult").click(function(){
-         console.log("destination link clicked on and iFrame changed")
+     //  $("#destResult").click(function(){
+     //     console.log("destination link clicked on and iFrame changed")
 
-         // $.getJSON("/game/gameId/travel/the-article-ID-they-travelled-to", function(result){
+     //     $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[0], function(result){
 
-         // }) -- make request here to the server for JSON data relavent to destination traveled to
-     })
+     //      });
+     // })
 
 });
   });
