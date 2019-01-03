@@ -6,10 +6,10 @@ $(document).ready(function(){
 
       var obj = result;
       console.log(obj)
-      console.log(obj.destinations)
-      console.log(obj.destinations[0])
-      console.log(obj.destinations[0].id)
-      console.log(obj.destinations[0].title)
+      // console.log(obj.destinations)
+      // console.log(obj.destinations[0])
+      // console.log(obj.destinations[0].id)
+      // console.log(obj.destinations[0].title)
       Object.keys(obj).forEach(function(key, index) {
 
            $('#wiki-content').attr('src', obj.url); //button for starting game
@@ -52,13 +52,28 @@ $(document).ready(function(){
            $("#destResult3").text("Article number 4: " + obj.destinations[3].title)
            $("#destResult4").text("Article number 5: " + obj.destinations[4].title)
 
-     //  $("#destResult").click(function(){
-     //     console.log("destination link clicked on and iFrame changed")
+      $("#destResult").click(function(){
 
-     //     $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[0], function(result){
+         console.log("button click affected the right element")
 
-     //      });
-     // })
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[0].title, function(result){
+           let object = result;
+           console.log(object)
+          });
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[1].title, function(result){
+           console.log(result.deadend)
+          });
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[2].title, function(result){
+
+          });
+
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[3].title, function(result){
+
+          });
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[4].title, function(result){
+
+          });
+     })
 
 });
   });
