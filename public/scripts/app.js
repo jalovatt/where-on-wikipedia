@@ -7,10 +7,6 @@ $(document).ready(function(){
       let obj = result;
       console.log(obj)
       console.log(obj.gameid)
-      // console.log(obj.destinations)
-      // console.log(obj.destinations[0])
-      // console.log(obj.destinations[0].id)
-      // console.log(obj.destinations[0].title)
       Object.keys(obj).forEach(function(key, index) {
 
            $('#wiki-content').attr('src', obj.url); //button for starting game
@@ -66,6 +62,7 @@ $(document).ready(function(){
           let object = res;
           console.log(object)
           console.log(object.pageid)
+          console.log(object.clues)
 
           });
 
@@ -77,6 +74,7 @@ $(document).ready(function(){
           let object = res;
           console.log(object)
           console.log(object.pageid)
+          console.log(object.clues)
           });
 
      });
@@ -87,6 +85,7 @@ $(document).ready(function(){
           let object = res;
           console.log(object)
           console.log(object.pageid)
+          console.log(object.clues)
           });
 
      });
@@ -97,6 +96,7 @@ $(document).ready(function(){
           let object = res;
           console.log(object)
           console.log(object.pageid)
+          console.log(object.clues)
           });
 
      });
@@ -107,6 +107,7 @@ $(document).ready(function(){
            let object = res;
            console.log(object)
            console.log(object.pageid)
+           console.log(object.clues)
           });
 
      });
@@ -114,21 +115,3 @@ $(document).ready(function(){
 });
 
 });
-
-
-
-        // $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[1].title, function(res){
-        //    //
-        //    console.log("bonjour")
-        //   });
-        // $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[2].title, function(res){
-
-        //   });
-
-        // $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[3].title, function(res){
-
-        //   });
-        // $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[4].title, function(res){
-
-        //   });
-
