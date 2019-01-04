@@ -3,7 +3,6 @@ $(document).ready(function(){
   $("#game").click(function(){
   $("#hide").removeClass("hidden")
     $.getJSON("/game/new/", function(result){
-
       let obj = result;
       console.log(obj)
       console.log(obj.gameid)
@@ -60,9 +59,15 @@ $(document).ready(function(){
 
         $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[0].title, function(res){
           let object = res;
-          console.log(object)
-          console.log(object.pageid)
-          console.log(object.clues)
+          // console.log(object)
+          // console.log(object.pageid)
+          // console.log(obj.destinations[0])
+          // console.log(object.destinations[0])
+          // obj.destinations[0] = object.destinations[0]
+          // console.log(object.destinations[0])
+
+          $("#destResult").text("Article number 1: " + object.destinations[0])
+          // console.log(object.destinations)
 
           });
 
