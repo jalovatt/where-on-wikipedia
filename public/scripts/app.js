@@ -48,30 +48,21 @@ $(document).ready(function(){
            $("#destResult3").text("Article number 4: " + obj.destinations[3].title)
            $("#destResult4").text("Article number 5: " + obj.destinations[4].title)
 
-
-
-
-
 });
   });
 
       $("#destResult").click(function(){
 
-        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[0].title, function(res){
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[0].id, function(res){
           let object = res;
-          // console.log(object)
-          // console.log(object.pageid)
-          // console.log(obj.destinations[0])
-          // console.log(object.destinations[0])
-          // obj.destinations[0] = object.destinations[0]
-          // console.log(object.destinations[0])
 
           $("#destResult").text("Article number 1: " + object.destinations[0])
           $("#destResult1").text("Article number 2: " + object.destinations[1])
           $("#destResult2").text("Article number 3: " + object.destinations[2])
           $("#destResult3").text("Article number 4: " + object.destinations[3])
           $("#destResult4").text("Article number 5: " + object.destinations[4])
-          // console.log(object.destinations)
+          console.log(object)
+          console.log(object.pageid)
 
           });
 
@@ -79,62 +70,64 @@ $(document).ready(function(){
 
       $("#destResult1").click(function(){
 
-        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[1].title, function(res){
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[1].id, function(res){
           let object = res;
-          console.log(object)
-          console.log(object.pageid)
-          console.log(object.clues)
+
           $("#destResult").text("Article number 1: " + object.destinations[0])
           $("#destResult1").text("Article number 2: " + object.destinations[1])
           $("#destResult2").text("Article number 3: " + object.destinations[2])
           $("#destResult3").text("Article number 4: " + object.destinations[3])
           $("#destResult4").text("Article number 5: " + object.destinations[4])
+          console.log(object)
+          console.log(object.pageid)
           });
 
      });
 
       $("#destResult2").click(function(){
 
-        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[2].title, function(res){
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[2].id, function(res){
           let object = res;
-          console.log(object)
-          console.log(object.pageid)
-          console.log(object.clues)
+
           $("#destResult").text("Article number 1: " + object.destinations[0])
           $("#destResult1").text("Article number 2: " + object.destinations[1])
           $("#destResult2").text("Article number 3: " + object.destinations[2])
           $("#destResult3").text("Article number 4: " + object.destinations[3])
           $("#destResult4").text("Article number 5: " + object.destinations[4])
+          console.log(object)
+          console.log(object.pageid)
           });
 
      });
 
       $("#destResult3").click(function(){
 
-        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[3].title, function(res){
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[3].id, function(res){
           let object = res;
-          console.log(object)
-          console.log(object.pageid)
-          console.log(object.clues)
+
           $("#destResult").text("Article number 1: " + object.destinations[0])
           $("#destResult1").text("Article number 2: " + object.destinations[1])
           $("#destResult2").text("Article number 3: " + object.destinations[2])
           $("#destResult3").text("Article number 4: " + object.destinations[3])
           $("#destResult4").text("Article number 5: " + object.destinations[4])
+          console.log(object)
+          console.log(object.pageid)
           });
 
      });
 
       $("#destResult4").click(function(){
 
-        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[4].title, function(res){
+        $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[4].id, function(res){
            let object = res;
-           console.log(object.clues)
+
           $("#destResult").text("Article number 1: " + object.destinations[0])
           $("#destResult1").text("Article number 2: " + object.destinations[1])
           $("#destResult2").text("Article number 3: " + object.destinations[2])
           $("#destResult3").text("Article number 4: " + object.destinations[3])
           $("#destResult4").text("Article number 5: " + object.destinations[4])
+          console.log(object)
+          console.log(object.pageid)
           });
 
      });
