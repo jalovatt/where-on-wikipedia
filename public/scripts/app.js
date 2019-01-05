@@ -17,6 +17,7 @@ $(document).ready(function(){
            $("#destResult2").empty();
            $("#destResult3").empty();
            $("#destResult4").empty();
+           $("#finalArticle").empty();
   });
 
       var integerCount = 0;
@@ -35,6 +36,8 @@ $(document).ready(function(){
 
       $("#btnSun2").click(function(){
         Object.keys(obj).forEach(function(key, index) {
+
+           $("#finalArticle").empty();
 
            $("#destResult").attr('href', "https://en.m.wikipedia.org/wiki/" + obj.destinations[0].title); //button for rendering articles
            $("#destResult1").attr('href', "https://en.m.wikipedia.org/wiki/" + obj.destinations[1].title);
@@ -56,14 +59,12 @@ $(document).ready(function(){
         $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[0].id, function(res){
           let object = res;
 
-          $("#destResult").text("Article number 1: " + object.destinations[0])
-          $("#destResult1").text("Article number 2: " + object.destinations[1])
-          $("#destResult2").text("Article number 3: " + object.destinations[2])
-          $("#destResult3").text("Article number 4: " + object.destinations[3])
-          $("#destResult4").text("Article number 5: " + object.destinations[4])
-          console.log(object)
-          console.log(object.pageid)
-
+        if (object.deadend == true){
+          $("#finalArticle").text("The article you're looking for isn't here!")
+        }
+        else {
+         $("#finalArticle").text("The final article is: " + object.destinations[0].title)
+        }
           });
 
      });
@@ -73,13 +74,12 @@ $(document).ready(function(){
         $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[1].id, function(res){
           let object = res;
 
-          $("#destResult").text("Article number 1: " + object.destinations[0])
-          $("#destResult1").text("Article number 2: " + object.destinations[1])
-          $("#destResult2").text("Article number 3: " + object.destinations[2])
-          $("#destResult3").text("Article number 4: " + object.destinations[3])
-          $("#destResult4").text("Article number 5: " + object.destinations[4])
-          console.log(object)
-          console.log(object.pageid)
+        if (object.deadend == true){
+          $("#finalArticle").text("The article you're looking for isn't here!")
+        }
+        else {
+         $("#finalArticle").text("The final article is: " + object.destinations[0].title)
+        }
           });
 
      });
@@ -89,13 +89,12 @@ $(document).ready(function(){
         $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[2].id, function(res){
           let object = res;
 
-          $("#destResult").text("Article number 1: " + object.destinations[0])
-          $("#destResult1").text("Article number 2: " + object.destinations[1])
-          $("#destResult2").text("Article number 3: " + object.destinations[2])
-          $("#destResult3").text("Article number 4: " + object.destinations[3])
-          $("#destResult4").text("Article number 5: " + object.destinations[4])
-          console.log(object)
-          console.log(object.pageid)
+        if (object.deadend == true){
+          $("#finalArticle").text("The article you're looking for isn't here!")
+        }
+        else {
+         $("#finalArticle").text("The final article is: " + object.destinations[0].title)
+        }
           });
 
      });
@@ -105,13 +104,12 @@ $(document).ready(function(){
         $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[3].id, function(res){
           let object = res;
 
-          $("#destResult").text("Article number 1: " + object.destinations[0])
-          $("#destResult1").text("Article number 2: " + object.destinations[1])
-          $("#destResult2").text("Article number 3: " + object.destinations[2])
-          $("#destResult3").text("Article number 4: " + object.destinations[3])
-          $("#destResult4").text("Article number 5: " + object.destinations[4])
-          console.log(object)
-          console.log(object.pageid)
+        if (object.deadend == true){
+          $("#finalArticle").text("The article you're looking for isn't here!")
+        }
+        else {
+         $("#finalArticle").text("The article is: " + object.destinations[0].title)
+        }
           });
 
      });
@@ -121,13 +119,12 @@ $(document).ready(function(){
         $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[4].id, function(res){
            let object = res;
 
-          $("#destResult").text("Article number 1: " + object.destinations[0])
-          $("#destResult1").text("Article number 2: " + object.destinations[1])
-          $("#destResult2").text("Article number 3: " + object.destinations[2])
-          $("#destResult3").text("Article number 4: " + object.destinations[3])
-          $("#destResult4").text("Article number 5: " + object.destinations[4])
-          console.log(object)
-          console.log(object.pageid)
+        if (object.deadend == true){
+          $("#finalArticle").text("The article you're looking for isn't here!")
+        }
+        else {
+         $("#finalArticle").text("The final article is: " + object.destinations[0].title)
+        }
           });
 
      });
