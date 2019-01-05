@@ -53,6 +53,22 @@ module.exports = function(db, gameBuilder) {
         destinations: step.destinations,
         clues: step.clues
       }];
+    },
+
+    async checkCapture(gameId, articleId, suspectId) {
+
+      const game = await db.loadGame(gameId);
+      if (!game) return ["The specified game doesn't exist"];
+
+      const lastId = game.steps[game.steps.length - 1].pageid.toString();
+
+      // console.log("article should be " + lastId);
+      if (articleId !== lastId) return ["The suspect isn't here"];
+
+      if (suspectId !== game.suspect.pageid.toString()) return [null, {message: "Your warrant was for the wrong person"}];
+
+      return [null, {message: `You caught the suspect!\n(game ${gameId}, article ${articleId}, suspect ${suspectId}`}];
+
     }
 
   };

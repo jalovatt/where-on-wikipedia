@@ -27,7 +27,20 @@ module.exports = function(helper) {
     },
 
     async getCapture(req, res, next) {
-      res.json({query: "You found GET /capture"});
+
+      const gameId = req.params.gameId;
+      const articleId = req.params.articleId;
+      const suspectId = req.params.suspectId;
+
+      const [err, result] = await helper.checkCapture(gameId, articleId, suspectId);
+
+      if (err) {
+        res.status(500)
+          .json({error: err});
+      } else {
+        res.json(result);
+      }
+
     }
 
   };
