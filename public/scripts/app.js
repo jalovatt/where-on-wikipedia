@@ -67,6 +67,10 @@ $(document).ready(function(){
           // console.log(object.destinations[0])
 
           $("#destResult").text("Article number 1: " + object.destinations[0])
+          $("#destResult1").text("Article number 2: " + object.destinations[1])
+          $("#destResult2").text("Article number 3: " + object.destinations[2])
+          $("#destResult3").text("Article number 4: " + object.destinations[3])
+          $("#destResult4").text("Article number 5: " + object.destinations[4])
           // console.log(object.destinations)
 
           });
@@ -80,6 +84,11 @@ $(document).ready(function(){
           console.log(object)
           console.log(object.pageid)
           console.log(object.clues)
+          $("#destResult").text("Article number 1: " + object.destinations[0])
+          $("#destResult1").text("Article number 2: " + object.destinations[1])
+          $("#destResult2").text("Article number 3: " + object.destinations[2])
+          $("#destResult3").text("Article number 4: " + object.destinations[3])
+          $("#destResult4").text("Article number 5: " + object.destinations[4])
           });
 
      });
@@ -91,6 +100,11 @@ $(document).ready(function(){
           console.log(object)
           console.log(object.pageid)
           console.log(object.clues)
+          $("#destResult").text("Article number 1: " + object.destinations[0])
+          $("#destResult1").text("Article number 2: " + object.destinations[1])
+          $("#destResult2").text("Article number 3: " + object.destinations[2])
+          $("#destResult3").text("Article number 4: " + object.destinations[3])
+          $("#destResult4").text("Article number 5: " + object.destinations[4])
           });
 
      });
@@ -102,6 +116,11 @@ $(document).ready(function(){
           console.log(object)
           console.log(object.pageid)
           console.log(object.clues)
+          $("#destResult").text("Article number 1: " + object.destinations[0])
+          $("#destResult1").text("Article number 2: " + object.destinations[1])
+          $("#destResult2").text("Article number 3: " + object.destinations[2])
+          $("#destResult3").text("Article number 4: " + object.destinations[3])
+          $("#destResult4").text("Article number 5: " + object.destinations[4])
           });
 
      });
@@ -110,9 +129,12 @@ $(document).ready(function(){
 
         $.getJSON("/game/" + obj.gameid + "/travel/" + obj.destinations[4].title, function(res){
            let object = res;
-           console.log(object)
-           console.log(object.pageid)
            console.log(object.clues)
+          $("#destResult").text("Article number 1: " + object.destinations[0])
+          $("#destResult1").text("Article number 2: " + object.destinations[1])
+          $("#destResult2").text("Article number 3: " + object.destinations[2])
+          $("#destResult3").text("Article number 4: " + object.destinations[3])
+          $("#destResult4").text("Article number 5: " + object.destinations[4])
           });
 
      });
