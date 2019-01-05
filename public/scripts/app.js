@@ -4,8 +4,6 @@ $(document).ready(function(){
   $("#hide").removeClass("hidden")
     $.getJSON("/game/new/", function(result){
       let obj = result;
-      console.log(obj)
-      console.log(obj.gameid)
       Object.keys(obj).forEach(function(key, index) {
 
            $('#wiki-content').attr('src', obj.url); //button for starting game
@@ -61,9 +59,11 @@ $(document).ready(function(){
 
         if (object.deadend == true){
           $("#finalArticle").text("The article you're looking for isn't here!")
+          console.log(object.clues)
         }
         else {
-         $("#finalArticle").text("The final article is: " + object.destinations[0].title)
+         $("#finalArticle").text("The suspect is hiding in: " + object.destinations[0].title)
+         console.log(object.clues)
         }
           });
 
@@ -76,9 +76,11 @@ $(document).ready(function(){
 
         if (object.deadend == true){
           $("#finalArticle").text("The article you're looking for isn't here!")
+          console.log(object.clues)
         }
         else {
-         $("#finalArticle").text("The final article is: " + object.destinations[0].title)
+         $("#finalArticle").text("The suspect is hiding in: " + object.destinations[0].title)
+         console.log(object.clues)
         }
           });
 
@@ -91,9 +93,11 @@ $(document).ready(function(){
 
         if (object.deadend == true){
           $("#finalArticle").text("The article you're looking for isn't here!")
+          console.log(object.clues)
         }
         else {
-         $("#finalArticle").text("The final article is: " + object.destinations[0].title)
+         $("#finalArticle").text("The suspect is hiding in: " + object.destinations[0].title)
+         console.log(object.clues)
         }
           });
 
@@ -106,9 +110,11 @@ $(document).ready(function(){
 
         if (object.deadend == true){
           $("#finalArticle").text("The article you're looking for isn't here!")
+          console.log(object.clues)
         }
         else {
-         $("#finalArticle").text("The article is: " + object.destinations[0].title)
+         $("#finalArticle").text("The suspect is hiding in: " + object.destinations[0].title)
+         console.log(object.clues)
         }
           });
 
@@ -121,9 +127,11 @@ $(document).ready(function(){
 
         if (object.deadend == true){
           $("#finalArticle").text("The article you're looking for isn't here!")
+          console.log(object.clues)
         }
         else {
-         $("#finalArticle").text("The final article is: " + object.destinations[0].title)
+         $("#finalArticle").text("The suspect is hiding in: " + object.destinations[0].title)
+         console.log(object.clues)
         }
           });
 
