@@ -6,11 +6,10 @@ const request = require("request");
 const wiki = require("../wiki-api/wiki")(request);
 const gameBuilder = require("../helpers/game-builder")(wiki);
 
-// Using this for our test queries:
-// https://en.wikipedia.org/wiki/Desert_Rat_Scrap_Book
-const articleId = 11263477;
-
 describe("Article processing", () => {
+
+  // https://en.wikipedia.org/wiki/Desert_Rat_Scrap_Book
+  const articleId = 11263477;
 
   let article;
   before((done) => {
@@ -24,7 +23,7 @@ describe("Article processing", () => {
       });
   });
 
-  describe("Metadata", () => {
+  xdescribe("Metadata", () => {
     it("should have a URL to the article", () => {
       assert.exists(article.fullurl);
     });
@@ -43,7 +42,7 @@ describe("Article processing", () => {
 
   });
 
-  describe("Random functions", () => {
+  xdescribe("Random functions", () => {
 
     it("should return a random article link found on a given page", () => {
       const rand = gameBuilder.getRandomLinkFrom(article);
@@ -59,63 +58,7 @@ describe("Article processing", () => {
       const rand = gameBuilder.getRandomCategory(article);
       assert.exists(article.categories.some((cat) => cat === rand));
     });
-  });
 
-  describe("Useability\n\t(If these fail, check that each test's article still fits the criteria)", () => {
-
-    async function testUseability(id, expectingArticle) {
-
-      const article = await wiki.getArticleById(id);
-      const useable = await gameBuilder.isUseableArticle(article);
-
-      if (expectingArticle) {
-        assert.isOk(useable);
-      } else {
-        assert.isNotOk(useable);
-      }
-
-    }
-
-    it("should return false for an article with no links", async () => {
-
-      // https://en.wikipedia.org/wiki/Special:DeadendPages
-      // https://en.wikipedia.org/wiki/Child_bereavement (no links as of Dec. 2018)
-      await testUseability(55307463, false);
-
-    });
-
-    it("should return false for an article with no links to it", async () => {
-
-      // https://en.wikipedia.org/wiki/Category:Orphaned_articles
-      // Ronan Carroll (no links to it as of Dec. 2018)
-      await testUseability(31940707, false);
-
-    });
-
-    it("should return false for an article with no categories", async () => {
-
-      // University of Mendoza
-      await testUseability(27342618, false);
-
-    });
-
-    it("should return the article for an article with links, links to it, and categories", async () => {
-
-      // Jenner Township, Somerset County, Pennsylvania
-      testUseability(133795, true);
-
-    });
-
-  });
-
-  xdescribe("Pick a suspect", () => {
-
-    it("Should return a random suspect", (done) => {
-
-    });
-
-    // Generating a suspect should return a list of clues pertaining to them,
-    // which will be randomly given in place of article clues
   });
 
   // xdescribe("Generating clues", () => {
@@ -135,7 +78,92 @@ describe("Article processing", () => {
 
 });
 
-describe("Generating a game", () => {
+xdescribe("Useability\n\t(If these fail, check that each test's article still fits the criteria)", () => {
+
+  async function testUseability(id, expectingArticle) {
+
+    const article = await wiki.getArticleById(id);
+    const useable = await gameBuilder.isUseableArticle(article);
+
+    if (expectingArticle) {
+      if (!useable || !useable.title) {
+        console.log(`\t\tuseability test failed for article ${id}`);
+      }
+      assert.isOk(useable);
+    } else {
+      if (useable && useable.title) {
+        console.log(`\t\tuseability test failed for article ${id}`);
+      }
+      assert.isNotOk(useable);
+    }
+
+  }
+
+  it("should return false for an article with no links", async () => {
+
+    // https://en.wikipedia.org/wiki/Special:DeadendPages
+    // https://en.wikipedia.org/wiki/Child_bereavement (no links as of Dec. 2018)
+    await testUseability(55307463, false);
+
+  });
+
+  it("should return false for an article with no links to it", async () => {
+
+    // https://en.wikipedia.org/wiki/Category:Orphaned_articles
+    // Ronan Carroll (no links to it as of Dec. 2018)
+    await testUseability(31940707, false);
+
+  });
+
+  it("should return false for an article with no categories", async () => {
+
+    // University of Mendoza
+    await testUseability(27342618, false);
+
+  });
+
+  it("should return the article for an article with links, links to it, and categories", async () => {
+
+    // Basketball
+    testUseability(3921, true);
+
+  });
+
+});
+
+describe("Duplicate filtering\n\t(If these fail, check that each test's article still fits the criteria)", () => {
+
+  // 4180746 - Victoria Golf Club - Only has six links (Jan. 2019)
+  it("should not return duplicate destinations", async () => {
+
+    const article = await wiki.getArticleById(4180746);
+    const destinations = await gameBuilder.addDestinations(article);
+
+    console.log(destinations);
+
+    const duplicates = destinations.some((dest, idx) => {
+      const first = destinations.findIndex((e) => e.title === dest.title);
+      return first !== idx;
+    });
+
+    console.log(duplicates);
+
+    assert.isFalse(duplicates);
+  });
+
+});
+
+xdescribe("Pick a suspect", () => {
+
+  it("Should return a random suspect", (done) => {
+
+  });
+
+  // Generating a suspect should return a list of clues pertaining to them,
+  // which will be randomly given in place of article clues
+});
+
+xdescribe("Generating a game", () => {
 
   // Get a mystery
   let game = {};

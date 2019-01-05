@@ -49,10 +49,13 @@ module.exports = function(wiki) {
       return (
         article.links &&
         article.links.length &&
+        article.links.length >= 5 &&
         article.linkshere &&
         article.linkshere.length &&
+        article.linkshere.length >= 3 &&
         article.categories &&
-        article.categories.length
+        article.categories.length &&
+        article.categories.length >= 3
       ) && article;
     },
 
@@ -138,6 +141,10 @@ module.exports = function(wiki) {
       return arr.indexOf(val) > -1;
     },
 
+    destinationExists(val, arr) {
+      return arr.find((dest) => dest.title === val);
+    },
+
     generateNewArticleClue(article, clueArr) {
       let clue;
       do {
@@ -184,7 +191,7 @@ module.exports = function(wiki) {
       let title;
       do {
         title = this.getRandomLinkFrom(article);
-      } while (this.existsInArray(title, dests));
+      } while (this.destinationExists(title, dests));
 
       const id = await wiki.getArticleIdFromTitle(title);
 
@@ -193,8 +200,11 @@ module.exports = function(wiki) {
 
     async addDestinations(article, include) {
 
-      const includeId = await wiki.getArticleIdFromTitle(include);
-      const dests = [{id: includeId, title: include}];
+      const dests = [];
+      if (include) {
+        const includeId = await wiki.getArticleIdFromTitle(include);
+        dests.push({id: includeId, title: include});
+      }
 
       while (dests.length < 5) {
         const dest = await this.generateNewDestination(article, dests);
