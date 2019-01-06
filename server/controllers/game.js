@@ -13,6 +13,17 @@ module.exports = function(helper) {
       }
     },
 
+    async getExisting(req, res, next) {
+      const [err, step] = await helper.startGame(req.params.gameId);
+
+      if (err) {
+        res.status(500)
+          .json({error: err});
+      } else {
+        res.json(step);
+      }
+    },
+
     async getTravel(req, res, next) {
       const gameId = req.params.gameId;
       const articleId = req.params.articleId;
