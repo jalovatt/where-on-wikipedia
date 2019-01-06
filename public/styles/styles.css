@@ -26,6 +26,10 @@ button {
   display: inline-block;
 }
 
+i {
+  pointer-events: none;
+}
+
 .main-content {
     position: absolute;
     left: calc((100vw - 1360px) / 2);
@@ -253,7 +257,7 @@ button {
 }
 
 /* Button glow */
-.metal.button:active {
+.metal.button.active {
 color: hsl(210, 100%, 40%);
 text-shadow:
   hsla(210,100%,20%,.3) 0 -1px 0,
