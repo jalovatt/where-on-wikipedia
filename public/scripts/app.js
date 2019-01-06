@@ -1,16 +1,21 @@
 $(document).ready(function(){
 
   function populateDestinations(obj) {
+    // console.log(obj)
+
 
     if (obj.deadend == true){
-      $("#destResult").text(obj.destinations[0]);
-      $("#destResult").removeAttr("href");
+      console.log("nigger")
+    // console.log(obj.deadend)
+      $("#destResult0").text(obj.destinations[0]);
+      $("#destResult0").removeAttr("href");
       $("#destResult1").empty();
       $("#destResult2").empty();
       $("#destResult3").empty();
       $("#destResult4").empty();
     }
     else {
+      console.log("cunt")
       $("#destResult0").text("Article number 1: " + obj.destinations[0].title);
       $("#destResult1").text("Article number 2: " + obj.destinations[1].title);
       $("#destResult2").text("Article number 3: " + obj.destinations[2].title);
@@ -56,6 +61,7 @@ $(document).ready(function(){
     $("#finalArticle").empty();
 
     populateDestinations(obj);
+    // console.log(obj)
 
     var integerCount = 0;
 
@@ -71,10 +77,13 @@ $(document).ready(function(){
     $("#btnSun2").click(function(){
       $("#finalArticle").empty();
       populateDestinations(obj);
+      console.log(obj)
     });
 
     function travelTo(gameId, articleId) {
       $.getJSON("/game/" + gameId + "/travel/" + articleId, populateDestinations);
+
+      console.log(articleId)
     }
 
     $("#destResult0").click( function() { travelTo(obj.gameid, obj.destinations[0].id);});
