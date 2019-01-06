@@ -33,57 +33,60 @@
 
   <main class="main-content carbon">
 
+    <div class="title">
+        <span class="title-where-on">where on</span>
+        <span class="title-wikipedia">&#xE02F;ikipediA</span>
+    </div>
+
     <article class="wiki screen">
       <div class="glass screen-overlay"></div>
-        <iframe class="screen-content" id="wiki-content" name="name"></iframe>
+        <iframe class="screen-content" id="wiki-content" name="wikiframe"></iframe>
         <div class="screen-bg metal linear"></div>
       <div class="screen-glow"></div>
     </article>
 
-    <div class="title">
-      <span class="title-where-on">where on</span>
-      <span class="title-wikipedia">&#xE02F;ikipediA</span>
-    </div>
-
     <article class="game screen">
-
       <div class="glass screen-overlay"></div>
 
       <section class="screen-content id="game-content">
-          <h6>The suspect is hiding in 1 of 5 articles listed below. Use the clues to track them down</h1>
-            <!-- <div class="button-container"> -->
-              <!--  <button class="metal radial"><i class="fab fa-wikipedia-w"></i></button>
-              <button class="metal radial"><i class="fas fa-search"></i></button>
-              <button class="metal radial"><i class="fas fa-running"></i></button>
-              <button class="metal radial"><i class="fas fa-bars"></i></button> -->
-            <!-- </div> -->
-      <!--       <script type="text/javascript" src="/scripts/app.js">
-              document.getElementById("wiki-content").setAttribute("src","https://en.m.wikipedia.org/wiki/?curid="+pageId)
-            </script> -->
 
-          <button id="game" >start game </button>
-            <div><h6 id="resultJson"><div id="hide" class="hidden"><i class="fa fa-refresh fa-spin"></i>Loading</div></h5></div>
+        <div id="tab-travel" class="tab hidden">
+          <button id="btnSun2"">articles</button>
+          <br></br>
+          <a href=""id="destResult0" target="wikiframe"></a>
+          <br></br>
+          <a href=""id="destResult1" target="wikiframe"></a>
+          <br></br>
+          <a href=""id="destResult2" target="wikiframe"></a>
+          <br></br>
+          <a href=""id="destResult3" target="wikiframe"></a>
+          <br></br>
+          <a href=""id="destResult4" target="wikiframe"></a>
+          <br></br>
+          <div id="finalArticle"></div>
+        </div>
 
-
+        <div id="tab-search" class="tab hidden">
           <button id="btnSun"">get a clue</button>
             <br></br>
               <div id="clueResult"></div>
             <br></br>
+        </div>
 
+        <div id="tab-suspect" class="tab hidden">
+          The suspect tab
+        </div>
 
-          <button id="btnSun2"">articles</button>
-            <br></br>
-              <a href=""id="destResult" target="name"></a>
-            <br></br>
-              <a href=""id="destResult1" target="name"></a>
-            <br></br>
-              <a href=""id="destResult2" target="name"></a>
-            <br></br>
-              <a href=""id="destResult3" target="name"></a>
-            <br></br>
-              <a href=""id="destResult4" target="name"></a>
-            <br></br>
-              <div id="finalArticle"></div>
+        <div id="tab-menu" class="tab">
+          <button id="game" >start game </button>
+          <button id="game-example" >example game</button>
+          <div><h6 id="resultJson"><div id="hide" class="hidden"><i class="fa fa-refresh fa-spin"></i>Loading</div></h5></div>
+        </div>
+
+        <div id="tab-help" class="tab hidden">
+          The help tab
+        </div>
+
       </section>
 
       <div class="screen-bg metal linear"></div>
@@ -91,11 +94,11 @@
     </article>
 
     <div class="button-container">
-      <button class="metal button radial"><i class="fas fa-plane"></i></button>
-      <button class="metal button radial"><i class="fas fa-search"></i></button>
-      <button class="metal button radial"><i class="fas fa-running"></i></button>
-      <button class="metal button radial"><i class="fas fa-bars"></i></button>
-      <button class="metal button radial"><i class="fas fa-question"></i></button>
+      <button id="btn-travel" class="metal button radial"><i class="fas fa-plane"></i></button>
+      <button id="btn-search" class="metal button radial"><i class="fas fa-search"></i></button>
+      <button id="btn-suspect" class="metal button radial"><i class="fas fa-running"></i></button>
+      <button id="btn-menu" class="metal button radial active"><i class="fas fa-bars"></i></button>
+      <button id="btn-help" class="metal button radial"><i class="fas fa-question"></i></button>
     </div>
   </main>
 

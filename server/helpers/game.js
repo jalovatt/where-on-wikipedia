@@ -1,6 +1,19 @@
 module.exports = function(db, gameBuilder) {
   const exampleGameId = "example";
 
+  function stepToJSON(gameId, step) {
+
+    return [null, {
+      gameid: gameId,
+      pageid: step.pageid,
+      title: step.title,
+      url: step.canonicalurl.replace("en.", "en.m."),
+      destinations: step.destinations,
+      clues: step.clues
+    }];
+
+  }
+
   return {
 
     async createGame() {
@@ -11,6 +24,13 @@ module.exports = function(db, gameBuilder) {
       return (err) ? [err] : [null, game];
     },
 
+    async loadGame(gameId) {
+
+      const game = await db.loadGame(gameId);
+
+      return (!game) ? ["Error loading the specified game"] : [null, game];
+    },
+
     async newGame() {
 
       const [err, game] = await this.createGame();
@@ -18,14 +38,18 @@ module.exports = function(db, gameBuilder) {
 
       const step = game.steps[0];
 
-      return [null, {
-        gameid: game["_id"],
-        pageid: step.pageid,
-        title: step.title,
-        url: step.canonicalurl.replace("en.", "en.m."),
-        destinations: step.destinations,
-        clues: step.clues
-      }];
+      return stepToJSON(game["_id"], step);
+
+    },
+
+    async startGame(gameId) {
+
+      const [err, game] = await this.loadGame(gameId);
+      if (err) return [err];
+
+      const step = game.steps[0];
+
+      return stepToJSON(game["_id"], step);
 
     },
 
@@ -45,14 +69,7 @@ module.exports = function(db, gameBuilder) {
         deadend: true
       }];
 
-      return [null, {
-        gameid: gameId,
-        pageid: articleId,
-        title: step.title,
-        url: step.canonicalurl.replace("en.", "en.m."),
-        destinations: step.destinations,
-        clues: step.clues
-      }];
+      return stepToJSON(gameId, step);
     },
 
     async checkCapture(gameId, articleId, suspectId) {

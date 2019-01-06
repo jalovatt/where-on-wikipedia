@@ -10,4 +10,6 @@ module.exports = function(router, controllers) {
                               controllers.game.getTravel);
   router.get("/game/:gameId/capture/:articleId/:suspectId",
                               controllers.game.getCapture);
+  router.get("/game/:gameId",
+                              controllers.game.getExisting);
 };
