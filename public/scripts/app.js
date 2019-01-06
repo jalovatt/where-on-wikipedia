@@ -5,8 +5,8 @@ $(document).ready(function(){
 
 
     if (obj.deadend == true){
-      console.log("nigger")
-    // console.log(obj.deadend)
+
+
       $("#destResult0").text(obj.destinations[0]);
       $("#destResult0").removeAttr("href");
       $("#destResult1").empty();
@@ -15,7 +15,7 @@ $(document).ready(function(){
       $("#destResult4").empty();
     }
     else {
-      console.log("cunt")
+
       $("#destResult0").text("Article number 1: " + obj.destinations[0].title);
       $("#destResult1").text("Article number 2: " + obj.destinations[1].title);
       $("#destResult2").text("Article number 3: " + obj.destinations[2].title);
