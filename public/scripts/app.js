@@ -5,11 +5,13 @@ $(document).ready(function(){
 
   }
 
+  function checkCapture(gameId, articleId, suspectId) {
+    $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + "441588");
+  }
+
   function populateDestinations(obj) {
 
     console.log("populating");
-
-    $("#clueResults").empty();
 
     if (obj.deadend){
 
@@ -19,6 +21,7 @@ $(document).ready(function(){
       $("#destResult2").empty();
       $("#destResult3").empty();
       $("#destResult4").empty();
+      $("#clueResult").empty();
     }
     else {
 
@@ -32,30 +35,27 @@ $(document).ready(function(){
 
       console.log(obj);
 
-      var integerCount = 0;
+      var integerCount2 = 0;
 
       $("#btn-clues").click(function(){
+        $("#clueResult").text("Clue number " + (integerCount2 + 1) + ": " + obj.clues[integerCount2]); //button for rendering clues
+        console.log(obj.clues[integerCount2[0]]);
+        integerCount2 ++;
 
-        if (integerCount > 4) return;
-
-        const clue = obj.clues[integerCount];
-
-        if (!clue) return;
-
-        const clueElement = '<li class="clue">' + clue + "</li>";
-
-        $("#clueResults").append(clueElement);
-        if (clue.match("The suspect is")) {
-          $("#suspectClues").append(clueElement);
+        if (integerCount2 > 4){
+          integerCount2 = 0;
         }
-
-        integerCount ++;
-
       });
     }
 
-    if (obj.finalstep == true) {
+    if (!obj.finalstep) {
+      console.log("no success");
+    }
+
+    if (obj.finalstep === true) {
       console.log("success");
+      checkCapture(obj.gameid, obj.pageid, 441588)
+      console.log(obj)
     }
   }
 
@@ -83,7 +83,7 @@ $(document).ready(function(){
     $("#wiki-content").attr("src", obj.url); //button for starting game
     $("#resultJson").attr("href", obj.url);
     $("#resultJson").text("Starting Article: " + obj.title);
-    $("#clueResults").empty();
+    $("#clueResult").empty();
     $("#destResult0").empty();
     $("#destResult1").empty();
     $("#destResult2").empty();
@@ -92,20 +92,18 @@ $(document).ready(function(){
     $("#finalArticle").empty();
 
     populateDestinations(obj);
-    console.log(obj);
 
     var integerCount = 0;
 
-    // $("#btn-clues").click(function(){
+    $("#btn-clues").click(function(){
+      $("#clueResult").text("Clue number " + (integerCount + 1) + ": " + obj.clues[integerCount]); //button for rendering clues
+      console.log(obj.clues[integerCount[0]]);
+      integerCount ++;
 
-    //   if (integerCount > 4) return;
-
-    //   $("#clueResults").append('<li class="clue">' + obj.clues[integerCount] + "</li>");
-    //   // $("#clueResults").text("Clue number " + (integerCount + 1) + ": " + obj.clues[integerCount]); //button for rendering clues
-    //   // console.log(obj.clues[integerCount[0]]);
-    //   integerCount ++;
-
-    // });
+      if (integerCount > 4){
+        integerCount = 0;
+      }
+    });
 
     // $("#btnSun2").click(function(){
     //   $("#finalArticle").empty();
