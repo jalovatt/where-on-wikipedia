@@ -225,6 +225,8 @@ module.exports = function(wiki) {
 
       }
 
+      steps[i].destinations = await this.addDestinations(steps[i]);
+      steps[steps.length - 1].clues = ["Keep your eyes peeled - the thief is nearby!"];
       steps[steps.length - 1].finalStep = true;
 
       return steps;

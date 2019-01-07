@@ -65,8 +65,8 @@ module.exports = function(db, gameBuilder) {
       if (!step.finalstep && (!step || !step.clues)) return [null, {
         gameid: gameId,
         pageid: articleId,
-        clues: Array(5).fill("Nobody seems to know what you're talking about"),
-        destinations: Array(5).fill("Nobody knows where the suspect might have gone"),
+        clues: ["Nobody seems to know what you're talking about"],
+        destinations: ["Nobody knows where the suspect might have gone"],
         deadend: true
       }];
 
