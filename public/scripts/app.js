@@ -39,7 +39,7 @@ $(document).ready(function(){
       $("#destResult3").off("click").click( function() { travelTo(obj.gameid, obj.destinations[3].id);});
       $("#destResult4").off("click").click( function() { travelTo(obj.gameid, obj.destinations[4].id);});
 
-      console.log(obj.clues)
+      console.log(obj)
 
       var integerCount2 = 0;
 
@@ -52,6 +52,10 @@ $(document).ready(function(){
           integerCount2 = 0;
         }
       });
+    }
+
+    if (obj.finalstep == true) {
+      console.log('success')
     }
   }
 
@@ -88,7 +92,7 @@ $(document).ready(function(){
     $("#finalArticle").empty();
 
     populateDestinations(obj);
-    console.log(obj.clues)
+    console.log(obj)
 
     var integerCount = 0;
 
