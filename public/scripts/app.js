@@ -43,7 +43,7 @@ $(document).ready(function(){
 
       var integerCount2 = 0;
 
-      $("#btnSun").click(function(){
+      $("#btn-clues").click(function(){
         $("#clueResult").text("Clue number " + (integerCount2 + 1) + ": " + obj.clues[integerCount2]); //button for rendering clues
         console.log(obj.clues[integerCount2[0]])
         integerCount2 ++;
@@ -96,7 +96,7 @@ $(document).ready(function(){
 
     var integerCount = 0;
 
-    $("#btnSun").click(function(){
+    $("#btn-clues").click(function(){
       $("#clueResult").text("Clue number " + (integerCount + 1) + ": " + obj.clues[integerCount]); //button for rendering clues
       console.log(obj.clues[integerCount[0]])
       integerCount ++;
@@ -106,11 +106,11 @@ $(document).ready(function(){
       }
     });
 
-    $("#btnSun2").click(function(){
-      $("#finalArticle").empty();
-      populateDestinations(obj);
-      // console.log(obj)
-    });
+    // $("#btnSun2").click(function(){
+    //   $("#finalArticle").empty();
+    //   populateDestinations(obj);
+    //   // console.log(obj)
+    // });
 
 
 

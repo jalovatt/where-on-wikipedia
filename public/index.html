@@ -51,42 +51,38 @@
       <section class="screen-content screen-content-on" id="game-content">
 
         <div id="tab-travel" class="tab hidden">
-          <h1>Destinations</h1>
-          <button id="btnSun2"">articles</button>
+          <h1>possible destinations</h1>
+          <!-- <button id="btnSun2"">articles</button> -->
           <!-- <br></br> -->
-          <h4><a href=""id="destResult0" target="wikiframe"></a></h4>
-          <!-- <br></br> -->
-          <h4><a href=""id="destResult1" target="wikiframe"></a></h4>
-          <!-- <br></br> -->
-          <h4><a href=""id="destResult2" target="wikiframe"></a></h4>
-          <!-- <br></br> -->
-          <h4><a href=""id="destResult3" target="wikiframe"></a></h4>
-          <!-- <br></br> -->
-          <h4><a href=""id="destResult4" target="wikiframe"></a></h4>
+          <h4><a href="" id="destResult0" target="wikiframe"></a></h4>
+          <h4><a href="" id="destResult1" target="wikiframe"></a></h4>
+          <h4><a href="" id="destResult2" target="wikiframe"></a></h4>
+          <h4><a href="" id="destResult3" target="wikiframe"></a></h4>
+          <h4><a href="" id="destResult4" target="wikiframe"></a></h4>
           <!-- <br></br> -->
           <div id="finalArticle"></div>
         </div>
 
         <div id="tab-search" class="tab hidden">
-          <h1>Search</h1>
-          <button id="btnSun"">get a clue</button>
+          <h1>search for clues</h1>
+          <button id="btn-clues"">get a clue</button>
             <br></br>
-              <div id="clueResult"></div>
+              <h5 id="clueResult"></h5>
             <br></br>
         </div>
 
         <div id="tab-suspect" class="tab hidden">
-          <h1>Suspect</h1>
+          <h1>identify a suspect</h1>
         </div>
 
         <div id="tab-menu" class="tab">
           <button id="game" >start game </button>
           <button id="game-example" >example game</button>
-          <div><h6 id="resultJson"><div id="hide" class="hidden"><i class="fa fa-refresh fa-spin"></i>Loading</div></h5></div>
+          <div><h6 id="resultJson"><div id="hide" class="hidden"><i class="fa fa-refresh fa-spin"></i> Loading</div></h5></div>
         </div>
 
         <div id="tab-help" class="tab hidden">
-          The help tab
+          <h1>help</h1>
         </div>
 
       </section>
@@ -96,11 +92,11 @@
     </article>
 
     <div class="button-container">
-      <button id="btn-travel" class="metal button radial"><i class="fas fa-plane"></i></button>
-      <button id="btn-search" class="metal button radial"><i class="fas fa-search"></i></button>
-      <button id="btn-suspect" class="metal button radial"><i class="fas fa-running"></i></button>
-      <button id="btn-menu" class="metal button radial active"><i class="fas fa-bars"></i></button>
-      <button id="btn-help" class="metal button radial"><i class="fas fa-question"></i></button>
+      <button id="btn-travel" class="metal button radial" title="Travel"><i class="fas fa-plane"></i></button>
+      <button id="btn-search" class="metal button radial" title="Search"><i class="fas fa-search"></i></button>
+      <button id="btn-suspect" class="metal button radial" title="Suspect"><i class="fas fa-running"></i></button>
+      <button id="btn-menu" class="metal button radial active" title="Menu"><i class="fas fa-bars"></i></button>
+      <button id="btn-help" class="metal button radial" title="Help"><i class="fas fa-question"></i></button>
     </div>
   </main>
 

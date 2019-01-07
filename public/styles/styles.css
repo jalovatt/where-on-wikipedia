@@ -35,9 +35,26 @@ a, a:visited {
   color: inherit;
 }
 
+a:active, a:hover {
+  color: hsl(210, 100%, 55%);
+}
+
 h1 {
   text-align: center;
+  font-size: 3rem;
+  font-variant: small-caps;
+}
+
+h4 {
+  padding-left: 10%;
+  padding-right: 10%;
   font-size: 2rem;
+}
+
+h5 {
+  padding-left: 10%;
+  padding-right: 10%;
+  font-size: 1.2rem;
 }
 
 .main-content {
@@ -127,6 +144,8 @@ h1 {
   right: 5%;
 
   height: 64%;
+
+  color: #222222;
 }
 
 .button-container {
@@ -168,7 +187,7 @@ h1 {
 }
 
 .screen-content-on {
-  background-color: #FFFFFF;
+  background-color: #EEEEEE;
 }
 
 
