@@ -7,7 +7,7 @@ const gameBuilder = require("../server/helpers/game-builder")(wiki);
 async function writeGame(id) {
 
   console.log("Generating game, will take a few seconds...");
-  gameBuilder.logMystery = true;
+  gameBuilder.logGame = true;
   const game = await gameBuilder.generateGame(5, id);
   const path = `./temp/${game["_id"]}.json`;
   fs.writeFileSync(path, JSON.stringify(game, null, 2));

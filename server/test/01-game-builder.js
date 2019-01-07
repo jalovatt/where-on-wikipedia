@@ -169,7 +169,7 @@ xdescribe("Generating a game", () => {
   let game = {};
   before(function (done) {
     this.timeout(20000);
-    gameBuilder.logMystery = true; // Spit out progress
+    gameBuilder.logGame = true; // Spit out progress
     gameBuilder.generateGame()
       .then((result) => {
         game = result;

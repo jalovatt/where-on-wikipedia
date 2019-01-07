@@ -71,7 +71,7 @@ module.exports = function(wiki) {
         const curArticle = await wiki.getArticleById(curId);
         useable = this.isUseableArticle(curArticle);
 
-        !useable && this.logMystery && console.log("\t\t.");
+        !useable && this.logGame && console.log("\t\t.");
 
       } while (!useable);
 
@@ -231,7 +231,7 @@ module.exports = function(wiki) {
 
     async addMetadata(steps, suspect) {
 
-      this.logMystery && console.log("\tAdding destinations and clues");
+      this.logGame && console.log("\tAdding destinations and clues");
 
       for (let i = 0, l = steps.length - 1; i < l; i++) {
 
@@ -252,20 +252,20 @@ module.exports = function(wiki) {
     },
 
     async generateGameSteps(numSteps) {
-      this.logMystery && console.log("\tGenerating steps...");
+      this.logGame && console.log("\tGenerating steps...");
 
       const steps = [];
       const loot = await this.getUseableRandomArticle();
       steps.push(loot);
 
-      this.logMystery && console.log(`\t- ${loot.title}`);
+      this.logGame && console.log(`\t- ${loot.title}`);
 
       for (let i = 1; i < numSteps; i++) {
         const link = await this.findUseableLinkFrom(steps[i-1]);
         const article = await this.getArticleByTitle(link.title);
         steps.push(article);
 
-        this.logMystery && console.log(`\t- ${article.title}`);
+        this.logGame && console.log(`\t- ${article.title}`);
       }
 
       return steps;
@@ -281,7 +281,7 @@ module.exports = function(wiki) {
 
       game["_id"] = generateGameId();
 
-      this.logMystery && console.log("\tDone!");
+      this.logGame && console.log("\tDone!");
 
       return game;
     },
