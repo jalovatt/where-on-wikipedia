@@ -54,18 +54,23 @@
           <h1>possible destinations</h1>
           <!-- <button id="btnSun2"">articles</button> -->
           <!-- <br></br> -->
-          <h4><a href="" id="destResult0" target="wikiframe"></a></h4>
-          <h4><a href="" id="destResult1" target="wikiframe"></a></h4>
-          <h4><a href="" id="destResult2" target="wikiframe"></a></h4>
-          <h4><a href="" id="destResult3" target="wikiframe"></a></h4>
-          <h4><a href="" id="destResult4" target="wikiframe"></a></h4>
+          <ul>
+            <li><a href="" id="destResult0" target="wikiframe"></a></li>
+            <li><a href="" id="destResult1" target="wikiframe"></a></li>
+            <li><a href="" id="destResult2" target="wikiframe"></a></li>
+            <li><a href="" id="destResult3" target="wikiframe"></a></li>
+            <li><a href="" id="destResult4" target="wikiframe"></a></li>
+          </ul>
           <!-- <br></br> -->
           <div id="finalArticle"></div>
         </div>
 
         <div id="tab-search" class="tab hidden">
           <h1>search for clues</h1>
-          <button id="btn-clues"">get a clue</button>
+          <ul id="clueResults">
+
+          </ul>
+          <button id="btn-clues"">Search</button>
             <br></br>
               <h5 id="clueResult"></h5>
             <br></br>
@@ -74,6 +79,8 @@
         <div id="tab-suspect" class="tab hidden">
           <h1>identify a suspect</h1>
           <h2>Clues:</h2>
+          <ul id="suspectClues">
+          </ul>
           <h2>Suspect:</h2>
           <input id="suspect" type="text">
         </div>

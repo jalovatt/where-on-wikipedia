@@ -45,10 +45,10 @@ h1 {
   font-variant: small-caps;
 }
 
-h4, .screen-button {
+li, .screen-button {
   padding-left: 10%;
   padding-right: 10%;
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 h5 {

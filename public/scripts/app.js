@@ -9,6 +9,8 @@ $(document).ready(function(){
 
     console.log("populating");
 
+    $("#clueResults").empty();
+
     if (obj.deadend){
 
       $("#destResult0").text(obj.destinations[0]);
@@ -17,7 +19,6 @@ $(document).ready(function(){
       $("#destResult2").empty();
       $("#destResult3").empty();
       $("#destResult4").empty();
-      $("#clueResult").empty();
     }
     else {
 
@@ -31,16 +32,25 @@ $(document).ready(function(){
 
       console.log(obj);
 
-      var integerCount2 = 0;
+      var integerCount = 0;
 
       $("#btn-clues").click(function(){
-        $("#clueResult").text("Clue number " + (integerCount2 + 1) + ": " + obj.clues[integerCount2]); //button for rendering clues
-        console.log(obj.clues[integerCount2[0]]);
-        integerCount2 ++;
 
-        if (integerCount2 > 4){
-          integerCount2 = 0;
+        if (integerCount > 4) return;
+
+        const clue = obj.clues[integerCount];
+
+        if (!clue) return;
+
+        const clueElement = '<li class="clue">' + clue + "</li>";
+
+        $("#clueResults").append(clueElement);
+        if (clue.match("The suspect is")) {
+          $("#suspectClues").append(clueElement);
         }
+
+        integerCount ++;
+
       });
     }
 
@@ -73,7 +83,7 @@ $(document).ready(function(){
     $("#wiki-content").attr("src", obj.url); //button for starting game
     $("#resultJson").attr("href", obj.url);
     $("#resultJson").text("Starting Article: " + obj.title);
-    $("#clueResult").empty();
+    $("#clueResults").empty();
     $("#destResult0").empty();
     $("#destResult1").empty();
     $("#destResult2").empty();
@@ -86,15 +96,16 @@ $(document).ready(function(){
 
     var integerCount = 0;
 
-    $("#btn-clues").click(function(){
-      $("#clueResult").text("Clue number " + (integerCount + 1) + ": " + obj.clues[integerCount]); //button for rendering clues
-      console.log(obj.clues[integerCount[0]]);
-      integerCount ++;
+    // $("#btn-clues").click(function(){
 
-      if (integerCount > 4){
-        integerCount = 0;
-      }
-    });
+    //   if (integerCount > 4) return;
+
+    //   $("#clueResults").append('<li class="clue">' + obj.clues[integerCount] + "</li>");
+    //   // $("#clueResults").text("Clue number " + (integerCount + 1) + ": " + obj.clues[integerCount]); //button for rendering clues
+    //   // console.log(obj.clues[integerCount[0]]);
+    //   integerCount ++;
+
+    // });
 
     // $("#btnSun2").click(function(){
     //   $("#finalArticle").empty();
