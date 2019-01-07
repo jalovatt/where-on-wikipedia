@@ -194,6 +194,8 @@ h5 {
   border-radius: 4px;
   background-color: #111111;
 
+  overflow-y: auto;
+
   z-index: 997;
 }
 
