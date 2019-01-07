@@ -1,6 +1,13 @@
 $(document).ready(function(){
 
+  function travelTo(gameId, articleId) {
+    $.getJSON("/game/" + gameId + "/travel/" + articleId, populateDestinations);
+
+  }
+
   function populateDestinations(obj) {
+
+    console.log("populating");
 
     if (obj.deadend == true){
 
@@ -25,18 +32,25 @@ $(document).ready(function(){
       $("#destResult2").attr("href", "https://en.m.wikipedia.org/wiki/" + obj.destinations[2].title);
       $("#destResult3").attr("href", "https://en.m.wikipedia.org/wiki/" + obj.destinations[3].title);
       $("#destResult4").attr("href", "https://en.m.wikipedia.org/wiki/" + obj.destinations[4].title);
+
+      $("#destResult0").off("click").click( function() { travelTo(obj.gameid, obj.destinations[0].id);});
+      $("#destResult1").off("click").click( function() { travelTo(obj.gameid, obj.destinations[1].id);});
+      $("#destResult2").off("click").click( function() { travelTo(obj.gameid, obj.destinations[2].id);});
+      $("#destResult3").off("click").click( function() { travelTo(obj.gameid, obj.destinations[3].id);});
+      $("#destResult4").off("click").click( function() { travelTo(obj.gameid, obj.destinations[4].id);});
+
       console.log(obj.clues)
 
       var integerCount2 = 0;
 
       $("#btnSun").click(function(){
-      $("#clueResult").text("Clue number " + (integerCount2 + 1) + ": " + obj.clues[integerCount2]); //button for rendering clues
-      console.log(obj.clues[integerCount2[0]])
-      integerCount2 ++;
+        $("#clueResult").text("Clue number " + (integerCount2 + 1) + ": " + obj.clues[integerCount2]); //button for rendering clues
+        console.log(obj.clues[integerCount2[0]])
+        integerCount2 ++;
 
-      if (integerCount2 > 4){
-        integerCount2 = 0;
-      }
+        if (integerCount2 > 4){
+          integerCount2 = 0;
+        }
       });
     }
   }
@@ -92,16 +106,7 @@ $(document).ready(function(){
       // console.log(obj)
     });
 
-    function travelTo(gameId, articleId) {
-      $.getJSON("/game/" + gameId + "/travel/" + articleId, populateDestinations);
 
-    }
-
-    $("#destResult0").click( function() { travelTo(obj.gameid, obj.destinations[0].id);});
-    $("#destResult1").click( function() { travelTo(obj.gameid, obj.destinations[1].id);});
-    $("#destResult2").click( function() { travelTo(obj.gameid, obj.destinations[2].id);});
-    $("#destResult3").click( function() { travelTo(obj.gameid, obj.destinations[3].id);});
-    $("#destResult4").click( function() { travelTo(obj.gameid, obj.destinations[4].id);});
 
   }
 
