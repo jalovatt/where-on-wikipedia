@@ -225,6 +225,8 @@ module.exports = function(wiki) {
 
       }
 
+      steps[steps.length - 1].finalStep = true;
+
       return steps;
     },
 

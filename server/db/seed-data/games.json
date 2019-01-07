@@ -4958,7 +4958,8 @@
       "length": 4750,
       "fullurl": "https://en.wikipedia.org/wiki/GSAT-1",
       "editurl": "https://en.wikipedia.org/w/index.php?title=GSAT-1&action=edit",
-      "canonicalurl": "https://en.wikipedia.org/wiki/GSAT-1"
+      "canonicalurl": "https://en.wikipedia.org/wiki/GSAT-1",
+      "finalstep": true
     }
   ]
 }
