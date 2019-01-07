@@ -9,7 +9,7 @@ $(document).ready(function(){
 
     console.log("populating");
 
-    if (obj.deadend == true){
+    if (obj.deadend){
 
       $("#destResult0").text(obj.destinations[0]);
       $("#destResult0").removeAttr("href");
