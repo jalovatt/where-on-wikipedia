@@ -6,12 +6,13 @@ $(document).ready(function(){
   }
 
   function checkCapture(gameId, articleId, suspectId) {
-    $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + "441588");
+    $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + "441588", function(res) {console.dir(res);});
   }
 
   function populateDestinations(obj) {
 
     console.log("populating");
+    $("#clueResults").empty();
 
     if (obj.deadend){
 
@@ -21,7 +22,7 @@ $(document).ready(function(){
       $("#destResult2").empty();
       $("#destResult3").empty();
       $("#destResult4").empty();
-      $("#clueResult").empty();
+
     }
     else {
 
@@ -35,16 +36,24 @@ $(document).ready(function(){
 
       console.log(obj);
 
-      var integerCount2 = 0;
+      var clueCount = 0;
 
-      $("#btn-clues").click(function(){
-        $("#clueResult").text("Clue number " + (integerCount2 + 1) + ": " + obj.clues[integerCount2]); //button for rendering clues
-        console.log(obj.clues[integerCount2[0]]);
-        integerCount2 ++;
+      $("#btn-clues").off("click").click(function(){
 
-        if (integerCount2 > 4){
-          integerCount2 = 0;
+        if (clueCount > obj.clues.length) return;
+
+        var clue = obj.clues[clueCount];
+
+        if (!clue) return;
+
+        var clueElement = '<li class="clue">' + clue + "</li>";
+        $("#clueResults").append(clueElement); //button for rendering clues
+
+        if (clue.match("The suspect is")) {
+          $("#suspectClues").append(clueElement);
         }
+
+        clueCount ++;
       });
     }
 
@@ -55,7 +64,6 @@ $(document).ready(function(){
     if (obj.finalstep === true) {
       console.log("success");
       checkCapture(obj.gameid, obj.pageid, 441588)
-      console.log(obj)
     }
   }
 
@@ -92,26 +100,6 @@ $(document).ready(function(){
     $("#finalArticle").empty();
 
     populateDestinations(obj);
-
-    var integerCount = 0;
-
-    $("#btn-clues").click(function(){
-      $("#clueResult").text("Clue number " + (integerCount + 1) + ": " + obj.clues[integerCount]); //button for rendering clues
-      console.log(obj.clues[integerCount[0]]);
-      integerCount ++;
-
-      if (integerCount > 4){
-        integerCount = 0;
-      }
-    });
-
-    // $("#btnSun2").click(function(){
-    //   $("#finalArticle").empty();
-    //   populateDestinations(obj);
-    //   // console.log(obj)
-    // });
-
-
 
   }
 
