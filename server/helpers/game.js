@@ -10,7 +10,7 @@ module.exports = function(db, gameBuilder) {
       url: step.canonicalurl.replace("en.", "en.m."),
       destinations: step.destinations,
       clues: step.clues,
-      finalstep: step.finalstep
+      finalstep: step.finalStep
     }];
 
   }
@@ -62,7 +62,7 @@ module.exports = function(db, gameBuilder) {
       const [err, step] = await db.findStepByArticle(gameId, articleId);
       if (err) return [err];
 
-      if (!step.finalstep && (!step || !step.clues)) return [null, {
+      if (!step.finalStep && (!step || !step.clues)) return [null, {
         gameid: gameId,
         pageid: articleId,
         clues: ["Nobody seems to know what you're talking about"],

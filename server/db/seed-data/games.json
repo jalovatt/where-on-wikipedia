@@ -4959,7 +4959,32 @@
       "fullurl": "https://en.wikipedia.org/wiki/GSAT-1",
       "editurl": "https://en.wikipedia.org/w/index.php?title=GSAT-1&action=edit",
       "canonicalurl": "https://en.wikipedia.org/wiki/GSAT-1",
-      "finalstep": true
+      "destinations": [
+        {
+          "id": 5376,
+          "title": "Cladistics"
+        },
+        {
+          "id": 14579,
+          "title": "Indonesia"
+        },
+        {
+          "id": 68094,
+          "title": "Pinales"
+        },
+        {
+          "id": 2117852,
+          "title": "Middle Jurassic"
+        },
+        {
+          "id": 444064,
+          "title": "Araucaria heterophylla"
+        }
+      ],
+      "clues": [
+        "Keep your eyes peeled - the thief is nearby!"
+      ],
+      "finalStep": true
     }
   ]
 }

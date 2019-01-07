@@ -225,9 +225,10 @@ module.exports = function(wiki) {
 
       }
 
-      steps[i].destinations = await this.addDestinations(steps[i]);
-      steps[steps.length - 1].clues = ["Keep your eyes peeled - the thief is nearby!"];
-      steps[steps.length - 1].finalStep = true;
+      const last = steps.length - 1;
+      steps[last].destinations = await this.addDestinations(steps[last]);
+      steps[last].clues = ["Keep your eyes peeled - the thief is nearby!"];
+      steps[last].finalStep = true;
 
       return steps;
     },
