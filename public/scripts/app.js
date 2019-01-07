@@ -74,6 +74,8 @@ $(document).ready(function(){
 
   function initializeGame(obj) {
 
+    $(".wiki.screen").addClass("screen-on");
+    $("#wiki-content").addClass("screen-content-on");
     $("#wiki-content").attr("src", obj.url); //button for starting game
     $("#resultJson").attr("href", obj.url);
     $("#resultJson").text("Starting Article: " + obj.title);
