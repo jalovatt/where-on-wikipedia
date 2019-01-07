@@ -73,12 +73,19 @@
 
         <div id="tab-suspect" class="tab hidden">
           <h1>identify a suspect</h1>
+          <h2>Clues:</h2>
+          <h2>Suspect:</h2>
+          <input id="suspect" type="text">
         </div>
 
         <div id="tab-menu" class="tab">
-          <button id="game" >start game </button>
-          <button id="game-example" >example game</button>
-          <div><h6 id="resultJson"><div id="hide" class="hidden"><i class="fa fa-refresh fa-spin"></i> Loading</div></h5></div>
+          <button id="game" class="screen-button">Generate New Game</button>
+          <span>(Note: This will take 10-20 seconds)</span>
+          <br>
+          <button id="game-existing" class="screen-button">Play Existing Game</button><input id="game-existing-id" type="text" placeholder="Enter a game ID">
+          <button id="game-example" class="screen-button">Play Example Game</button>
+          <br>
+          <div><h4 id="resultJson"><div id="hide" class="hidden"><i class="fa fa-refresh fa-spin"></i> Loading</div></h4></div>
         </div>
 
         <div id="tab-help" class="tab hidden">

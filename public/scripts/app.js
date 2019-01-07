@@ -116,4 +116,17 @@ $(document).ready(function(){
     $.getJSON("/game/example/", initializeGame);
   });
 
+  $("#game-existing").click(function () {
+    var id = $("#game-existing-id").val();
+
+    console.log("id: " + id);
+
+    if (!id || id === "") {
+      alert("Please enter a game ID");
+    } else {
+      $("#hide").removeClass("hidden");
+      $.getJSON("/game/" + id + "/", initializeGame);
+    }
+  });
+
 });

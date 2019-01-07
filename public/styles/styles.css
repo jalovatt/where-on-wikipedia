@@ -45,7 +45,7 @@ h1 {
   font-variant: small-caps;
 }
 
-h4 {
+h4, .screen-button {
   padding-left: 10%;
   padding-right: 10%;
   font-size: 2rem;
@@ -122,6 +122,17 @@ h5 {
   font-size: 8rem;
 }
 
+.screen-button {
+  background: none;
+  border: none;
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+.screen-button:active, .screen-button:hover {
+  color: hsl(210, 100%, 55%);
+}
+
 .screen {
     position: absolute;
     top: 5%;
@@ -187,7 +198,7 @@ h5 {
 }
 
 .screen-content-on {
-  background-color: #EEEEEE;
+  background-color: white;
 }
 
 
@@ -265,7 +276,7 @@ h5 {
     inset 0 10px rgba(255,255,255,0.2),
     inset 0 10px 20px rgba(255,255,255,0.25),
     inset 0 -15px 30px rgba(0,0,0,0.3);
-  background:rgba(0,0,0,0.15);
+  background:rgba(0,0,0,0.10);
 }
 
 
