@@ -21,31 +21,21 @@ $(document).ready(function(){
     }
     else {
 
-      $("#destResult0").text("Article number 1: " + obj.destinations[0].title);
-      $("#destResult1").text("Article number 2: " + obj.destinations[1].title);
-      $("#destResult2").text("Article number 3: " + obj.destinations[2].title);
-      $("#destResult3").text("Article number 4: " + obj.destinations[3].title);
-      $("#destResult4").text("Article number 5: " + obj.destinations[4].title);
+      obj.destinations.forEach(function (dest, idx) {
+        $("#destResult" + idx)
+          .text(dest.title)
+          .attr("href", "https://en.m.wikipedia.org/wiki/" + dest.title)
+          .off("click")
+          .click( function() { travelTo(obj.gameid, dest.id);});
+      });
 
-      $("#destResult0").attr("href", "https://en.m.wikipedia.org/wiki/" + obj.destinations[0].title); //button for rendering articles
-      $("#destResult1").attr("href", "https://en.m.wikipedia.org/wiki/" + obj.destinations[1].title);
-      $("#destResult2").attr("href", "https://en.m.wikipedia.org/wiki/" + obj.destinations[2].title);
-      $("#destResult3").attr("href", "https://en.m.wikipedia.org/wiki/" + obj.destinations[3].title);
-      $("#destResult4").attr("href", "https://en.m.wikipedia.org/wiki/" + obj.destinations[4].title);
-
-      $("#destResult0").off("click").click( function() { travelTo(obj.gameid, obj.destinations[0].id);});
-      $("#destResult1").off("click").click( function() { travelTo(obj.gameid, obj.destinations[1].id);});
-      $("#destResult2").off("click").click( function() { travelTo(obj.gameid, obj.destinations[2].id);});
-      $("#destResult3").off("click").click( function() { travelTo(obj.gameid, obj.destinations[3].id);});
-      $("#destResult4").off("click").click( function() { travelTo(obj.gameid, obj.destinations[4].id);});
-
-      console.log(obj)
+      console.log(obj);
 
       var integerCount2 = 0;
 
       $("#btn-clues").click(function(){
         $("#clueResult").text("Clue number " + (integerCount2 + 1) + ": " + obj.clues[integerCount2]); //button for rendering clues
-        console.log(obj.clues[integerCount2[0]])
+        console.log(obj.clues[integerCount2[0]]);
         integerCount2 ++;
 
         if (integerCount2 > 4){
@@ -55,19 +45,19 @@ $(document).ready(function(){
     }
 
     if (obj.finalstep == true) {
-      console.log('success')
+      console.log("success");
     }
   }
 
   function showTab(event) {
-    const btn = event.target;
-    const tabId = "tab-" + btn.id.match(/btn-(.+)/)[1];
+    var btn = event.target;
+    var tabId = "tab-" + btn.id.match(/btn-(.+)/)[1];
 
     $(".button").removeClass("active");
     $(btn).addClass("active");
 
     $(".tab").addClass("hidden");
-    $(`#${tabId}`).removeClass("hidden");
+    $("#" + tabId).removeClass("hidden");
   }
 
   $("#btn-travel").click(showTab);
@@ -92,13 +82,13 @@ $(document).ready(function(){
     $("#finalArticle").empty();
 
     populateDestinations(obj);
-    console.log(obj)
+    console.log(obj);
 
     var integerCount = 0;
 
     $("#btn-clues").click(function(){
       $("#clueResult").text("Clue number " + (integerCount + 1) + ": " + obj.clues[integerCount]); //button for rendering clues
-      console.log(obj.clues[integerCount[0]])
+      console.log(obj.clues[integerCount[0]]);
       integerCount ++;
 
       if (integerCount > 4){
