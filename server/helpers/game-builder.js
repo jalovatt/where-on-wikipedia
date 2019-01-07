@@ -134,7 +134,22 @@ module.exports = function(wiki) {
     },
 
     generateSuspectClue(suspect) {
-      return this.generateArticleClue(suspect);
+      // - Article that links here
+      const linksHere = (article) => {
+        const str = "The suspect is mentioned in '%ARTICLE%'";
+        const link = this.getRandomLinkTo(article);
+        return str.replace("%ARTICLE%", link);
+      };
+
+      // - Category that this belongs to
+      const category = (article) => {
+        const str = "The suspect is listed in '%CATEGORY%'";
+        const cat = this.getRandomCategory(article);
+        return str.replace("%CATEGORY%", cat);
+      };
+
+      const clueTypes = [linksHere, category];
+      return clueTypes[randomInt(clueTypes.length)](suspect);
     },
 
     existsInArray(val, arr) {
@@ -215,6 +230,9 @@ module.exports = function(wiki) {
     },
 
     async addMetadata(steps, suspect) {
+
+      this.logMystery && console.log("\tAdding destinations and clues");
+
       for (let i = 0, l = steps.length - 1; i < l; i++) {
 
         const destinations = await this.addDestinations(steps[i], steps[i + 1].title);
@@ -262,6 +280,8 @@ module.exports = function(wiki) {
       game.steps = await this.addMetadata(steps, game.suspect);
 
       game["_id"] = generateGameId();
+
+      this.logMystery && console.log("\tDone!");
 
       return game;
     },
