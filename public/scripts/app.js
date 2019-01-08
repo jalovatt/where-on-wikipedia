@@ -3,10 +3,7 @@ $(document).ready(function(){
   function requestTravel(gameId, articleId) {
 
     // Show the modal + loading icon
-    showModal("Waiting for the server",
-      htmlFragments.loading() +
-      "<br><em>If generating a new game, this may take 10-20 seconds</em>"
-    );
+    showModal("Travelling...", htmlFragments.loading());
 
     // Send the request
     $.getJSON("/game/" + gameId + "/travel/" + articleId)

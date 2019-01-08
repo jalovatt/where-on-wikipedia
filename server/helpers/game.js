@@ -62,13 +62,21 @@ module.exports = function(db, gameBuilder) {
       const [err, step] = await db.findStepByArticle(gameId, articleId);
       if (err) return [err];
 
-      if (!step.finalStep && (!step || !step.clues)) return [null, {
-        gameid: gameId,
-        pageid: articleId,
-        clues: ["Nobody seems to know what you're talking about"],
-        destinations: ["Nobody knows where the suspect might have gone"],
-        deadend: true
-      }];
+      if (!step.finalStep && (!step || !step.clues)) {
+
+        const [err, dest] = await db.findDestinationTitle(gameId, articleId);
+        if (err) return [err];
+
+        return [null, {
+          gameid: gameId,
+          pageid: articleId,
+          title: dest.title,
+          clues: ["Nobody seems to know what you're talking about"],
+          destinations: ["Nobody knows where the suspect might have gone"],
+          deadend: true
+        }];
+
+      }
 
       return stepToJSON(gameId, step);
     },

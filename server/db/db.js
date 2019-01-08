@@ -38,6 +38,17 @@ module.exports = async function(mongo) {
       return (!step) && [null, {}] || [null, step];
     },
 
+    async findDestinationTitle(gameId, articleId) {
+      const game = await this.loadGame(gameId);
+      if (!game) return ["Couldn't find game with that ID"];
+
+      const destinations = game.steps.reduce((acc, step) => acc.concat(step.destinations), []);
+      const dest = destinations.find((dest) => dest.id.toString() === articleId);
+
+      return (dest) ? [null, dest] : ["Couldn't find a destination with that ID"];
+
+    },
+
     async findUserByEmail(email) {
       const searchEmail = email.trim().toLowerCase();
 
