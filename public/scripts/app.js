@@ -19,10 +19,13 @@ $(document).ready(function(){
 
   }
 
-  function checkCapture(gameId, articleId, suspectId) {
+  function checkCapture(gameId, articleId) {
+
+    const suspectId = 441588;
+
     $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + "441588", function(res) {
-      console.dir(res)
-      showModal("capture status", JSON.stringify(res));
+      console.dir(res);
+      showModal("capture status", JSON.stringify(res, null, 2));
     });
   }
 
@@ -73,6 +76,11 @@ $(document).ready(function(){
 
         if (clueCount > obj.clues.length) return;
 
+        if (obj.finalstep && clueCount === 1) {
+          checkCapture(obj.gameid, obj.pageid);
+          return;
+        }
+
         var clue = obj.clues[clueCount];
 
         if (!clue) return;
@@ -84,7 +92,7 @@ $(document).ready(function(){
           $("#suspectClues").append(clueElement);
         }
 
-        clueCount ++;
+        clueCount++;
       });
     }
 
@@ -94,7 +102,6 @@ $(document).ready(function(){
 
     if (obj.finalstep === true) {
       console.log("success");
-      checkCapture(obj.gameid, obj.pageid, 441588)
     }
   }
 
