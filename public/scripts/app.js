@@ -47,11 +47,21 @@ $(document).ready(function(){
       $("#destResult3").empty().addClass("hidden");
       $("#destResult4").empty().addClass("hidden");
 
+      $("#li2").addClass("hidden");
+      $("#li3").addClass("hidden");
+      $("#li4").addClass("hidden");
+      $("#li5").addClass("hidden");
+
       $("#backButton").removeClass("hidden");
       $("#backButton").text("go back");
 
       $("#backButton").click(function() {requestTravel(obj.gameid, backId)
-        console.log(backId)})
+        console.log(backId)
+        $("#li2").removeClass("hidden");
+        $("#li3").removeClass("hidden");
+        $("#li4").removeClass("hidden");
+        $("#li5").removeClass("hidden");
+      })
 
       $("#btn-clues").off("click").click(function() {
         if (clueCount === 1) return;
