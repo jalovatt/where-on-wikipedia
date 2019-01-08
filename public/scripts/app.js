@@ -31,20 +31,36 @@ $(document).ready(function(){
     console.log("populating");
     $("#clueResults").empty();
 
+    var clueCount = 0;
+
     if (obj.deadend){
 
       $("#destResult0").text(obj.destinations[0]);
       $("#destResult0").removeAttr("href");
-      $("#destResult1").empty();
-      $("#destResult2").empty();
-      $("#destResult3").empty();
-      $("#destResult4").empty();
+      $("#destResult1").empty().addClass("hidden");
+      $("#destResult2").empty().addClass("hidden");
+      $("#destResult3").empty().addClass("hidden");
+      $("#destResult4").empty().addClass("hidden");
 
-    }
-    else {
+      $("#btn-clues").off("click").click(function() {
+        if (clueCount === 1) return;
+
+        var clue = obj.clues[clueCount];
+
+        if (!clue) return;
+
+        var clueElement = htmlFragments.clue(clue);
+        $("#clueResults").append(clueElement); //button for rendering clues
+
+        clueCount ++;
+
+      });
+
+    } else {
 
       obj.destinations.forEach(function (dest, idx) {
         $("#destResult" + idx)
+          .removeClass("hidden")
           .text(dest.title)
           .attr("href", "https://en.m.wikipedia.org/wiki/" + dest.title)
           .off("click")
@@ -52,8 +68,6 @@ $(document).ready(function(){
       });
 
       console.log(obj);
-
-      var clueCount = 0;
 
       $("#btn-clues").off("click").click(function(){
 
@@ -129,12 +143,13 @@ $(document).ready(function(){
     $("#wiki-content").attr("src", obj.url); //button for starting game
     // $("#resultJson").attr("href", obj.url);
     // $("#resultJson").text("Starting Article: " + obj.title);
-    $("#clueResult").empty();
-    $("#destResult0").empty();
-    $("#destResult1").empty();
-    $("#destResult2").empty();
-    $("#destResult3").empty();
-    $("#destResult4").empty();
+    // $("#clueResults").empty();
+    // $("#destResult0").empty();
+    // $("#destResult1").empty();
+    // $("#destResult2").empty();
+    // $("#destResult3").empty();
+    // $("#destResult4").empty();
+    $("#suspectClues").empty();
     $("#finalArticle").empty();
 
     populateDestinations(obj);
