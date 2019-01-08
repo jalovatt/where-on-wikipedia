@@ -67,22 +67,22 @@ $(document).ready(function(){
     }
   }
 
-  function showTab(event) {
-    var btn = event.target;
-    var tabId = "tab-" + btn.id.match(/btn-(.+)/)[1];
+  function showTab(tab) {
+    var btnId = "#btn-" + tab;
+    var tabId = "#tab-" + tab;
 
     $(".button").removeClass("active");
-    $(btn).addClass("active");
+    $(btnId).addClass("active");
 
     $(".tab").addClass("hidden");
-    $("#" + tabId).removeClass("hidden");
+    $(tabId).removeClass("hidden");
   }
 
-  $("#btn-travel").click(showTab);
-  $("#btn-search").click(showTab);
-  $("#btn-suspect").click(showTab);
-  $("#btn-menu").click(showTab);
-  $("#btn-help").click(showTab);
+  $("#btn-travel").click(function() {showTab("travel");} );
+  $("#btn-search").click(function() {showTab("search");} );
+  $("#btn-suspect").click(function() {showTab("suspect");} );
+  $("#btn-menu").click(function() {showTab("menu");} );
+  $("#btn-help").click(function() {showTab("help");} );
 
   function initializeGame(obj) {
 
