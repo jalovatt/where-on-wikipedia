@@ -94,9 +94,10 @@ $(document).ready(function(){
 
   var htmlFragments = {
     clue(text) {return "<li class='clue'>" + text + "</li>";},
-    loading() {return "<i class='fa fa-refresh fa-spin'></i> Loading";},
-
-
+    loading() {return "<h1><i class='fa fa-refresh fa-spin'></i></h1>";},
+    newGame(json) {return "<p>Someone has stolen XXXXX. Track them down and get it back!</p>";},
+    newGameError(err) { return "<h4>Something went wrong:</h4>" +
+      "<h4>" + err + "</h4>";},
   };
 
 
@@ -137,13 +138,12 @@ $(document).ready(function(){
     $.getJSON("/game/" + id + "/")
       .done(function (json) {
         // When the request comes back, populate and show the starting message
-        initializeGame(json)
+        initializeGame(json);
 
-        showModal("Oh no!", "<p>Someone has stolen XXXXX. Track them down and get it back!</p>");
-
+        showModal("Oh no!", htmlFragments.newGame(json));
       })
       .fail(function (json) {
-        showModal("Oops!", "Something went wrong:" + JSON.stringify(json));
+        showModal("Oops!", htmlFragments.newGameError(json.responseJSON.error));
       });
 
   }
