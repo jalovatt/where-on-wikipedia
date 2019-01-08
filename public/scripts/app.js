@@ -170,7 +170,7 @@ $(document).ready(function(){
   function requestGame(id) {
 
     // Show the modal + loading icon
-    showModal("Waiting for the server",
+    showModal("waiting for the server",
       htmlFragments.loading() + "<br>" + htmlFragments.waitTime()
     );
 
