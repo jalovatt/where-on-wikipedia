@@ -136,7 +136,8 @@ $(document).ready(function(){
     newGame(json) {return "<p>Someone has stolen XXXXX. Track them down and get it back!</p>";},
     newGameError(err) { return "<h4>Something went wrong:</h4>" +
       "<h4>" + err + "</h4>";},
-    travel(title) {return "<p>You've arrived at '" + title + "'";}
+    travel(title) {return "<p>You've arrived at '" + title + "'";},
+    waitTime() {return "<em>If generating a new game, this may take 10-20 seconds</em>";},
   };
 
 
@@ -170,8 +171,7 @@ $(document).ready(function(){
 
     // Show the modal + loading icon
     showModal("Waiting for the server",
-      htmlFragments.loading() +
-      "<br><em>If generating a new game, this may take 10-20 seconds</em>"
+      htmlFragments.loading() + "<br>" + htmlFragments.waitTime()
     );
 
     // Send the request
