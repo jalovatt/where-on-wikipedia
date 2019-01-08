@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+  let backId;
+
   function requestTravel(gameId, articleId) {
 
     // Show the modal + loading icon
@@ -48,6 +50,9 @@ $(document).ready(function(){
       $("#backButton").removeClass("hidden");
       $("#backButton").text("go back");
 
+      $("#backButton").click(function() {requestTravel(obj.gameid, backId)
+        console.log(backId)})
+
       $("#btn-clues").off("click").click(function() {
         if (clueCount === 1) return;
 
@@ -63,6 +68,10 @@ $(document).ready(function(){
       });
 
     } else {
+
+      if (obj.pageid) {
+        backId = obj.pageid
+      }
 
       obj.destinations.forEach(function (dest, idx) {
         $("#destResult" + idx)
