@@ -1,7 +1,24 @@
 $(document).ready(function(){
 
-  function travelTo(gameId, articleId) {
-    $.getJSON("/game/" + gameId + "/travel/" + articleId, populateDestinations);
+  function requestTravel(gameId, articleId) {
+
+    // Show the modal + loading icon
+    showModal("Waiting for the server",
+      htmlFragments.loading() +
+      "<br><em>If generating a new game, this may take 10-20 seconds</em>"
+    );
+
+    // Send the request
+    $.getJSON("/game/" + gameId + "/travel/" + articleId)
+      .done(function (json) {
+        // When the request comes back, populate and show the starting message
+        populateDestinations(json);
+
+        showModal(null, htmlFragments.travel(json.title));
+      })
+      .fail(function (json) {
+        showModal("Oops!", htmlFragments.travelError(json.responseJSON.error));
+      });
 
   }
 
@@ -34,7 +51,7 @@ $(document).ready(function(){
           .text(dest.title)
           .attr("href", "https://en.m.wikipedia.org/wiki/" + dest.title)
           .off("click")
-          .click( function() { travelTo(obj.gameid, dest.id);});
+          .click( function() { requestTravel(obj.gameid, dest.id);});
       });
 
       console.log(obj);
@@ -98,6 +115,7 @@ $(document).ready(function(){
     newGame(json) {return "<p>Someone has stolen XXXXX. Track them down and get it back!</p>";},
     newGameError(err) { return "<h4>Something went wrong:</h4>" +
       "<h4>" + err + "</h4>";},
+    travel(title) {return "<p>You've arrived at '" + title + "'";}
   };
 
 
