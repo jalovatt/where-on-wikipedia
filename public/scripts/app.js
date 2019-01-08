@@ -6,7 +6,10 @@ $(document).ready(function(){
   }
 
   function checkCapture(gameId, articleId, suspectId) {
-    $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + "441588", function(res) {console.dir(res);});
+    $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + "441588", function(res) {
+      console.dir(res)
+      showModal("capture status", JSON.stringify(res));
+    });
   }
 
   function populateDestinations(obj) {
@@ -46,7 +49,7 @@ $(document).ready(function(){
 
         if (!clue) return;
 
-        var clueElement = '<li class="clue">' + clue + "</li>";
+        var clueElement = htmlFragments.clue(clue);
         $("#clueResults").append(clueElement); //button for rendering clues
 
         if (clue.match("The suspect is")) {
@@ -78,6 +81,25 @@ $(document).ready(function(){
     $(tabId).removeClass("hidden");
   }
 
+  // 'title' will be wrapped in an <h1>
+  // 'message' will be used as-is, so should have any necessary HTML already
+  function showModal(title, message) {
+    var modal = $("#tab-modal").empty();
+
+    if (title && title !== "") modal.append("<h1>" + title + "</h1>");
+    modal.append(message);
+
+    showTab("modal");
+  }
+
+  var htmlFragments = {
+    clue(text) {return "<li class='clue'>" + text + "</li>";},
+    loading() {return "<i class='fa fa-refresh fa-spin'></i> Loading";},
+
+
+  };
+
+
   $("#btn-travel").click(function() {showTab("travel");} );
   $("#btn-search").click(function() {showTab("search");} );
   $("#btn-suspect").click(function() {showTab("suspect");} );
@@ -89,8 +111,8 @@ $(document).ready(function(){
     $(".wiki.screen").addClass("screen-on");
     $("#wiki-content").addClass("screen-content-on");
     $("#wiki-content").attr("src", obj.url); //button for starting game
-    $("#resultJson").attr("href", obj.url);
-    $("#resultJson").text("Starting Article: " + obj.title);
+    // $("#resultJson").attr("href", obj.url);
+    // $("#resultJson").text("Starting Article: " + obj.title);
     $("#clueResult").empty();
     $("#destResult0").empty();
     $("#destResult1").empty();
@@ -103,14 +125,37 @@ $(document).ready(function(){
 
   }
 
+  function requestGame(id) {
+
+    // Show the modal + loading icon
+    showModal("Waiting for the server",
+      htmlFragments.loading() +
+      "<br><em>If generating a new game, this may take 10-20 seconds</em>"
+    );
+
+    // Send the request
+    $.getJSON("/game/" + id + "/")
+      .done(function (json) {
+        // When the request comes back, populate and show the starting message
+        initializeGame(json)
+
+        showModal("Oh no!", "<p>Someone has stolen XXXXX. Track them down and get it back!</p>");
+
+      })
+      .fail(function (json) {
+        showModal("Oops!", "Something went wrong:" + JSON.stringify(json));
+      });
+
+  }
+
   $("#game").click(function(){
-    $("#hide").removeClass("hidden");
-    $.getJSON("/game/new/", initializeGame);
+    // $("#hide").removeClass("hidden");
+    requestGame("new");
   });
 
   $("#game-example").click(function () {
-    $("#hide").removeClass("hidden");
-    $.getJSON("/game/example/", initializeGame);
+    // $("#hide").removeClass("hidden");
+    requestGame("example");
   });
 
   $("#game-existing").click(function () {
@@ -121,8 +166,8 @@ $(document).ready(function(){
     if (!id || id === "") {
       alert("Please enter a game ID");
     } else {
-      $("#hide").removeClass("hidden");
-      $.getJSON("/game/" + id + "/", initializeGame);
+      // $("#hide").removeClass("hidden");
+      requestGame(id);
     }
   });
 
