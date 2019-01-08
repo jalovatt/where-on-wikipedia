@@ -45,6 +45,9 @@ $(document).ready(function(){
       $("#destResult3").empty().addClass("hidden");
       $("#destResult4").empty().addClass("hidden");
 
+      $("#backButton").removeClass("hidden");
+      $("#backButton").text("go back");
+
       $("#btn-clues").off("click").click(function() {
         if (clueCount === 1) return;
 
