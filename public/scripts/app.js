@@ -24,13 +24,6 @@ $(document).ready(function(){
 
   }
 
-  if ($("#suspectDropdown").change()){
-    $(".sus").change(function(){
-      suspectWarrant = $('#suspectDropdown').find(":selected").val();
-      console.log(suspectWarrant);
-  })
-   };
-
   function checkCapture(gameId, articleId) {
 
 
@@ -50,8 +43,8 @@ $(document).ready(function(){
 
     if (obj.deadend){
 
-      $("#destResult0").text(obj.destinations[0]);
-      $("#destResult0").removeAttr("href");
+      $("#destResult0").text(obj.destinations[0]).removeAttr("href");
+      // $("#destResult0").removeAttr("href");
       $("#destResult1").empty();
       $("#destResult2").empty();
       $("#destResult3").empty();
@@ -89,6 +82,8 @@ $(document).ready(function(){
       });
 
     } else {
+
+      $("#backButton").addClass("hidden");
 
       if (obj.pageid) {
         backId = obj.pageid;
