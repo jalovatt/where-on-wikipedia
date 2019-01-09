@@ -51,7 +51,6 @@ module.exports = function(helper) {
       } else {
         res.json(result);
       }
-
     }
 
   };

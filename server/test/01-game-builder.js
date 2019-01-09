@@ -15,15 +15,12 @@ describe("Article processing", () => {
   before((done) => {
     wiki.getArticleById(articleId)
       .then((result) => {
-
-        // print("Article data:", result);
         article = result;
-
         done();
       });
   });
 
-  xdescribe("Metadata", () => {
+  describe("Metadata", () => {
     it("should have a URL to the article", () => {
       assert.exists(article.fullurl);
     });
@@ -42,7 +39,7 @@ describe("Article processing", () => {
 
   });
 
-  xdescribe("Random functions", () => {
+  describe("Random functions", () => {
 
     it("should return a random article link found on a given page", () => {
       const rand = gameBuilder.getRandomLinkFrom(article);
@@ -61,24 +58,9 @@ describe("Article processing", () => {
 
   });
 
-  // xdescribe("Generating clues", () => {
-
-  //   let clues;
-  //   before((done) => {
-  //     clues = queries.addClues(article);
-  //     print("Clues:", clues);
-  //     done();
-  //   });
-
-  //   it("should have three clues", () => {
-  //     assert.equal(clues.length, 3);
-  //   });
-
-  // });
-
 });
 
-xdescribe("Useability\n\t(If these fail, check that each test's article still fits the criteria)", () => {
+describe("Useability\n\t(If these fail, check that each test's article still fits the criteria)", () => {
 
   async function testUseability(id, expectingArticle) {
 
@@ -139,41 +121,29 @@ describe("Duplicate filtering\n\t(If these fail, check that each test's article 
     const article = await wiki.getArticleById(4180746);
     const destinations = await gameBuilder.addDestinations(article);
 
-    console.log(destinations);
+    // console.log(destinations);
 
     const duplicates = destinations.some((dest, idx) => {
       const first = destinations.findIndex((e) => e.title === dest.title);
       return first !== idx;
     });
 
-    console.log(duplicates);
+    // console.log(duplicates);
 
     assert.isFalse(duplicates);
   });
 
 });
 
-xdescribe("Pick a suspect", () => {
+describe("Generating a game", () => {
 
-  it("Should return a random suspect", (done) => {
-
-  });
-
-  // Generating a suspect should return a list of clues pertaining to them,
-  // which will be randomly given in place of article clues
-});
-
-xdescribe("Generating a game", () => {
-
-  // Get a mystery
   let game = {};
   before(function (done) {
-    this.timeout(20000);
+    this.timeout(20000); // Keep Mocha from complaining at how long this takes
     gameBuilder.logGame = true; // Spit out progress
     gameBuilder.generateGame()
       .then((result) => {
         game = result;
-        // print("Mystery:", mystery);
         done();
       });
   });
@@ -209,8 +179,3 @@ xdescribe("Generating a game", () => {
   });
 
 });
-
-
-function print(heading, query) {
-  console.log("\n" + heading + "\n" + JSON.stringify(query, null, 2));
-}

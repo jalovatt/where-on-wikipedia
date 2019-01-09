@@ -25,6 +25,26 @@ function generateGameId() {
   return new Date().getTime().toString(36).toUpperCase();
 }
 
+// Fisher-Yates shuffling algorithm:
+// https://bost.ocks.org/mike/shuffle/
+shuffleArray(arr) {
+  const out = [...arr];
+  let left = out.length, swap, take;
+
+  while (left) {
+
+    // Pick a remaining element…
+    take = Math.floor(Math.random() * left--);
+
+    // And swap it with the current element.
+    swap = out[left];
+    out[left] = out[take];
+    out[take] = swap;
+  }
+
+  return out;
+}
+
 module.exports = function(wiki) {
 
   return {
@@ -42,10 +62,6 @@ module.exports = function(wiki) {
     },
 
     isUseableArticle(article) {
-      // console.log("=================");
-      // console.log("IS USEABLE ARTICLE GOT:");
-      // console.log(JSON.stringify(article, null, 2));
-      // console.log("=================");
       return (
         article.links &&
         article.links.length &&
@@ -169,26 +185,6 @@ module.exports = function(wiki) {
       return clue;
     },
 
-    // Fisher-Yates shuffling algorithm:
-    // https://bost.ocks.org/mike/shuffle/
-    shuffleArray(arr) {
-      const out = [...arr];
-      let left = out.length, swap, take;
-
-      while (left) {
-
-        // Pick a remaining element…
-        take = Math.floor(Math.random() * left--);
-
-        // And swap it with the current element.
-        swap = out[left];
-        out[left] = out[take];
-        out[take] = swap;
-      }
-
-      return out;
-    },
-
     addClues(article, suspect) {
       const clues = [];
       while (clues.length < 5) {
@@ -199,7 +195,7 @@ module.exports = function(wiki) {
       (randomInt(2) === 1) && (clues[0] = this.generateSuspectClue(suspect));
       (randomInt(2) === 1) && (clues[1] = this.generateSuspectClue(suspect));
 
-      return this.shuffleArray(clues);
+      return shuffleArray(clues);
     },
 
     async generateNewDestination(article, dests) {
@@ -226,7 +222,7 @@ module.exports = function(wiki) {
         dests.push(dest);
       }
 
-      return this.shuffleArray(dests);
+      return shuffleArray(dests);
     },
 
     async addMetadata(steps, suspect) {
@@ -234,13 +230,11 @@ module.exports = function(wiki) {
       this.logGame && console.log("\tAdding destinations and clues");
 
       for (let i = 0, l = steps.length - 1; i < l; i++) {
-
         const destinations = await this.addDestinations(steps[i], steps[i + 1].title);
         steps[i].destinations = destinations;
 
         const clues = this.addClues(steps[i + 1], suspect);
         steps[i].clues = clues;
-
       }
 
       const last = steps.length - 1;
@@ -287,5 +281,4 @@ module.exports = function(wiki) {
     },
 
   };
-
 };
