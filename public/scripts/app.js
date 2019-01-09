@@ -142,7 +142,7 @@ $(document).ready(function(){
 
   function showTab(tab) {
 
-    if (!gameStarted && !(tab === "menu" || tab === "help")) return;
+    if (!gameStarted && !(tab === "menu" || tab === "help" || tab === "modal")) return;
 
     var btnId = "#btn-" + tab;
     var tabId = "#tab-" + tab;
