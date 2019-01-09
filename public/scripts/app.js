@@ -164,7 +164,7 @@ $(document).ready(function(){
   var htmlFragments = {
     clue(text) {return "<li class='clue'>" + text + "</li>";},
     loading() {return "<h1><i class='fa fa-refresh fa-spin'></i></h1>";},
-    newGame(json) {return "<p>Someone has stolen XXXXX. Track them down and get it back!</p>";},
+    newGame(json) {return "<p>Someone has stolen the article for '" + json.title + "'. Track them down and get it back before Wikipedia's database notices and the article is lost forever!</p>";},
     newGameError(err) { return "<h4>Something went wrong:</h4>" +
       "<h4>" + err + "</h4>";},
     travel(title) {return "<p>You've arrived at '" + title + "'";},
