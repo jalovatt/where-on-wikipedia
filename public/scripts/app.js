@@ -1,15 +1,8 @@
 $(document).ready(function(){
 
   let backId;
+  var suspectWarrant;
   let gameStarted = false;
-
-
-  if ($("#suspectDropdown").change()){
-    $("#suspectDropdown").change(function(){
-      var suspectWarrant = $("#suspectDropdown").find(":selected").text();
-      console.log(suspectWarrant);
-    });
-  };
 
 
   function requestTravel(gameId, articleId) {
@@ -31,13 +24,20 @@ $(document).ready(function(){
 
   }
 
+  if ($("#suspectDropdown").change()){
+    $(".sus").change(function(){
+      suspectWarrant = $('#suspectDropdown').find(":selected").val();
+      console.log(suspectWarrant);
+  })
+   };
+
   function checkCapture(gameId, articleId) {
 
-    const suspectId = 441588;
 
-    $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + "441588", function(res) {
+    $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + suspectWarrant, function(res) {
       console.dir(res);
       showModal("capture status", JSON.stringify(res, null, 2));
+
     });
   }
 
@@ -110,6 +110,8 @@ $(document).ready(function(){
         if (clueCount > obj.clues.length) return;
 
         if (obj.finalstep && clueCount === 1) {
+          suspectWarrant = $('#suspectDropdown').find(":selected").val();
+          console.log(suspectWarrant);
           checkCapture(obj.gameid, obj.pageid);
           return;
         }
