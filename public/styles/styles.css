@@ -94,10 +94,6 @@ li {
   margin-bottom: 1rem;
 }
 
-em {
-  text-align: center;
-}
-
 p {
   font-size: 1.5rem;
   line-height: 1.5;
@@ -200,13 +196,13 @@ a {
   transition: all 0.2s;
 }
 
+a:visited {
+  color: var(--color-blue);
+}
+
 a:active, a:hover {
   color: white;
   background-color: var(--color-blue);
-}
-
-a:visited {
-  color: var(--color-blue);
 }
 
 /* Adapted from:
@@ -528,4 +524,15 @@ box-shadow:
 
 .scrollable {
   overflow-y: auto;
+}
+
+.menu-warning {
+  display: inline-block;
+  text-align: center;
+
+  width: 100%;
+  font-size: 1.5em;
+
+  margin-top: 1%;
+  margin-bottom: 5%;
 }
