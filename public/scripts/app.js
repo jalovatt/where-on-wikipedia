@@ -42,10 +42,10 @@ $(document).ready(function(){
 
       $("#destResult0").text(obj.destinations[0]);
       $("#destResult0").removeAttr("href");
-      $("#destResult1").empty().addClass("hidden");
-      $("#destResult2").empty().addClass("hidden");
-      $("#destResult3").empty().addClass("hidden");
-      $("#destResult4").empty().addClass("hidden");
+      $("#destResult1").empty();
+      $("#destResult2").empty();
+      $("#destResult3").empty();
+      $("#destResult4").empty();
 
       $("#li2").addClass("hidden");
       $("#li3").addClass("hidden");
@@ -80,7 +80,7 @@ $(document).ready(function(){
     } else {
 
       if (obj.pageid) {
-        backId = obj.pageid
+        backId = obj.pageid;
       }
 
       obj.destinations.forEach(function (dest, idx) {
@@ -131,11 +131,14 @@ $(document).ready(function(){
     var btnId = "#btn-" + tab;
     var tabId = "#tab-" + tab;
 
+    $(".screen-content").toggleClass("scrollable", (tab === "help"));
+
     $(".button").removeClass("active");
     $(btnId).addClass("active");
 
     $(".tab").addClass("hidden");
     $(tabId).removeClass("hidden");
+
   }
 
   // 'title' will be wrapped in an <h1>

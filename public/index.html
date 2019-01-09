@@ -68,7 +68,7 @@
 
         <div id="tab-search" class="tab hidden">
           <h1>Search for Clues</h1>
-          <button id="btn-clues"">Search</button>
+          <button id="btn-clues" class="screen-button">Search</button>
           <ul id="clueResults"></ul>
 
             <!-- <br></br>
@@ -104,16 +104,14 @@
 
         <div id="tab-menu" class="tab">
           <button id="game" class="screen-button">Generate New Game</button>
-          <span>(Note: This will take 10-20 seconds)</span>
+          <em>(Note: This will take 10-20 seconds)</em>
           <br>
-          <button id="game-existing" class="screen-button">Play Existing Game</button><input id="game-existing-id" type="text" placeholder="Enter a game ID">
+          <button id="game-existing" class="screen-button hidden">Play Existing Game</button><input id="game-existing-id" class="hidden" type="text" placeholder="Enter a game ID">
           <button id="game-example" class="screen-button">Play Example Game</button>
           <br>
         </div>
 
         <div id="tab-help" class="tab hidden">
-          <h1>Help</h1>
-
           <p>
             One of history's greatest villains has set their sights on Wikipedia and stolen an article!
           </p>
@@ -129,17 +127,18 @@
           <p>
             Due to technical limitations, the game isn't able to track your movements directly as you click in the embedded Wikipedia window. For doing research, you can use the embedded window or open new browser tabs - regardless, travel must be done via the game interface.
           </p>
+
           <h3>Getting A Warrant</h3>
           <p>
             Once you've learned enough about your suspect to identify them, enter their page ID (we're working on a better solution) in the Suspect tab and click the button to request a warrant. Be careful - when you catch up to the suspect, you'll need to have a warrant matching their identity or the Wikipedia police (I swear that's a real thing) will have to let them go.
           </p>
+
           <h3>Capture</h3>
           <p>
             When you finally catch up to the thief, you'll be given a warning that they're somewhere in the vicinity. Make sure you have a warrant, then search for clues one last time to unleash the local constabulary and bring your quarry to justice.
           </p>
 
           <br>
-
 
           <p class="help-text">
             <i class="help-icon fas fa-plane"></i>
@@ -149,7 +148,6 @@
 
           <br>
 
-
           <p class="help-text">
             <i class="help-icon fas fa-search"></i>
 
@@ -157,7 +155,6 @@
           </p>
 
           <br>
-
 
           <p class="help-text">
             <i class="help-icon fas fa-running"></i>
@@ -167,11 +164,12 @@
 
           <h2>Credits</h2>
           <p>
-            Where on Wikipedia was created by <a href="https://jalovatt.github.io" target="_new">Adam Lovatt</a> and <a href="" target="_new">Bryan Kenny</a> as an homage to the Carmen Sandiego game series.
+            Where on Wikipedia was created by <a href="https://jalovatt.github.io" target="_new">Adam Lovatt</a> and <a href="https://www.resume.com/share/bryankenny" target="_new">Bryan Kenny</a> as an homage to the Carmen Sandiego game series.
           </p>
           <p>
             Comments and bug reports can be directed to <a href="https://github.com/jalovatt/where-on-wikipedia">the project's Github page</a>.
           </p>
+          <br><br>
 
         </div>
 
