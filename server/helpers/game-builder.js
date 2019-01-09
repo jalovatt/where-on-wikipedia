@@ -27,7 +27,7 @@ function generateGameId() {
 
 // Fisher-Yates shuffling algorithm:
 // https://bost.ocks.org/mike/shuffle/
-shuffleArray(arr) {
+function shuffleArray(arr) {
   const out = [...arr];
   let left = out.length, swap, take;
 
