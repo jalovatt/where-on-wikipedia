@@ -1,14 +1,15 @@
 $(document).ready(function(){
 
   let backId;
+  let gameStarted = false;
 
 
   if ($("#suspectDropdown").change()){
     $("#suspectDropdown").change(function(){
-      var suspectWarrant = $('#suspectDropdown').find(":selected").text();
+      var suspectWarrant = $("#suspectDropdown").find(":selected").text();
       console.log(suspectWarrant);
-  })
-   };
+    });
+  };
 
 
   function requestTravel(gameId, articleId) {
@@ -64,13 +65,14 @@ $(document).ready(function(){
       $("#backButton").removeClass("hidden");
       $("#backButton").text("go back");
 
-      $("#backButton").click(function() {requestTravel(obj.gameid, backId)
+      $("#backButton").click(function() {
+        requestTravel(obj.gameid, backId);
         // console.log(backId)
         $("#li2").removeClass("hidden");
         $("#li3").removeClass("hidden");
         $("#li4").removeClass("hidden");
         $("#li5").removeClass("hidden");
-      })
+      });
 
       $("#btn-clues").off("click").click(function() {
         if (clueCount === 1) return;
@@ -137,6 +139,9 @@ $(document).ready(function(){
   }
 
   function showTab(tab) {
+
+    if (!gameStarted && !(tab === "menu" || tab === "help")) return;
+
     var btnId = "#btn-" + tab;
     var tabId = "#tab-" + tab;
 
@@ -167,7 +172,7 @@ $(document).ready(function(){
     newGame(json) {return "<p>Someone has stolen the article for '" + json.title + "'. Track them down and get it back before Wikipedia's database notices and the article is lost forever!</p>";},
     newGameError(err) { return "<h4>Something went wrong:</h4>" +
       "<h4>" + err + "</h4>";},
-    travel(title) {return "<p>You've arrived at '" + title + "'";},
+    travel(title) {return "<h2>You've arrived at '" + title + "'</h2>";},
     waitTime() {return "<em>If generating a new game, this may take 10-20 seconds</em>";},
   };
 
@@ -180,17 +185,11 @@ $(document).ready(function(){
 
   function initializeGame(obj) {
 
+    gameStarted = true;
+
     $(".wiki.screen").addClass("screen-on");
     $("#wiki-content").addClass("screen-content-on");
-    $("#wiki-content").attr("src", obj.url); //button for starting game
-    // $("#resultJson").attr("href", obj.url);
-    // $("#resultJson").text("Starting Article: " + obj.title);
-    // $("#clueResults").empty();
-    // $("#destResult0").empty();
-    // $("#destResult1").empty();
-    // $("#destResult2").empty();
-    // $("#destResult3").empty();
-    // $("#destResult4").empty();
+    $("#wiki-content").attr("src", obj.url);
     $("#suspectClues").empty();
     $("#finalArticle").empty();
 
@@ -210,7 +209,6 @@ $(document).ready(function(){
       .done(function (json) {
         // When the request comes back, populate and show the starting message
         initializeGame(json);
-
         showModal("Oh no!", htmlFragments.newGame(json));
       })
       .fail(function (json) {
