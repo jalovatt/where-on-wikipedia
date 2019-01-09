@@ -2,6 +2,15 @@ $(document).ready(function(){
 
   let backId;
 
+
+  if ($("#suspectDropdown").change()){
+    $("#suspectDropdown").change(function(){
+      var suspectWarrant = $('#suspectDropdown').find(":selected").text();
+      console.log(suspectWarrant)
+  })
+   };
+
+
   function requestTravel(gameId, articleId) {
 
     // Show the modal + loading icon
@@ -56,7 +65,7 @@ $(document).ready(function(){
       $("#backButton").text("go back");
 
       $("#backButton").click(function() {requestTravel(obj.gameid, backId)
-        console.log(backId)
+        // console.log(backId)
         $("#li2").removeClass("hidden");
         $("#li3").removeClass("hidden");
         $("#li4").removeClass("hidden");
@@ -79,11 +88,6 @@ $(document).ready(function(){
 
     } else {
 
-      $( "option" ).each(function( index ) {
-        console.log( index + ": " + $( this ).text() )
-        // console.log($( this.value ))
-      });
-
       if (obj.pageid) {
         backId = obj.pageid;
       }
@@ -97,7 +101,7 @@ $(document).ready(function(){
           .click( function() { requestTravel(obj.gameid, dest.id);});
       });
 
-      console.log(obj);
+      // console.log(obj);
 
       $("#btn-clues").off("click").click(function(){
 
