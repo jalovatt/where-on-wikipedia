@@ -239,7 +239,7 @@ module.exports = function(wiki) {
 
       const last = steps.length - 1;
       steps[last].destinations = await this.addDestinations(steps[last]);
-      steps[last].clues = ["Keep your eyes peeled - the thief is nearby!"];
+      steps[last].clues = ["Keep your eyes peeled - the thief is nearby! \n Before hitting search again to confirm you have the correct suspect, navigate to the suspects tab to identify the thief from the list of perps" ];
       steps[last].finalStep = true;
 
       return steps;
