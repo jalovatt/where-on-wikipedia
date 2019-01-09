@@ -79,6 +79,11 @@ $(document).ready(function(){
 
     } else {
 
+      $( "option" ).each(function( index ) {
+        console.log( index + ": " + $( this ).text() )
+        // console.log($( this.value ))
+      });
+
       if (obj.pageid) {
         backId = obj.pageid;
       }
