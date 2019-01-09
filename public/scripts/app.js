@@ -6,7 +6,7 @@ $(document).ready(function(){
   if ($("#suspectDropdown").change()){
     $("#suspectDropdown").change(function(){
       var suspectWarrant = $('#suspectDropdown').find(":selected").text();
-      console.log(suspectWarrant)
+      console.log(suspectWarrant);
   })
    };
 
