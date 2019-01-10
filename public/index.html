@@ -51,7 +51,7 @@
       <section class="screen-content screen-content-on" id="game-content">
 
         <div id="tab-travel" class="tab hidden">
-          <h1>The suspect may have fled to</h1>
+          <h1>Possible Destinations</h1>
           <!-- <button id="btnSun2"">articles</button> -->
           <!-- <br></br> -->
           <ul>
@@ -83,8 +83,8 @@
           </ul>
           <h2>Suspect:</h2>
           <!-- <input id="suspect" type="text"> -->
-            <select id="suspectDropdown">
-              <option> ----- </option>
+            <select id="suspectDropdown" class="dropdown">
+              <option value="" disabled selected>Identify the culprit</option>
               <option id="opt1" value="99217">Ernst Blofeld</option>
               <option id="opt2" value="951124">Auric Goldfinger</option>
               <option id="opt3" value="10656254">Carmen Sandiego</option>
@@ -101,13 +101,12 @@
               <option id="opt14" value="98301">The Joker</option>
               <option id="opt15" value="1547531">Cruella de Vil</option>
             </select>
-          <h2>Suspect Rap Sheet:</h2>
-          <a href="" id="suspectLink"></a> \
+          <a id="suspectLink" class="centered-text" href="https://www.wikipedia.org/" target="_new">View this suspect's rap sheet</a>
         </div>
 
         <div id="tab-menu" class="tab">
           <button id="game" class="screen-button">Generate New Game</button>
-          <em class="menu-warning">(Note: This will take 10-20 seconds)</em>
+          <em class="centered-text">(This may take up to thirty seconds)</em>
           <br>
           <button id="game-existing" class="screen-button hidden">Play Existing Game</button><input id="game-existing-id" class="hidden" type="text" placeholder="Enter a game ID">
           <button id="game-example" class="screen-button">Play Example Game</button>
@@ -120,7 +119,7 @@
           </p>
           <p>
             Put your sleuthing skills to the test and capture them before they escape and the article disappears from Wikipedia's servers forever!
-            <br><em>Disclaimer: No Wikipedia articles were harmed in the making of this game.</em>
+            <em class="centered-text">Disclaimer: No Wikipedia articles were harmed in the making of this game.</em>
           </p>
 
           <h2>How To Play</h2>

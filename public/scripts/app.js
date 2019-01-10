@@ -1,16 +1,18 @@
 $(document).ready(function(){
 
-  let backId;
-  var suspectWarrant;
-  var suspectName
-  let gameStarted = false;
+  var backId;
+  // var suspectWarrant;
+  // var suspectName
+  var gameStarted = false;
 
-  suspectName = $('#suspectDropdown').find(":selected").text();
+  // suspectName = $('#suspectDropdown').find(":selected").text();
 
-  if ($("#suspectDropdown").change()){
-    $("#suspectLink").attr("href", "https://en.m.wikipedia.org/wiki/" + suspectWarrant)
-    $("#suspectLink").text(suspectName)
-  };
+  // if ($("#suspectDropdown").change()){
+  //   $("#suspectLink").attr("href", "https://en.m.wikipedia.org/wiki/" + suspectWarrant)
+  //   $("#suspectLink").text(suspectName)
+  // };
+
+
 
   // $('#suspectDropdown').find(":selected").text(function(){
   //   $("#suspectLink").attr("href", "https://en.m.wikipedia.org/wiki/" + suspectWarrant)
@@ -175,7 +177,6 @@ $(document).ready(function(){
     newGameError(err) { return "<h4>Something went wrong:</h4>" +
       "<h4>" + err + "</h4>";},
     travel(title) {return "<h2>You've arrived at '" + title + "'</h2>";},
-    waitTime() {return "<em>If generating a new game, this may take 10-20 seconds</em>";},
   };
 
 
@@ -202,8 +203,8 @@ $(document).ready(function(){
   function requestGame(id) {
 
     // Show the modal + loading icon
-    showModal("waiting for the server",
-      htmlFragments.loading() + "<br>" + htmlFragments.waitTime()
+    showModal("Fetching game data",
+      htmlFragments.loading()
     );
 
     // Send the request
@@ -240,6 +241,10 @@ $(document).ready(function(){
       // $("#hide").removeClass("hidden");
       requestGame(id);
     }
+  });
+
+  $("#suspectDropdown").click(function() {
+    $("#suspectLink").attr("href", "https://en.wikipedia.org/?curid=" + this.value);
   });
 
 });
