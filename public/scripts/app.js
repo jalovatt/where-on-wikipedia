@@ -29,9 +29,15 @@ $(document).ready(function(){
 
   function checkCapture(gameId, articleId) {
 
-
     $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + suspectWarrant, function(res) {
-      showModal("Capture Status", "Correct! you've caught the thief; " + suspectName);
+      if (res.victory === false){
+        showModal("Capture Status", JSON.stringify(res.message));
+        console.log(res)
+      }
+      if (res.victory === true){
+        showModal("Capture Status", "Congratulations, you have caught the thief; " + suspectName);
+        console.log(res)
+      }
     });
   }
 
