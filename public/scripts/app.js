@@ -26,17 +26,14 @@ $(document).ready(function(){
   }
 
   function requestCapture(gameId, articleId, suspectId) {
-
     suspectName = $('#suspectDropdown').find(":selected").text();
 
     $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + suspectId, function(res) {
       if (res.victory === false){
         showModal("Capture Status", JSON.stringify(res.message));
-        console.log(res)
       }
       if (res.victory === true){
         showModal("Capture Status", "Congratulations, you have caught the thief; " + suspectName);
-        console.log(res)
       }
     });
   }
@@ -109,8 +106,6 @@ $(document).ready(function(){
 
         if (obj.finalstep && clueCount === 1) {
           var suspectId = $('#suspectDropdown').find(":selected").val();
-          // suspectName = $('#suspectDropdown').find(":selected").text();
-          // console.log(suspectWarrant);
           requestCapture(obj.gameid, obj.pageid, suspectId);
           return;
         }
@@ -120,7 +115,7 @@ $(document).ready(function(){
         if (!clue) return;
 
         var clueElement = htmlFragments.clue(clue);
-        $("#clueResults").append(clueElement); //button for rendering clues
+        $("#clueResults").append(clueElement);
 
         if (clue.match("The suspect is")) {
           $("#suspectClues").append(clueElement);
@@ -148,8 +143,6 @@ $(document).ready(function(){
 
   }
 
-  // 'title' will be wrapped in an <h1>
-  // 'message' will be used as-is, so should have any necessary HTML already
   function showModal(title, message) {
     var modal = $("#tab-modal").empty();
 
@@ -210,12 +203,10 @@ $(document).ready(function(){
   }
 
   $("#game").click(function(){
-    // $("#hide").removeClass("hidden");
     requestGame("new");
   });
 
   $("#game-example").click(function () {
-    // $("#hide").removeClass("hidden");
     requestGame("example");
   });
 
@@ -227,7 +218,6 @@ $(document).ready(function(){
     if (!id || id === "") {
       alert("Please enter a game ID");
     } else {
-      // $("#hide").removeClass("hidden");
       requestGame(id);
     }
   });
