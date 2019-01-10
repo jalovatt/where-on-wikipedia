@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
   var backId;
+  var suspectName;
 
   var gameStarted = false;
 
@@ -25,6 +26,8 @@ $(document).ready(function(){
   }
 
   function requestCapture(gameId, articleId, suspectId) {
+
+    suspectName = $('#suspectDropdown').find(":selected").text();
 
     $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + suspectId, function(res) {
       if (res.victory === false){
