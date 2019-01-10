@@ -2,8 +2,11 @@ $(document).ready(function(){
 
   let backId;
   var suspectWarrant;
+  var suspectName
   let gameStarted = false;
 
+  suspectName = $('#suspectDropdown').find(":selected").text();
+  console.log(suspectName)
 
   function requestTravel(gameId, articleId) {
 
@@ -29,7 +32,10 @@ $(document).ready(function(){
 
     $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + suspectWarrant, function(res) {
       console.dir(res);
-      showModal("capture status", JSON.stringify(res, null, 2));
+      showModal("capture status", "Correct! you've caught the thief; " + suspectName);
+      console.log(res)
+      console.log(res.victory)
+      console.log(res.message)
 
     });
   }
@@ -102,6 +108,7 @@ $(document).ready(function(){
 
         if (obj.finalstep && clueCount === 1) {
           suspectWarrant = $('#suspectDropdown').find(":selected").val();
+          suspectName = $('#suspectDropdown').find(":selected").text();
           console.log(suspectWarrant);
           checkCapture(obj.gameid, obj.pageid);
           return;
