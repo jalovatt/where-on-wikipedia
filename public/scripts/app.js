@@ -7,10 +7,10 @@ $(document).ready(function(){
 
   suspectName = $('#suspectDropdown').find(":selected").text();
 
-  // // if ($("#suspectDropdown").change()){
-  // //   $("#suspectLink").attr("href", "https://en.m.wikipedia.org/wiki/" + suspectWarrant)
-  // //   $("#suspectLink").text(suspectName)
-  // // };
+  if ($("#suspectDropdown").change()){
+    $("#suspectLink").attr("href", "https://en.m.wikipedia.org/wiki/" + suspectWarrant)
+    $("#suspectLink").text(suspectName)
+  };
 
   // $('#suspectDropdown').find(":selected").text(function(){
   //   $("#suspectLink").attr("href", "https://en.m.wikipedia.org/wiki/" + suspectWarrant)
