@@ -44,7 +44,6 @@ $(document).ready(function(){
     if (obj.deadend){
 
       $("#destResult0").text(obj.destinations[0]).removeAttr("href");
-      // $("#destResult0").removeAttr("href");
       $("#destResult1").empty();
       $("#destResult2").empty();
       $("#destResult3").empty();
@@ -60,7 +59,6 @@ $(document).ready(function(){
 
       $("#backButton").click(function() {
         requestTravel(obj.gameid, backId);
-        // console.log(backId)
         $("#li2").removeClass("hidden");
         $("#li3").removeClass("hidden");
         $("#li4").removeClass("hidden");
@@ -97,8 +95,6 @@ $(document).ready(function(){
           .off("click")
           .click( function() { requestTravel(obj.gameid, dest.id);});
       });
-
-      // console.log(obj);
 
       $("#btn-clues").off("click").click(function(){
 
