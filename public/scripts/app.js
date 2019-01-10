@@ -232,7 +232,7 @@ $(document).ready(function(){
     }
   });
 
-  $("#suspectDropdown").click(function() {
+  $("#suspectDropdown").change(function() {
     $("#suspectLink").attr("href", "https://en.wikipedia.org/?curid=" + this.value);
   });
 
