@@ -6,7 +6,16 @@ $(document).ready(function(){
   let gameStarted = false;
 
   suspectName = $('#suspectDropdown').find(":selected").text();
-  console.log(suspectName)
+
+  // // if ($("#suspectDropdown").change()){
+  // //   $("#suspectLink").attr("href", "https://en.m.wikipedia.org/wiki/" + suspectWarrant)
+  // //   $("#suspectLink").text(suspectName)
+  // // };
+
+  // $('#suspectDropdown').find(":selected").text(function(){
+  //   $("#suspectLink").attr("href", "https://en.m.wikipedia.org/wiki/" + suspectWarrant)
+  //   $("#suspectLink").text(suspectName)
+  // });
 
   function requestTravel(gameId, articleId) {
 
