@@ -103,6 +103,8 @@ function initializeGame(obj) {
   $("#suspectClues").empty();
   $("#finalArticle").empty();
 
+  $(".button").removeClass("disabled");
+
   populateStep(obj);
 }
 
