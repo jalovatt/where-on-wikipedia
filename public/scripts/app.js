@@ -1,23 +1,9 @@
 $(document).ready(function(){
 
   var backId;
-  // var suspectWarrant;
-  // var suspectName
+
   var gameStarted = false;
 
-  // suspectName = $('#suspectDropdown').find(":selected").text();
-
-  // if ($("#suspectDropdown").change()){
-  //   $("#suspectLink").attr("href", "https://en.m.wikipedia.org/wiki/" + suspectWarrant)
-  //   $("#suspectLink").text(suspectName)
-  // };
-
-
-
-  // $('#suspectDropdown').find(":selected").text(function(){
-  //   $("#suspectLink").attr("href", "https://en.m.wikipedia.org/wiki/" + suspectWarrant)
-  //   $("#suspectLink").text(suspectName)
-  // });
 
   function requestTravel(gameId, articleId) {
 
@@ -38,9 +24,9 @@ $(document).ready(function(){
 
   }
 
-  function checkCapture(gameId, articleId) {
+  function requestCapture(gameId, articleId, suspectId) {
 
-    $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + suspectWarrant, function(res) {
+    $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + suspectId, function(res) {
       if (res.victory === false){
         showModal("Capture Status", JSON.stringify(res.message));
         console.log(res)
@@ -119,10 +105,10 @@ $(document).ready(function(){
         if (clueCount > obj.clues.length) return;
 
         if (obj.finalstep && clueCount === 1) {
-          suspectWarrant = $('#suspectDropdown').find(":selected").val();
-          suspectName = $('#suspectDropdown').find(":selected").text();
-          console.log(suspectWarrant);
-          checkCapture(obj.gameid, obj.pageid);
+          var suspectId = $('#suspectDropdown').find(":selected").val();
+          // suspectName = $('#suspectDropdown').find(":selected").text();
+          // console.log(suspectWarrant);
+          requestCapture(obj.gameid, obj.pageid, suspectId);
           return;
         }
 

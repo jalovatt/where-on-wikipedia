@@ -80,7 +80,7 @@ module.exports = function(db, gameBuilder) {
 
       if (articleId !== lastId) return ["The suspect isn't here"];
 
-      if (!suspectId || suspectId === "") return [null, {victory: false, message: "You didn't have a warrant!"}];
+      if (!suspectId || suspectId === "none") return [null, {victory: false, message: "You didn't have a warrant!"}];
       if (suspectId !== game.suspect.pageid.toString()) return [null, {victory: false, message: "Your warrant was for the wrong person!"}];
 
       return [null, {victory: true, message: `You caught the suspect!\n(game ${gameId}, article ${articleId}, suspect ${suspectId}`}];
