@@ -10,14 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jalovatt/wiki-sandiego.git"
+    "url": "git+https://github.com/jalovatt/where-on-wikipedia.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jalovatt/wiki-sandiego/issues"
+    "url": "https://github.com/jalovatt/where-on-wikipedia/issues"
   },
-  "homepage": "https://github.com/jalovatt/wiki-sandiego#readme",
+  "homepage": "https://github.com/jalovatt/where-on-wikipedia#readme",
+  "engines": {
+    "node": "10.x"
+  },
   "dependencies": {
     "bcrypt": "2.0.0",
     "body-parser": "^1.18.3",
