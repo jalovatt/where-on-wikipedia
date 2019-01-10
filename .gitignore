@@ -62,4 +62,3 @@ typings/
 
 temp/
 .DS_Store
-utils/seed-remote-db.js
