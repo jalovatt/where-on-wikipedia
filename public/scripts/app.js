@@ -13,6 +13,35 @@ var htmlFragments = {
   travel(title) {return "<p>Have a look around '" + title + "' and see if anybody noticed your quarry.</p>";},
 };
 
+$(document).ready(function(){
+
+  $("#btn-travel").click(   function() {showTab("travel");} );
+  $("#btn-search").click(   function() {showTab("search");} );
+  $("#btn-suspect").click(  function() {showTab("suspect");} );
+  $("#btn-menu").click(     function() {showTab("menu");} );
+  $("#btn-help").click(     function() {showTab("help");} );
+
+  $("#game").click(         function() {requestGame("new");} );
+  $("#game-example").click( function() {requestGame("example");} );
+
+  // Allow the user to request a specific game by its ID. Disabled in the HTML
+  // for now, until we have a nice way to display game IDs to the user.
+  $("#game-existing").click(function () {
+    var id = $("#game-existing-id").val();
+
+    if (!id || id === "") {
+      alert("Please enter a game ID");
+    } else {
+      requestGame(id);
+    }
+  });
+
+  $("#menu-suspect").change(function() {
+    $("#btn-view-suspect").attr("href", "https://en.wikipedia.org/?curid=" + this.value);
+  });
+
+});
+
 // Request a game from the server by id, or generate a new one if id = "new"
 function requestGame(id) {
 
@@ -61,6 +90,18 @@ function requestCapture(gameId, articleId, suspectId) {
       showModal("You did it!", "<p>Congratulations, you've apprehended " + suspectName + " and returned the stolen article. Wikipedia is once again a safe, happy, magical place.");
     }
   });
+}
+
+function initializeGame(obj) {
+  globals.gameStarted = true;
+
+  $(".wiki.screen").addClass("screen-on");
+  $("#wiki-content").addClass("screen-content-on");
+  $("#wiki-content").attr("src", obj.url);
+  $("#suspectClues").empty();
+  $("#finalArticle").empty();
+
+  populateStep(obj);
 }
 
 function populateStep(step) {
@@ -149,8 +190,6 @@ function populateStep(step) {
   }
 }
 
-
-
 function showTab(tab) {
 
   if (!globals.gameStarted && !(tab === "menu" || tab === "help" || tab === "modal")) return;
@@ -176,46 +215,3 @@ function showModal(title, message) {
 
   showTab("modal");
 }
-
-function initializeGame(obj) {
-
-  globals.gameStarted = true;
-
-  $(".wiki.screen").addClass("screen-on");
-  $("#wiki-content").addClass("screen-content-on");
-  $("#wiki-content").attr("src", obj.url);
-  $("#suspectClues").empty();
-  $("#finalArticle").empty();
-
-  populateStep(obj);
-
-}
-
-$(document).ready(function(){
-
-  $("#btn-travel").click(function() {showTab("travel");} );
-  $("#btn-search").click(function() {showTab("search");} );
-  $("#btn-suspect").click(function() {showTab("suspect");} );
-  $("#btn-menu").click(function() {showTab("menu");} );
-  $("#btn-help").click(function() {showTab("help");} );
-
-  $("#game").click(function(){requestGame("new");} );
-  $("#game-example").click(function () {requestGame("example");} );
-
-  // Allow the user to request a specific game by its ID. Disabled in the HTML
-  // for now, until we have a nice way to display game IDs to the user.
-  $("#game-existing").click(function () {
-    var id = $("#game-existing-id").val();
-
-    if (!id || id === "") {
-      alert("Please enter a game ID");
-    } else {
-      requestGame(id);
-    }
-  });
-
-  $("#menu-suspect").change(function() {
-    $("#btn-view-suspect").attr("href", "https://en.wikipedia.org/?curid=" + this.value);
-  });
-
-});
