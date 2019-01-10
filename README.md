@@ -7,7 +7,10 @@ As our final project for the [Lighthouse Labs](https://www.lighthouselabs.ca) we
 ## Usage
 
 ### The Easy Way
--placeholder-
+
+Direct your browser to [where-on-wikipedia.herokuapp.com](https://where-on-wikipedia.herokuapp.com/).
+
+See? Easy.
 
 ### The Hard Way
 
