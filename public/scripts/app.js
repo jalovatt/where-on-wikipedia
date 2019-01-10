@@ -31,12 +31,7 @@ $(document).ready(function(){
 
 
     $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + suspectWarrant, function(res) {
-      console.dir(res);
-      showModal("capture status", "Correct! you've caught the thief; " + suspectName);
-      console.log(res)
-      console.log(res.victory)
-      console.log(res.message)
-
+      showModal("Capture Status", "Correct! you've caught the thief; " + suspectName);
     });
   }
 
@@ -127,14 +122,6 @@ $(document).ready(function(){
 
         clueCount++;
       });
-    }
-
-    if (!obj.finalstep) {
-      console.log("no success");
-    }
-
-    if (obj.finalstep === true) {
-      console.log("success");
     }
   }
 
