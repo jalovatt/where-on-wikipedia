@@ -42,6 +42,7 @@ We had to leave out some planned features due to time constraints:
 - Truly random suspects, as opposed to the current hard-coded list. We ran into a bit of a roadblock figuring out how to have players give us the suspect - typing it manually would require checking for spelling, etc.
 - Provide a unique game ID so players can share a particular mystery with friends. The app already uses these IDs internally, so we're really just missing a nice way to convey it to the player.
 - Integrate the app with the embedded Wikipedia page. [The Wiki Game](https://www.thewikigame.com) does this by rewriting the Wikipedia HTML so that all clicked links go through their app.
+- Implement tests for the server routes and database functions.
 
 Contributions are more than welcome. :)
 
