@@ -40,6 +40,8 @@ $(document).ready(function(){
     $("#btn-view-suspect").attr("href", "https://en.wikipedia.org/?curid=" + this.value);
   });
 
+  showTab("help");
+
 });
 
 // Request a game from the server by id, or generate a new one if id = "new"
