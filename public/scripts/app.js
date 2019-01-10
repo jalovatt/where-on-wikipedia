@@ -17,7 +17,7 @@ $(document).ready(function(){
         // When the request comes back, populate and show the starting message
         populateDestinations(json);
 
-        showModal(null, htmlFragments.travel(json.title));
+        showModal("You've arrived!", htmlFragments.travel(json.title));
       })
       .fail(function (json) {
         showModal("Oops!", htmlFragments.travelError(json.responseJSON.error));
@@ -30,10 +30,12 @@ $(document).ready(function(){
 
     $.getJSON("/game/" + gameId + "/capture/" + articleId + "/" + suspectId, function(res) {
       if (res.victory === false){
-        showModal("Capture Status", JSON.stringify(res.message));
+        showModal("Oh dear...", "<em class='centered-text'>" + res.message + "</em><p>The culprit got away, and all of Wikipedia mourns the loss of... well, nobody knows what they lost because it's gone now. Better luck time.</p>");
+        console.log(res)
       }
       if (res.victory === true){
-        showModal("Capture Status", "Congratulations, you have caught the thief; " + suspectName);
+        showModal("You did it!", "<p>Congratulations, you've apprehended " + suspectName + " and returned the stolen article. Wikipedia is once again a safe, happy, magical place.");
+        console.log(res)
       }
     });
   }
@@ -47,7 +49,7 @@ $(document).ready(function(){
 
     if (obj.deadend){
 
-      $("#destResult0").text(obj.destinations[0]).removeAttr("href");
+      $("#destResult0").text(obj.destinations[0]).removeAttr("href").off("click");
       $("#destResult1").empty();
       $("#destResult2").empty();
       $("#destResult3").empty();
@@ -158,7 +160,7 @@ $(document).ready(function(){
     newGame(json) {return "<p>Someone has stolen the article for '" + json.title + "'. Track them down and get it back before Wikipedia's database notices and the article is lost forever!</p>";},
     newGameError(err) { return "<h4>Something went wrong:</h4>" +
       "<h4>" + err + "</h4>";},
-    travel(title) {return "<h2>You've arrived at '" + title + "'</h2>";},
+    travel(title) {return "<p>Have a look around '" + title + "' and see if anybody noticed your quarry.</p>";},
   };
 
 
